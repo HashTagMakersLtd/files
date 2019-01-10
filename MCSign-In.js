@@ -14,7 +14,6 @@ function initFirebaseAuth() {
 }
 
 function signInWithGoogle(){//Signs in with Google
-	console.log("clicked");
 	var provider = new firebase.auth.GoogleAuthProvider();
 	firebase.auth().signInWithRedirect(provider);
 	firebase.auth().getRedirectResult().then(function(result) {//This gets the result of the redirected login
@@ -40,7 +39,7 @@ function signInWithGoogle(){//Signs in with Google
 function authStateObserver(user) {
 	
 	if (user) { // User is signed in!
-		alert("Already logged in!");
+		alert("Already logged in as "+firebase.auth().currentUser.displayName);
 	} else {
 		button.on("click", signInWithGoogle)
 	}
