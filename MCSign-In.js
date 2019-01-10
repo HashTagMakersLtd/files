@@ -1,4 +1,6 @@
 
+var db = firebase.firestore();
+
 //Functions
 
 function signOut() {
@@ -39,6 +41,9 @@ function signInWithGoogle(){//Signs in with Google
 				    console.error("Error creating user: ", error);
 				});
 		    } 
+		    else{
+		    	console.log("Returning user");
+		    }
 		}).catch(function(error) {
 		    console.log("Error finding user:", error);
 		});
