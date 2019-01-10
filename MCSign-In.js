@@ -22,7 +22,27 @@ function signInWithGoogle(){//Signs in with Google
 	  }
 	  // The signed-in user info.
 	  var user = result.user;
-	  //TODO: add to database
+
+	  //Add the user to database
+	  var userRef = db.collection("users").doc(user.email);
+
+		userRef.get().then(function(doc) {
+		    if (!doc.exists) {
+		        userRef.set({
+				    admin: false,
+				    starred: []
+				})
+				.then(function() {
+				    console.log("User successfully created!");
+				})
+				.catch(function(error) {
+				    console.error("Error creating user: ", error);
+				});
+		    } 
+		}).catch(function(error) {
+		    console.log("Error finding user:", error);
+		});
+
 	}).catch(function(error) {
 	  // Handle Errors here.
 	  var errorCode = error.code;
