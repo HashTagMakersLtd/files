@@ -40,9 +40,8 @@ function authStateObserver(user) {
 	
 	if (user) { // User is signed in!
 		alert("Already logged in as "+firebase.auth().currentUser.displayName);
-	} else {
-		button.on("click", signInWithGoogle)
-	}
+	} 
 }
  
 initFirebaseAuth();
+button.on("click", signInWithGoogle);
