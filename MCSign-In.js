@@ -1,5 +1,3 @@
-//Useful references
-var button = $("#googleSI");
 
 //Functions
 
@@ -14,6 +12,7 @@ function initFirebaseAuth() {
 }
 
 function signInWithGoogle(){//Signs in with Google
+	//console.log("clicked");
 	var provider = new firebase.auth.GoogleAuthProvider();
 	firebase.auth().signInWithRedirect(provider);
 	firebase.auth().getRedirectResult().then(function(result) {//This gets the result of the redirected login
@@ -44,4 +43,3 @@ function authStateObserver(user) {
 }
  
 initFirebaseAuth();
-button.on("click", signInWithGoogle);
