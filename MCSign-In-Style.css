@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One')
+	
 	html {
 		background: linear-gradient(#0090ff, #14a101);
 		height: 100%;
@@ -22,3 +23,10 @@
 		font-weight: normal;
 		
 	}
+
+
+/*
+heres the fonts
+font-family: 'Secular One', sans-serif;
+font-family: 'Heebo', sans-serif;
+*/
