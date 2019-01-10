@@ -1,24 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
 
 	html {
 		background: linear-gradient(#0090ff, #14a101);
 		height: 100%;
-    	-webkit-background-size: cover;
-    	-moz-background-size: cover;
-    	-o-background-size: cover;
-    	background-size: cover;
-    	background-repeat:no-repeat;
-    	background: -webkit-linear-gradient(#0090ff, #14a101);
-    	background: -moz-linear-gradient(#0090ff, #14a101);
-    	background: -ms-linear-gradient(#0090ff, #14a101);
-    	background: -o-linear-gradient(#0090ff, #14a101);
-    	background: linear-gradient(#0090ff, #14a101);
-    	text-align: center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-repeat:no-repeat;
+		background: -webkit-linear-gradient(#0090ff, #14a101);
+		background: -moz-linear-gradient(#0090ff, #14a101);
+		background: -ms-linear-gradient(#0090ff, #14a101);
+		background: -o-linear-gradient(#0090ff, #14a101);
+		background: linear-gradient(#0090ff, #14a101);
+		text-align: center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		background-repeat:no-repeat;
+		background: -webkit-linear-gradient(#0090ff, #14a101);
+		background: -moz-linear-gradient(#0090ff, #14a101);
+		background: -ms-linear-gradient(#0090ff, #14a101);
+		background: -o-linear-gradient(#0090ff, #14a101);
+		background: linear-gradient(#0090ff, #14a101);
+	}
+	body {
+		text-align: center;
+		font-family: 'Heebo', sans-serif;
+		color: white;
+		height: 100%;
 	}
 	h1 {
 		color: white;
-		font-family: bahnschrift;
-		margin-top: 20%;
-		font-size: 5em;
+		font-size: 7em;
 		font-weight: normal;
-		
+		font-family: bahnschrift;
+		margin: 0;
+
+	}
+	#buttonField {
+		margin: 0 auto;
+		margin-top: 20vh;
+		display: block;
+		vertical-align: center;
+
+	}
+	button {
+		width: 80%;
+		height: 5%;
+		font-size: 5em;
+		font-family: 'Secular One', sans-serif;
+		color: white;
+		padding: 1%;
+		background: none;
+		border: 15px solid white;
+		border-radius: 3em;
+		vertical-align: center;
+		transition: 0.1s;
+	}
+	button:active {
+		background-color: rgb(255, 255, 255, 50%);
+		box-shadow: none;
+		text-shadow: none;
+		transition: 0.1s;
+	}
+	#compName {
+		bottom: 2%;
+		position: absolute;
+		display: block;
+		font-size: 2em;
+	}
+	#parkLogo {
+		margin-top: 6%;
 	}
