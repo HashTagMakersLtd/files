@@ -25,7 +25,8 @@ function signInWithGoogle(){//Signs in with Google
 	  // The signed-in user info.
 	  var user = result.user;
 
-	  //Add the user to database
+	  /*
+	  //Add the user to database (deprecated)
 	  var userRef = db.collection("users").doc(user.email);
 
 		userRef.get().then(function(doc) {
@@ -47,6 +48,7 @@ function signInWithGoogle(){//Signs in with Google
 		}).catch(function(error) {
 		    console.log("Error finding user:", error);
 		});
+		*/
 
 	}).catch(function(error) {
 	  // Handle Errors here.
