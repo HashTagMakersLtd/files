@@ -85,6 +85,7 @@ function writeMessageHere(message){
 //TODO: Hook writeMessageHere up to button and inputText field
 
 function deleteMessage(msgID){
+	//TODO: check if user is admin or the msg is theirs
 	genChatRef.doc(msgID).update({
 	    text: "🚫This message has been deleted🚫"
 	})
@@ -95,4 +96,10 @@ function deleteMessage(msgID){
 	    // The document probably doesn't exist.
 	    console.error("Error deleting msg: ", error);
 	});
+}
+
+function populateMessages(n){
+	for (var i =0;i<n;i++){
+		writeMessageHere(i);
+	}
 }
