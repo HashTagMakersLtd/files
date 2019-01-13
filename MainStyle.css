@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
 @import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
 body{
-	background-color: #c0c0c0;
+	background-color: #f4f4f4;
 	font-family: 'Heebo', sans-serif;
 	padding: 0;
 	margin: 0;
@@ -86,32 +86,55 @@ html{
 
 /*forum field code*/
 #forumField {
-	width: 80%;
-	margin-top: 10%;
-	text-align: right;
-	padding: 10%;
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 30%;
+	text-align: center;
 }
-ul{
+ul {
 	list-style: none;
-	left: 5%;
+	padding: 0;
+	margin: 0 auto;
+} 
+li {
+	border-radius: 50px;
+	padding-left: 5%;
+	padding-right: 5%;
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 5%;
 }
 ul a {
-	font-size: 8em;
 	font-family: 'Secular One', sans-serif;
-	color: #14a101;
-	text-decoration: none;
+	color: white;
+	font-size: 8em;
 	font-weight: bold;
-	text-shadow: 5px 5px 8px grey;
-	transition: 0.5s;
+	text-decoration: none;
+	background: -webkit-linear-gradient(#0090ff, #14a101);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
-ul a:active, a:hover {
+.btnOut{
+	background: linear-gradient(#0090ff, #14a101);
+	background-size: cover;
+	padding: 3%;
 	transition: 0.5s;
-	color: #0d5e02;
+	border-radius: 9em;
+	box-shadow: 10px 10px 20px grey;
+
 }
-.border {
-	width: 100%;
-	height: 5px;
+.btnIn{
+	background-color: #fff;
+	transition: 0.5s;
+	border-radius: 10em;
+}
+.btnIn:active{
 	background-color: grey;
+	transition: 0.5s;
+}
+.btnOut:hover{
+	box-shadow: 10px 10px 20px grey;
+	transition: 0.5s;
 }
 /*Standard Button*/
 .btn {
@@ -179,19 +202,6 @@ ul a:active, a:hover {
 	ul{
 		list-style: none;
 		left: 5%;
-	}
-	ul a {
-		font-size: 5em;
-		font-family: 'Secular One', sans-serif;
-		color: #14a101;
-		text-decoration: none;
-		font-weight: bold;
-		text-shadow: 5px 5px 8px grey;
-		transition: 0.5s;
-	}
-	ul a:active, a:hover {
-		transition: 0.5s;
-		color: #0d5e02;
 	}
 	#mainMenu {
 		width: 20%;
