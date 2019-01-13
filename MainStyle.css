@@ -3,8 +3,6 @@
 body{
 	background-color: #c0c0c0;
 	font-family: 'Heebo', sans-serif;
-	height: 100%;
-	width: 100%;
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
@@ -12,8 +10,6 @@ body{
 	text-align: center;
 }
 html{
-	height: 100%;
-	width: 100%;
 	overflow: hidden;
 	overflow-x: hidden;
 }
@@ -29,7 +25,7 @@ html{
 	color: white;
 	padding: 0;
 	font-family: 'Barlow Condensed', sans-serif;
-	z-index: 999;
+	z-index: 990;
 	position: absolute;
 }
 .header span {
@@ -38,7 +34,6 @@ html{
 }
 .header td img {
 	width: 60%;
-	height: 10%;
 	padding: 10%;
 	transition: 0.5s;
 }
@@ -47,25 +42,26 @@ html{
 	transition: 0.5s;
 }
 /*sidemenu code*/
-.sideMenu {
+#mainMenu {
 	padding-top: 5%;
 	position: absolute;
 	background-color: #0090ff;
-	display: block;
-	width: 80%;
-	height: 85%;
+	width: 0;
+	height: 100%;
 	bottom: 0;
+	right: 0;
 	font-family: 'Heebo', sans-serif;
 	font-size: 3em;
 	color: white;
-	margin: 0 auto;
-	z-index: 20;
+	z-index: 999;
+	overflow: hidden;
+	text-align: center;
 }
-.sideMenu img {
+#mainMenu img {
 	width: 60%;
-
+	margin: 0 auto;
 }
-.sideMenu button {
+#mainMenu button {
 	width: 100%;
 	background: none;
 	border-style: none;
@@ -78,16 +74,14 @@ html{
 	padding: 5%;
 	transition: 0.5s;
 }
-.sideMenu button:hover, button:active{
+#mainMenu button i {
+	font-size: 1em;
+}
+#mainMenu button:hover, button:active{
 	background-color: #005da5;
 	transition: 0.5s;
 }
-#profileMenu {
-	margin-left: -80%;
-}
-#mainMenu {
-	right: -80%;
-}
+
 
 /*forum field code*/
 #forumField {
@@ -159,6 +153,7 @@ ul a:active, a:hover {
 	}
 	.header span {
 		height: 10%;
+		font-size: 4em;
 	}
 	.btn {
 		font-family: 'Secular One', sans-serif;
@@ -197,14 +192,14 @@ ul a:active, a:hover {
 		transition: 0.5s;
 		color: #0d5e02;
 	}
-	.sideMenu {
+	#mainMenu {
 		width: 20%;
 	}
-	.sideMenu img {
+	#mainMenu img {
 		width: 50%;
 		margin-top: 10%;
 	}
-	.sideMenu button {
+	#mainMenu button {
 		font-size: 0.6em;
 	}
 }
