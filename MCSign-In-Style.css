@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
-
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
 	html {
 		background: linear-gradient(#0090ff, #14a101);
 		height: 100%;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-		background-repeat:no-repeat;
-		background: -webkit-linear-gradient(#0090ff, #14a101);
-		background: -moz-linear-gradient(#0090ff, #14a101);
-		background: -ms-linear-gradient(#0090ff, #14a101);
-		background: -o-linear-gradient(#0090ff, #14a101);
-		background: linear-gradient(#0090ff, #14a101);
-		text-align: center;
+    	-webkit-background-size: cover;
+    	-moz-background-size: cover;
+    	-o-background-size: cover;
+    	background-size: cover;
+    	background-repeat:no-repeat;
+    	background: -webkit-linear-gradient(#0090ff, #14a101);
+    	background: -moz-linear-gradient(#0090ff, #14a101);
+    	background: -ms-linear-gradient(#0090ff, #14a101);
+    	background: -o-linear-gradient(#0090ff, #14a101);
+    	background: linear-gradient(#0090ff, #14a101);
+    	text-align: center;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -34,16 +34,20 @@
 		color: white;
 		font-size: 7em;
 		font-weight: normal;
-		font-family: bahnschrift;
+		font-family: 'Barlow Condensed', sans-serif;
 		margin: 0;
 
 	}
 	#buttonField {
 		margin: 0 auto;
-		margin-top: 20vh;
+		margin-top: 15vh;
 		display: block;
 		vertical-align: center;
 
+	}
+	#facebookSI, #googleSI{
+		font-size: 4em;
+		opacity: 0;
 	}
 	button {
 		width: 80%;
@@ -57,6 +61,8 @@
 		border-radius: 3em;
 		vertical-align: center;
 		transition: 0.1s;
+		margin-bottom: 2%;
+		opacity: 0;
 	}
 	button:active {
 		background-color: rgb(255, 255, 255, 50%);
@@ -71,5 +77,62 @@
 		font-size: 2em;
 	}
 	#parkLogo {
-		margin-top: 6%;
+		margin-top: -16%;
 	}
+	#parkLogoIMG {
+		width: 30%;
+	}
+	#htmlLogoIMG {
+		width: 10%;
+	}
+/*Media Query for computer viewing*/
+@media(min-width: 1030px) {
+	body {
+		overflow-y: hidden;
+	}
+	#buttonField {
+		margin: 0 auto;
+		top: 30%;
+		display: block;
+		vertical-align: center;
+	}
+	#parkLogo {
+		margin-top: 1%;
+	}
+	#compName {
+		bottom: 2%;
+		position: absolute;
+		display: block;
+		font-size: 0.5em;
+	}
+	#parkLogoIMG {
+		width: 20%;
+	}
+	#htmlLogoIMG {
+		width: 5%;
+	}
+	#facebookSI, #googleSI{
+		font-size: 2em;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 1%;
+	}
+	button {
+		width: 30%;
+		height: 3%;
+		font-size: 3em;
+		font-family: 'Secular One', sans-serif;
+		color: white;
+		padding: 0.2%;
+		background: none;
+		border: 7px solid white;
+		border-radius: 3em;
+		vertical-align: center;
+		transition: 0.5s;
+	}
+	button:hover{
+		border-color: #cccccc;
+		color: #cccccc;
+		transition: 0.5s;
+	}
+}
