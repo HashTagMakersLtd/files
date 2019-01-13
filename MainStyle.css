@@ -129,12 +129,15 @@ ul a {
 	border-radius: 10em;
 }
 .btnIn:active{
-	background-color: grey;
+	background-color: #dddddd;
 	transition: 0.5s;
 }
 .btnOut:hover{
 	box-shadow: 10px 10px 20px grey;
 	transition: 0.5s;
+}
+.btnOut:active {
+	box-shadow: none;
 }
 /*Standard Button*/
 .btn {
@@ -203,14 +206,28 @@ ul a {
 		list-style: none;
 		left: 5%;
 	}
-	#mainMenu {
-		width: 20%;
-	}
 	#mainMenu img {
-		width: 50%;
-		margin-top: 10%;
+		width: 20%;
+		margin-top: 3%;
 	}
 	#mainMenu button {
 		font-size: 0.6em;
+		padding: 2%;
+	}
+	.btnIn:hover{
+		background-color: #eeeeee;
+		transition: 0.5s;
+	}
+	.btnOut:hover {
+		box-shadow: none;
+	}
+	li {
+		margin-bottom: 1%;
+	}
+	ul a {
+		font-size: 3em;
+	}
+	.btnOut {
+		padding: 2%;
 	}
 }
