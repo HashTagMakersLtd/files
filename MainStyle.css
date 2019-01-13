@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
+body{
+	background-color: #c0c0c0;
+	font-family: 'Heebo', sans-serif;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	overflow-x: hidden;
+	text-align: center;
+}
+html{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	overflow-x: hidden;
+}
+/*Header code*/
+.header td {
+	width: 1%;
+	height: 1%;
+}
+.header {
+	background-color: #0090ff;
+	box-shadow: 0px 3px 40px grey;
+	text-align: center;
+	color: white;
+	padding: 0;
+	font-family: 'Barlow Condensed', sans-serif;
+	z-index: 999;
+	position: absolute;
+}
+.header span {
+	height: 10%;
+	font-size: 6em;
+}
+.header td img {
+	width: 60%;
+	height: 10%;
+	padding: 10%;
+	transition: 0.5s;
+}
+.header td img:active {
+	background-color: #005da5;
+	transition: 0.5s;
+}
+/*sidemenu code*/
+.sideMenu {
+	padding-top: 5%;
+	position: absolute;
+	background-color: #0090ff;
+	display: block;
+	width: 80%;
+	height: 85%;
+	bottom: 0;
+	font-family: 'Heebo', sans-serif;
+	font-size: 3em;
+	color: white;
+	margin: 0 auto;
+	z-index: 20;
+}
+.sideMenu img {
+	width: 60%;
+
+}
+.sideMenu button {
+	width: 100%;
+	background: none;
+	border-style: none;
+	display: block;
+	font-family: 'Heebo', sans-serif;
+	font-size: 1.5em;
+	color: white;
+	text-align: right;
+	padding-right: 10%;
+	padding: 5%;
+	transition: 0.5s;
+}
+.sideMenu button:hover, button:active{
+	background-color: #005da5;
+	transition: 0.5s;
+}
+#profileMenu {
+	margin-left: -80%;
+}
+#mainMenu {
+	right: -80%;
+}
+
+/*forum field code*/
+#forumField {
+	width: 80%;
+	margin-top: 10%;
+	text-align: right;
+	padding: 10%;
+}
+ul{
+	list-style: none;
+	left: 5%;
+}
+ul a {
+	font-size: 8em;
+	font-family: 'Secular One', sans-serif;
+	color: #14a101;
+	text-decoration: none;
+	font-weight: bold;
+	text-shadow: 5px 5px 8px grey;
+	transition: 0.5s;
+}
+ul a:active, a:hover {
+	transition: 0.5s;
+	color: #0d5e02;
+}
+.border {
+	width: 100%;
+	height: 5px;
+	background-color: grey;
+}
+/*Standard Button*/
+.btn {
+	font-family: 'Secular One', sans-serif;
+	color: white;
+	font-size: 5em;
+	background-color: #14a101;
+	border-radius: 40px;
+	border-style: none;
+	transition: 0.5s;
+	box-shadow: 5px 5px 8px grey;
+	margin: 3%;
+}
+.btn:hover, .btn:active {
+	transition: 0.5s;
+	background-color: #0d5e02;
+}
+#createPostBtn {
+	position: absolute;
+	display: block;
+	width: 70%;
+	margin: 0 auto;
+	bottom: 2%;
+	right: 0;
+	left: 0;
+	z-index: 4;
+}
+/*Mediaquery for desktop viewing*/
+@media(min-width: 1030px) {
+	.header td img {
+		width: 10%;
+		padding: 3%;
+		transition: 0.5s;
+	}
+	#forumField {
+		width: 60%;
+		padding: 2%;
+		margin: 0 auto;
+		margin-top: 6%;
+	}
+	.header span {
+		height: 10%;
+	}
+	.btn {
+		font-family: 'Secular One', sans-serif;
+		color: white;
+		font-size: 2em;
+		background-color: #14a101;
+		border-radius: 40px;
+		padding: 2%;
+		border-style: none;
+		transition: 0.5s;
+		box-shadow: 5px 5px 8px grey;
+	}
+	#createPostBtn {
+		position: absolute;
+		display: block;
+		width: 30%;
+		margin: 0 auto;
+		bottom: 2%;
+		right: 0;
+		left: 0;
+	}
+	ul{
+		list-style: none;
+		left: 5%;
+	}
+	ul a {
+		font-size: 5em;
+		font-family: 'Secular One', sans-serif;
+		color: #14a101;
+		text-decoration: none;
+		font-weight: bold;
+		text-shadow: 5px 5px 8px grey;
+		transition: 0.5s;
+	}
+	ul a:active, a:hover {
+		transition: 0.5s;
+		color: #0d5e02;
+	}
+	.sideMenu {
+		width: 20%;
+	}
+	.sideMenu img {
+		width: 50%;
+		margin-top: 10%;
+	}
+	.sideMenu button {
+		font-size: 0.6em;
+	}
+}
