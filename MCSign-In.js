@@ -66,7 +66,7 @@ function authStateObserver(user) {
 	
 	if (user) { // User is signed in!
 		alert("Logged in as "+firebase.auth().currentUser.displayName);
-		window.location("Main.html");
+		window.location.href = "Main.html";
 	} 
 }
  
