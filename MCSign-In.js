@@ -65,7 +65,8 @@ function signInWithGoogle(){//Signs in with Google
 function authStateObserver(user) {
 	
 	if (user) { // User is signed in!
-		alert("Already logged in as "+firebase.auth().currentUser.displayName);
+		alert("Logged in as "+firebase.auth().currentUser.displayName);
+		window.location("Main.html");
 	} 
 }
  
