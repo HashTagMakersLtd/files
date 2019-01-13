@@ -43,6 +43,7 @@ html{
 }
 /*sidemenu code*/
 #mainMenu {
+	box-shadow: -3px 0px 40px #0080dd;
 	padding-top: 5%;
 	position: absolute;
 	background-color: #0090ff;
