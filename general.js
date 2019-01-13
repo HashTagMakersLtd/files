@@ -22,4 +22,4 @@ function addForum(Name, From){
 	});
 }
 
-addForum("Testing", firebase.firestore().collection("users").doc("jyudel@gmail.com"))l;
+//addForum("Testing", firebase.firestore().collection("users").doc("jyudel@gmail.com"));
