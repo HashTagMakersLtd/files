@@ -12,6 +12,8 @@ function displayOldMessage(doc){
 	//TODO: actually add this
 	//Here's how: prepend it on the list
 	//On a different side depending if it comes from you or not
+	
+	//$("#chatroomDiv").prepend(doc.data().from.id+": "+doc.data().text+"\n");
 }
 
 function displayNewMessage(doc){
@@ -19,6 +21,8 @@ function displayNewMessage(doc){
 	//TODO: actually add this
 	//Here's how: append it on the list
 	//On a different side depending if it comes from you or not
+	
+	//$("#chatroomDiv").prepend(doc.data().from.id+": "+doc.data().text+"\n");
 }
 
 function get25messages(queryRef){
