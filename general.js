@@ -8,7 +8,7 @@ function addForum(Name, From){
 	    docRef.collection("genChat").add({
 		    from: From,
 		    text: "Welcome to the chat for the "+Name+" forum!",
-		    timestamp: date.getTime()
+		    timestamp: firebase.firestore.Timestamp.fromDate(date.getTime())
 		})
 		.then(function(docRef) {
 		    console.log("General chat initialized");
