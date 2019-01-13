@@ -34,7 +34,7 @@ function get25messages(queryRef){
             displayOldMessage(doc);
         });
 
-        var nextBatch = genChatRef.orderBy("timestamp", "desc")
+        nextBatch = genChatRef.orderBy("timestamp", "desc")
           						.startAfter(lastVisible)
           						.limit(25);
     })
@@ -67,6 +67,7 @@ genChatRef
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
         alert("We've run into an error downloading chat data!");
+        //TODO: Add Hebrew
         window.location.href = "Main.html";
     });
 
@@ -88,6 +89,7 @@ function deleteMessage(msgID){
 	//TODO: check if user is admin or the msg is theirs
 	genChatRef.doc(msgID).update({
 	    text: "🚫This message has been deleted🚫"
+	    //TODO: Add Hebrew
 	})
 	.then(function() {
 	    console.log("Msg successfully deleted");

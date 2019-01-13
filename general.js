@@ -7,6 +7,7 @@ function addForum(Name){
 	.then(function(docRef) {
 	    console.log("Document written with ID: ", docRef.id);
 	    postMessage(docRef.collection("genChat"),"Welcome to the chat for the "+Name+" forum!")
+	    //TODO: Add Hebrew
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);
