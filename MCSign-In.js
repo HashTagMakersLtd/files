@@ -10,7 +10,7 @@ function signOut() {
 
 function initFirebaseAuth() {
   // Listen to auth state changes.
-  firebase.auth().onAuthStateChanged(authStateObserver);
+  ;
 }
 
 function signInWithGoogle(){//Signs in with Google
@@ -62,12 +62,10 @@ function signInWithGoogle(){//Signs in with Google
 	});
 }
 
-function authStateObserver(user) {
-	
+
+firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
 		alert("Logged in as "+firebase.auth().currentUser.displayName);
 		window.location.href = "Main.html";
-	} 
-}
- 
-initFirebaseAuth();
+	}
+});

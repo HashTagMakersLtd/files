@@ -5,7 +5,7 @@ genChatRef = firebase.firestore().collection("forums").doc(id).collection("genCh
 
 // READING MESSAGES AND INITIALIZING CHAT
 
-var firstBatch = genChatRef.orderBy("timestamp",'desc').limit(25);
+var firstBatch = genChatRef.orderBy("timestamp", "desc").limit(25);
 
 function displayOldMessage(doc){
 	console.log(doc.id, " => ", doc.data());
@@ -17,12 +17,13 @@ function displayOldMessage(doc){
 function get25messages(queryRef){
 	queryRef.get()
     .then(function(querySnapshot) {
+    	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+
         querySnapshot.forEach(function(doc) {
-            
             displayOldMessage(doc);
         });
 
-        var nextBatch = genChatRef.orderBy("timestamp",'desc')
+        var nextBatch = genChatRef.orderBy("timestamp", "desc")
           						.startAfter(lastVisible)
           						.limit(25);
     })
@@ -40,3 +41,15 @@ get25messages(firstBatch);
 
 
 //WRITING MESSAGES
+
+firebase.auth().onAuthStateChanged(function(user){
+	if (user) { // User is signed in!
+		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
+	}
+});
+
+function writeMessageHere(message){
+	writeMessageInChat(genChatRef,message,userRef);
+}
+
+//TODO: Hook writeMessageHere up to button and inputText field
