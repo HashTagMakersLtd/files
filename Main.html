@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MakerChat</title>
+	<link rel="stylesheet" type="text/css" href="MainStyle.css">
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
+	<script type="text/javascript" src="firebaseConfig.js"></script>
+	<script type="text/javascript" src="Main.js"></script>
+	<script type="text/javascript" src="general.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<!--Header (to be made into catch?)-->
+	<div class="sideMenu" id="profileMenu">
+		<img src="genericProfileImg.png" id="profilePhoto">
+		<button id="changeUserName">שנה שם המשתמש</button>
+		<button id="changePassword">שנה סיסמה</button>
+	</div>
+
+	<div class="sideMenu" id="mainMenu">
+		<img src="museumLogoImg.png">
+		<button id="settings">הגדרות</button>
+	</div>
+	<div class="header">
+		<table>
+			<tr>
+				<td id="toggleProfile" style="text-align: left;">
+					<img src="genericProfileImg.png" id="profilePhoto">
+				</td>
+				<td style="text-align: center;">
+					<span>MakerChat</span>
+				</td>
+				<td id="toggleMenu" style="text-align: right;">
+					<img src="MenuImg.png">
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="forumField">
+		<ul id="forumList">
+			
+		</ul>
+	</div>
+
+	<button class="btn" id="createPostBtn">
+		צור פוסט חדש
+	</button>
+	<!-- Local Script for Animation -->
+	<script type="text/javascript">
+		$("#toggleProfile").click(function(){
+			if($("#profileMenu").css('margin-left') < '0') {
+				$("#profileMenu").animate({marginLeft: '0'});
+			} else if($("#profileMenu").css('margin-left') > '0') {
+				$("#profileMenu").animate({marginLeft: '-80%'});
+			}
+		});
+		$("#toggleMenu").click(function(){
+			if($("#mainMenu").css('right') < '0') {
+				$("#mainMenu").animate({right: '0'});
+			} else if($("#mainMenu").css('right') > '0') {
+				$("#mainMenu").animate({right: '-80%'});
+			}
+		});
+	</script>
+</body>
+</html>
