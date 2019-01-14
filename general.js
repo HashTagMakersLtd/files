@@ -1,25 +1,32 @@
-function addForum(Name, From){
+
+//CHATS
+function addForum(Name){
 	firebase.firestore().collection("forums").add({
     	name: Name
 	})
 	.then(function(docRef) {
 	    console.log("Document written with ID: ", docRef.id);
-	    var date = new Date();
-	    docRef.collection("genChat").add({
-		    from: From,
-		    text: "Welcome to the chat for the "+Name+" forum!",
-		    timestamp: firebase.firestore.Timestamp.fromDate(date.getTime())
-		})
-		.then(function(docRef) {
-		    console.log("General chat initialized");
-		})
-		.catch(function(error) {
-		    console.error("Error initializing chat: ", error);
-		});
+	    postMessage(docRef.collection("genChat"),"Welcome to the chat for the "+Name+" forum!")
+	    //TODO: Add Hebrew
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);
 	});
 }
 
-//addForum("Testing", firebase.firestore().collection("users").doc("jyudel@gmail.com"));
+function get(name){
+   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
+}
+
+function writeMessageInChat(chatRef, message,userRef){
+		var date = new Date();
+	    chatRef.add({
+		    from: userRef,
+		    text: message,
+		    timestamp: firebase.firestore.Timestamp.fromDate(date)
+		})
+		.catch(function(error) {
+		    console.error("Error posting message: ", error);
+		});
+}
