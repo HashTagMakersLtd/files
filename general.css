@@ -1,0 +1,81 @@
+/*Header code*/
+.header td {
+	width: 1%;
+	height: 1%;
+}
+.header {
+	background-color: #0090ff;
+	box-shadow: 0px 3px 40px grey;
+	text-align: center;
+	color: white;
+	padding: 0;
+	font-family: 'Barlow Condensed', sans-serif;
+	z-index: 990;
+	position: absolute;
+}
+.header span {
+	height: 10%;
+	font-size: 6em;
+}
+.header td img {
+	width: 60%;
+	padding: 10%;
+	transition: 0.5s;
+}
+.header td img:active {
+	background-color: #005da5;
+	transition: 0.5s;
+}
+/*sidemenu code*/
+#mainMenu {
+	box-shadow: -3px 0px 40px #0080dd;
+	padding-top: 5%;
+	position: absolute;
+	background-color: #0090ff;
+	width: 0;
+	height: 100%;
+	bottom: 0;
+	right: 0;
+	font-family: 'Heebo', sans-serif;
+	font-size: 3em;
+	color: white;
+	z-index: 999;
+	overflow: hidden;
+	text-align: center;
+}
+#mainMenu img {
+	width: 60%;
+	margin: 0 auto;
+}
+#mainMenu button {
+	width: 100%;
+	background: none;
+	border-style: none;
+	display: block;
+	font-family: 'Heebo', sans-serif;
+	font-size: 1.5em;
+	color: white;
+	text-align: right;
+	padding-right: 10%;
+	padding: 5%;
+	transition: 0.5s;
+}
+#mainMenu button i {
+	font-size: 1em;
+}
+#mainMenu button:hover, button:active{
+	background-color: #005da5;
+	transition: 0.5s;
+}
+/*Mediaquery for desktop viewing*/
+@media(min-width: 1030px) {
+	.header td img {
+		width: 10%;
+		padding: 3%;
+		transition: 0.5s;
+	}
+	.header span {
+		height: 10%;
+		font-size: 4em;
+	}
+}
