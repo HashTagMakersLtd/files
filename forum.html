@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MakerChat</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="general.js"></script>
+	<link rel="stylesheet" type="text/css" href="forum.css">
+	<!-- HEADER STYLE -->
+	<link rel="stylesheet" type="text/css" href="general.css">
+</head>
+<body>
+	<!--START HEADER CODE-->
+	<div id="mainMenu">
+		<button id="backBtn" style=" right: 0;">חזור<i class="material-icons">arrow_forward_ios</i></button>
+		<img src="museumLogoImg.png">
+		<button id="settings">הגדרות</button>
+	</div>
+	<div class="header">
+		<table>
+			<tr>
+				<td id="toggleProfile" style="text-align: left;">
+					<img src="genericProfileImg.png" id="profilePhoto">
+				</td>
+				<td style="text-align: center;">
+					<span id="forumTitle">MakerChat</span>
+				</td>
+				<td id="toggleMenu" style="text-align: right;">
+					<img src="MenuImg.png">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--END HEADER CODE-->
+
+	<div id="threadField">
+		<ul id="threadList">
+			<!-- <li> to be appended from firebase -->
+			<li class="threadItem" id="">
+				<h2 class="threadTitle">כותרת</h2>
+				<span class="author">כותב</span><br>
+				<div class="infoDiv">
+					<button class="likeBtn"><i class="material-icons">thumb_up_alt</i></button>
+					<span class="timeStamp">TimeStamp</span>
+					<i class="material-icons">thumb_up_alt</i>
+					<span class="likeNum">00</span>
+
+					<i class="material-icons">chat_bubble</i>
+					<span class="comNum">000</span>
+				</div><br>
+				<div class="border"></div>
+			</li>
+		</ul>
+	</div>
+	<button id="newPostBtn">התחל שיחה</button>
+	<script type="text/javascript">
+		$("#toggleMenu").click(function(){
+			if($("#mainMenu").css('width') < '80%') {
+				$("#mainMenu").animate({width: '80%'});
+			}
+		});
+		$("#backBtn").click(function(){
+			if($("#mainMenu").css('width') > '0') {
+				$("#mainMenu").animate({width: '0'});
+			}
+		});
+	</script>
+</body>
+</html>
