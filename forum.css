@@ -67,7 +67,7 @@ li h2 {
 }
 .author {
 	font-family: 'Heebo', sans-serif;
-	font-size: 3em;
+	font-size: 2.5em;
 }
 .timeStamp {
 	float: left;
@@ -76,6 +76,8 @@ li h2 {
 .border {
 	width: 100%;
 	height: 2px;
+	margin-top: 5%;
+	margin-bottom: 5%;
 	background-color: grey;
 }
 #newPostBtn {

@@ -17,7 +17,7 @@ function getThreadAsElement(doc){
 					<span class=\"likeNum\">"+doc.data().likeCount+"</span>\
 					<i class=\"material-icons\">chat_bubble</i>\
 					<span class=\"comNum\">"+doc.data().commentCount+"</span>\
-				</div><br>\
+				</div>\
 				<div class=\"border\"></div>\
 			</li>"
 }
@@ -70,6 +70,7 @@ allThreadsRef
                 console.log("Removed thread: ", change.doc.data());
                 //TODO: Handle this?
             }
+            else{console.log("Strange change")}
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
