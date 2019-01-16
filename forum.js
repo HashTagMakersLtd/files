@@ -98,6 +98,7 @@ function makeNewThread(title){
 	    from: userRef,
 	    name: title,
 	    timestamp: ts,
+	    mostRecentPost: ts,
 	    commentCount: 0,
 	    likeCount: 1,
 	    usersWhoLiked: [userRef]
