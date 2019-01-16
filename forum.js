@@ -111,10 +111,12 @@ function makeNewThread(title){
 	window.location.href = "thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\""
 }
 //TODO: Add functionality when user clicks the button
-function onButtonClick {
+function onButtonClick() {
 	var title = prompt("Enter a title:","Title");
 	//TODO: Add Hebrew
-	makeNewThread(title);
+	if (title!=null){
+		makeNewThread(title);
+	}
 }
 
 //LIKES
