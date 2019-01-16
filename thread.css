@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
+body{
+	background-color: #f4f4f4;
+	font-family: 'Heebo', sans-serif;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	overflow-x: hidden;
+	text-align: right;
+}
+html{
+	overflow: hidden;
+	overflow-x: hidden;
+}
+
+/*Code for Mother-Post*/
+.headerDiv {
+	background-color: #f4f4f4;
+	position: absolute;
+	display: block;
+	width: 100%;
+	border: 1px solid grey;
+	padding-bottom: 5%;
+	box-shadow: 0px 10px 50px grey;
+	z-index: 10;
+}
+h1 {
+	font-family: 'Secular One', sans-serif;
+	color: #0090ff;
+	font-size: 6em;
+	margin-top: 15%;
+	text-align: right;
+	padding: 5%;
+	margin-bottom: 0%;
+	padding-bottom: 0%;
+}
+#author {
+	font-family: 'Heebo', sans-serif;
+	font-size: 3em;
+	margin-right: 5%;
+}
+.infoDiv {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 3em;
+	color: grey;
+}
+.infoDiv > .material-icons {
+	font-size: 1em;
+	vertical-align: middle;
+}
+.likeBtn {
+	float: left;
+	background-color: grey;
+	border-style: none;
+	border-radius: 20px;
+	padding: 2%;
+}
+.likeBtn > .material-icons {
+	font-size: 4em;
+	vertical-align: middle;
+	color: white;
+}
+.liked {
+	background-color: #0090ff;
+	transition: 0.5s;
+}
+.timeStamp {
+	float: left;
+	margin-left: 10%;
+}
+.border {
+	width: 100%;
+	height: 2px;
+	background-color: grey;
+}
+
+/*Code for 1st tier comments*/
+#mainField {
+	width: 100%;
+	display: block;
+	overflow-y: scroll;
+	text-align: center;
+	position: absolute;
+	display: block;
+	z-index: 2;
+	max-height: 55%;
+	margin-top: 60%;
+}
+.theirCom {
+	text-align: right;
+	border: 1px solid grey;
+	z-index: 9;
+	overflow: auto;
+	width: 100%;
+	padding-bottom: 3%;
+	left: 0;
+}
+.yourCom {
+	text-align: right;
+	border: 1px solid grey;
+	z-index: 9;
+	overflow: auto;
+	width: 100%;
+	padding-bottom: 3%;
+	left: 0;
+	background-color: #b6ffaf;
+}
+.theirCom > .userName, .yourCom > .userName {
+	font-weight: bold;
+	font-family: 'Secular One', sans-serif;
+	font-size: 3em;
+	margin-right: 2%;
+}
+.theirCom > #profilePhoto, .yourCom > #profilePhoto {
+	width: 10%;
+	margin-right: 3%;
+	float: right;
+}
+.theirCom > .comText, .yourCom > .comText {
+	float: right;
+	margin-right: 3%;
+	width: 80%;
+	font-size: 2em;
+}
+
+/*Style for 2nd teir comments*/
+.comSpace {
+	width: 90%;
+	margin-bottom: 5%;
+}
+.comSpace {
+	font-size: 0.8em;
+}
+.comSpace .comText {
+	font-size: 3em;
+}
+.comSpace >.yourCom >.comText {
+	font-size: 2.5em;
+}
+/*Style for 2nd tier comment posting*/
+.postComDiv {
+	width: 100%;
+	display: block;
+	overflow: auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding-bottom: 2%;
+}
+#sendCom {
+	float: left;
+	width: 12%;
+	margin-left: 5%;
+	height: 15%;
+	padding: 2%;
+	background-color: #14a101;
+	border-style: none;
+	border-radius: 200px;
+	box-shadow: 10px 10px 30px #cccccc;
+	text-align: center;
+	transition: 0.5s;
+}
+#sendCom:active, #sendCom:hover {
+	transition: 0.5s;
+	background-color: #0a5900;
+}
+#comInput2 {
+	width: 65%;
+	float: right;
+	padding: 1%;
+	padding-right: 3%;
+	border-radius: 50px;
+	font-size: 4em;
+	margin-right: 5%;
+	text-align: right;
+	border-style: none;
+	bottom: 0;
+	font-family: 'Heebo', sans-serif;
+	box-shadow: 10px 10px 30px #cccccc;
+	overflow: auto;
+	height: 1.5em;
+}
+#comInput::placeholder {
+	color: grey;
+	font-family: 'Heebo', sans-serif;
+}
+#sendCom > img {
+	width: 60%;
+}
+
+
+/*Style for comment posting*/
+#inputDiv {
+	width: 100%;
+	display: block;
+	bottom: 2%;
+	vertical-align: middle;
+	position: absolute;
+	z-index: 990;
+}
+#send {
+	float: left;
+	width: 15%;
+	margin-left: 5%;
+	height: 15%;
+	padding: 2%;
+	background-color: #14a101;
+	border-style: none;
+	border-radius: 200px;
+	box-shadow: 10px 10px 30px #cccccc;
+	text-align: center;
+	transition: 0.5s;
+}
+#send:active, #send:hover {
+	transition: 0.5s;
+	background-color: #0a5900;
+}
+#comInput {
+	width: 65%;
+	float: right;
+	height: 100px;
+	padding: 1%;
+	padding-right: 3%;
+	border-radius: 50px;
+	font-size: 4em;
+	margin-right: 5%;
+	text-align: right;
+	border-style: none;
+	bottom: 0;
+	font-family: 'Heebo', sans-serif;
+	box-shadow: 10px 10px 30px #cccccc;
+}
+#comInput::placeholder {
+	color: grey;
+	font-family: 'Heebo', sans-serif;
+}
+#send > img {
+	width: 70%;
+}
