@@ -8,7 +8,7 @@ var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
 	return "<li class=\"threadItem\" id=\""+doc.id+"\">\
-				<a href=\"thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\">\
+				<a href=\"thread.html?forumID=\""+id+"\"&threadID=\""+doc.id+"\">\
 					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
 					<span class=\"author\">"+doc.data().from.id+"</span><br>\
 					<div class=\"infoDiv\">\
