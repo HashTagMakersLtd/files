@@ -61,17 +61,18 @@ getNext25messages(firstBatch);
 allThreadsRef
     .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
-            if (change.type === "added" && change.doc.metadata.hasPendingWrites) {
+        	//console.log(change);
+            if (change.type === "added" && !change.doc.metadata.fromCache) {
                 displayNewThread(getThreadAsElement(change.doc))
             }
             else if (change.type === "modified") {
-                //console.log("Modified thread: ", change.doc.data());
+                console.log("Modified thread: ", change.doc.data());
                 $("#"+change.doc.id).remove();
                 displayNewThread(getThreadAsElement(change.doc));
             }
             else if (change.type === "removed") {
                 console.log("Removed thread: ", change.doc.data());
-                //TODO: Handle this?
+                $("#"+change.doc.id).remove();
             }
             else{console.log(change)}
         });
@@ -108,7 +109,7 @@ function makeNewThread(title){
 	    //TODO: Inform user
 	});
 	//TODO: maybe initialize thread w a comment?
-	window.location.href = "thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\""
+	//window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
 }
 //TODO: Add functionality when user clicks the button
 function onButtonClick() {
