@@ -76,12 +76,14 @@ li h2 {
 }
 .timeStamp {
 	float: left;
-	margin-left: 50%;
+	margin-left: 5%;
 }
 .border {
 	width: 100%;
 	height: 2px;
 	background-color: grey;
+	margin-top: 5%;
+	margin-bottom: 10%;
 }
 #newPostBtn {
 	bottom: 2%;

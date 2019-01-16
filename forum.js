@@ -65,6 +65,7 @@ allThreadsRef
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
             if (change.type === "added" && !change.doc.metadata.fromCache) {
+            	//console.log("added");
                 displayNewThread(getThreadAsElement(change.doc))
             }
             else if (change.type === "modified") {
@@ -112,7 +113,7 @@ function makeNewThread(title){
 	    //TODO: Inform user
 	});
 	//TODO: maybe initialize thread w a comment?
-	//window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
+	window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
 }
 
 function onButtonClick() {

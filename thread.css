@@ -15,7 +15,7 @@ html{
 }
 
 /*Code for Mother-Post*/
-.headerDiv {
+#headerDiv {
 	background-color: #f4f4f4;
 	position: absolute;
 	display: block;
@@ -25,10 +25,10 @@ html{
 	box-shadow: 0px 10px 50px grey;
 	z-index: 10;
 }
-h2 {
+h1 {
 	font-family: 'Secular One', sans-serif;
 	color: #0090ff;
-	font-size: 5em;
+	font-size: 4.5em;
 	margin-top: 15%;
 	text-align: right;
 	padding: 5%;
@@ -41,7 +41,7 @@ h2 {
 	margin-right: 5%;
 }
 .infoDiv {
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
 	text-align: center;
 	font-size: 3em;
@@ -69,7 +69,7 @@ h2 {
 }
 .timeStamp {
 	float: left;
-	margin-left: 10%;
+	margin-left: 2%;
 }
 .border {
 	width: 100%;
@@ -86,8 +86,8 @@ h2 {
 	position: absolute;
 	display: block;
 	z-index: 2;
-	max-height: 58%;
-	margin-top: 55%;
+	max-height: 60%;
+	margin-top: 53%;
 }
 .theirCom {
 	text-align: right;
@@ -123,7 +123,7 @@ h2 {
 	float: right;
 	margin-right: 3%;
 	width: 80%;
-	font-size: 2em;
+	font-size: 3em;
 }
 
 /*Style for 2nd teir comments*/
@@ -138,7 +138,7 @@ h2 {
 	font-size: 3em;
 }
 .comSpace >.yourCom >.comText {
-	font-size: 2.5em;
+	font-size: 3em;
 }
 /*Style for 2nd tier comment posting*/
 .postComDiv {
@@ -166,7 +166,7 @@ h2 {
 	transition: 0.5s;
 	background-color: #0a5900;
 }
-#comInput2 {
+.comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;

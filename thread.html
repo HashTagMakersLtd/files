@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>MakerChat</title>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
@@ -41,7 +42,7 @@
 	<!-- Main post div -->
 	<div id="headerDiv">
 		<h1 id="threadTitle">כותרת</h1>
-		<span id="author">כותב</span>
+		<span class="author">כותב</span>
 		<div class="infoDiv">
 			<button class="likeBtn"><i class="material-icons">thumb_up_alt</i></button>
 			<span class="timeStamp">TimeStamp</span>
@@ -55,8 +56,10 @@
 
 	<!-- Field for comments -->
 	<div id="mainField">
-		<!-- field for top tier comment and associated 2nd tier comments -->
+		<!-- Commenting out all of Sivan's beautifl work!
+		<--field for top tier comment and associated 2nd tier comments
 		<div class="theirComField">
+
 			<div class="theirCom" id="">
 				<span class="userName">משתמש101</span><br>
 				<img id="profilePhoto" src="genericProfileImg.png">
@@ -71,8 +74,9 @@
 					<span class="comNum">000</span>
 				</div>
 			</div>
-			<!-- field for 2nd tier comments / post comment -->
+			<-- field for 2nd tier comments / post comment
 			<div class="comSpace" id="">
+
 				<div class="theirCom" id="">
 					<span class="userName">משתמש101</span><br>
 					<img id="profilePhoto" src="genericProfileImg.png">
@@ -84,6 +88,7 @@
 						<span class="likeNum">00</span>
 					</div>
 				</div>
+
 				<div class="yourCom" id="">
 					<span class="userName">אתה</span><br>
 					<img id="profilePhoto" src="genericProfileImg.png">
@@ -95,39 +100,24 @@
 						<span class="likeNum">00</span>
 					</div>
 				</div>
-				<!-- Post comment -->
+				<-- Post comment 
+
 				<div class="postComDiv">
 					<textarea name="text" id="comInput2" placeholder="הגיבו כאן"></textarea>
 					<button id="sendCom">
 						<img src="sendImg.png">
 					</button>
 				</div>
+
 			</div>
 		</div>
-
-		<!-- Your comment field -->
-		<div class="yourComField">
-			<div class="yourCom" id="">
-				<span class="userName">אתה</span><br>
-				<img id="profilePhoto" src="genericProfileImg.png">
-				<span class="comText"> טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט טקסט</span>
-				<div class="infoDiv">
-					<button class="likeBtn"><i class="material-icons">thumb_up_alt</i></button>
-					<span class="timeStamp">TimeStamp</span>
-					<i class="material-icons">thumb_up_alt</i>
-					<span class="likeNum">00</span>
-
-					<i class="material-icons">chat_bubble</i>
-					<span class="comNum">000</span>
-				</div>
-			</div>
-		</div>
+	-->
 	</div>
 
 	<!-- Bottom submit div -->
 	<div id="inputDiv">
 		<textarea name="text" id="comInput" placeholder="הקלידו כאן"></textarea>
-		<button id="send">
+		<button id="send" onclick="mainButtonClick()">
 			<img src="sendImg.png">
 		</button>
 	</div>
