@@ -58,3 +58,13 @@ function likeAnything(docRef, userRef){
 		usersWhoLiked: firebase.firestore.FieldValue.arrayUnion(userRef),
 	})
 }
+
+function didUserLike(doc, userRef){
+	var u = doc.data().usersWhoLiked;
+	for (var i = 0; i<u.length;i++){
+		if (u[i].id===userRef.id){
+			return true;
+		}
+	}
+	return false;
+}

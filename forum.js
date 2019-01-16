@@ -111,7 +111,7 @@ function makeNewThread(title){
 	//TODO: maybe initialize thread w a comment?
 	//window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
 }
-//TODO: Add functionality when user clicks the button
+
 function onButtonClick() {
 	var title = prompt("Enter a title:");
 	//TODO: Add Hebrew
