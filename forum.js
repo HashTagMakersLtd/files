@@ -8,17 +8,19 @@ var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
 	return "<li class=\"threadItem\" id=\""+doc.id+"\">\
-				<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
-				<span class=\"author\">"+doc.data().from.id+"</span><br>\
-				<div class=\"infoDiv\">\
-					<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-					<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
-					<i class=\"material-icons\">thumb_up_alt</i>\
-					<span class=\"likeNum\">"+doc.data().likeCount+"</span>\
-					<i class=\"material-icons\">chat_bubble</i>\
-					<span class=\"comNum\">"+doc.data().commentCount+"</span>\
-				</div>\
-				<div class=\"border\"></div>\
+				<a href=\"thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\">\
+					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
+					<span class=\"author\">"+doc.data().from.id+"</span><br>\
+					<div class=\"infoDiv\">\
+						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
+						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
+						<i class=\"material-icons\">thumb_up_alt</i>\
+						<span class=\"likeNum\">"+doc.data().likeCount+"</span>\
+						<i class=\"material-icons\">chat_bubble</i>\
+						<span class=\"comNum\">"+doc.data().commentCount+"</span>\
+					</div>\
+					<div class=\"border\"></div>\
+				</a>\
 			</li>"
 }
 
@@ -62,15 +64,15 @@ allThreadsRef
             if (change.type === "added" && change.doc.metadata.hasPendingWrites) {
                 displayNewThread(getThreadAsElement(change.doc))
             }
-            if (change.type === "modified") {
+            else if (change.type === "modified") {
                 console.log("Modified thread: ", change.doc.data());
                 //TODO: actually do this
             }
-            if (change.type === "removed") {
+            else if (change.type === "removed") {
                 console.log("Removed thread: ", change.doc.data());
                 //TODO: Handle this?
             }
-            else{console.log(change)}
+            //else{console.log(change)}
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
@@ -91,7 +93,8 @@ firebase.auth().onAuthStateChanged(function(user){
 function makeNewThread(title){
 	var date = new Date();
 	var ts = firebase.firestore.Timestamp.fromDate(date);
-	allThreadsRef.add({
+	var newThread = allThreadsRef.doc();
+	newThread.set({
 	    from: userRef,
 	    name: title,
 	    timestamp: ts,
@@ -104,6 +107,7 @@ function makeNewThread(title){
 	    //TODO: Inform user
 	});
 	//TODO: maybe initialize thread w a comment?
+	window.location.href = "thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\""
 }
 //TODO: Add functionality when user clicks the button
 
