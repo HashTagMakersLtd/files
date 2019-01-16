@@ -31,6 +31,7 @@ function writeMessageInChat(chatRef, message,userRef){
 		});
 }
 */
+
 //Get timestamp string from date object
 function timeConverter(UNIX_timestamp){
   var a = UNIX_timestamp;
