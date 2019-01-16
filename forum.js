@@ -12,7 +12,7 @@ function getThreadAsElement(doc){
 				<span class=\"author\">"+doc.data().from.id+"</span><br>\
 				<div class=\"infoDiv\">\
 					<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-					<span class=\"timeStamp\">"+doc.data().timestamp+"</span>\
+					<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
 					<i class=\"material-icons\">thumb_up_alt</i>\
 					<span class=\"likeNum\">"+doc.data().likeCount+"</span>\
 					<i class=\"material-icons\">chat_bubble</i>\
@@ -36,7 +36,7 @@ function get25messages(queryRef){
             displayThread(getThreadAsElement(doc));
         });
 
-        nextBatch = genChatRef.orderBy("timestamp", "desc")
+        nextBatch = allThreadsRef.orderBy("timestamp", "desc")
           						.startAfter(lastVisible)
           						.limit(25);
     })
