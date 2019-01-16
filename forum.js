@@ -60,7 +60,7 @@ allThreadsRef
     .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
             if (change.type === "added" && change.doc.metadata.hasPendingWrites) {
-                displayNewThread(change.doc)
+                displayNewThread(getThreadAsElement(change.doc))
             }
             if (change.type === "modified") {
                 console.log("Modified thread: ", change.doc.data());
@@ -70,7 +70,7 @@ allThreadsRef
                 console.log("Removed thread: ", change.doc.data());
                 //TODO: Handle this?
             }
-            else{console.log("Strange change")}
+            else{console.log(change)}
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
