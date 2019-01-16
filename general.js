@@ -18,7 +18,7 @@ function get(name){
    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
       return decodeURIComponent(name[1]);
 }
-
+/*
 function writeMessageInChat(chatRef, message,userRef){
 		var date = new Date();
 	    chatRef.add({
@@ -30,9 +30,9 @@ function writeMessageInChat(chatRef, message,userRef){
 		    console.error("Error posting message: ", error);
 		});
 }
-
+*/
+//Get timestamp string from date object
 function timeConverter(UNIX_timestamp){
-  //var a = new Date(UNIX_timestamp * 1000);
   var a = UNIX_timestamp;
   var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
@@ -49,4 +49,12 @@ function timeConverter(UNIX_timestamp){
   }
   var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return time;
+}
+
+//Liking
+
+function likeAnything(docRef, userRef){
+	docRef.update({
+		usersWhoLiked: firebase.firestore.FieldValue.arrayUnion(userRef),
+	})
 }

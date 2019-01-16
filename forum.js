@@ -8,14 +8,14 @@ var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
 	return "<li class=\"threadItem\" id=\""+doc.id+"\">\
-				<a href=\"thread.html?forumID=\""+id+"&threadID=\""+doc.id+"\">\
+				<a href=\"thread.html?forumID="+id+"&threadID="+doc.id+"\">\
 					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
 					<span class=\"author\">"+doc.data().from.id+"</span><br>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
 						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\">"+doc.data().likeCount+"</span>\
+						<span class=\"likeNum\">"+doc.data().usersWhoLiked.length+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
 						<span class=\"comNum\">"+doc.data().commentCount+"</span>\
 					</div>\
@@ -65,8 +65,9 @@ allThreadsRef
                 displayNewThread(getThreadAsElement(change.doc))
             }
             else if (change.type === "modified") {
-                console.log("Modified thread: ", change.doc.data());
-                //TODO: actually do this
+                //console.log("Modified thread: ", change.doc.data());
+                $("#"+change.doc.id).remove();
+                displayNewThread(getThreadAsElement(change.doc));
             }
             else if (change.type === "removed") {
                 console.log("Removed thread: ", change.doc.data());
@@ -100,7 +101,6 @@ function makeNewThread(title){
 	    timestamp: ts,
 	    mostRecentPost: ts,
 	    commentCount: 0,
-	    likeCount: 1,
 	    usersWhoLiked: [userRef]
 	})
 	.catch(function(error) {
@@ -111,6 +111,11 @@ function makeNewThread(title){
 	window.location.href = "thread.html?forumID=\""+id+"\"&threadID=\""+newThread.id+"\""
 }
 //TODO: Add functionality when user clicks the button
+$("#newPostBtn").click(function() {
+	var title = prompt("Enter a title:","Title");
+	//TODO: Add Hebrew
+	makeNewThread(title);
+})
 
 //LIKES
 
