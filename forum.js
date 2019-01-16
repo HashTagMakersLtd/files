@@ -68,9 +68,10 @@ allThreadsRef
                 displayNewThread(getThreadAsElement(change.doc))
             }
             else if (change.type === "modified") {
-                console.log("Modified thread: ", change.doc.data());
+                //console.log("Modified thread: ", change);
                 $("#"+change.doc.id+"-main").remove();
                 displayNewThread(getThreadAsElement(change.doc));
+                //TODO: maybe figure out a wya to not move threads around when liking them?
             }
             else if (change.type === "removed") {
                 console.log("Removed thread: ", change.doc.data());
@@ -135,6 +136,3 @@ function onLikeButtonClick(id){
 		$("#"+id).addClass("liked");
 	}
 }
-//TODO: click function if btn is grey
-
-//TODO: click fn if btn is blue
