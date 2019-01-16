@@ -7,6 +7,7 @@ allThreadsRef = firebase.firestore().collection("forums").doc(id).collection("th
 var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
+	var liked = didUserLike(doc,userRef.id) ? "liked" : "";
 	return "<li class=\"threadItem\" id=\""+doc.id+"\">\
 				<a href=\"thread.html?forumID="+id+"&threadID="+doc.id+"\">\
 					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
@@ -14,7 +15,7 @@ function getThreadAsElement(doc){
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
-						<i class=\"material-icons\">thumb_up_alt</i>\
+						<i class=\"material-icons\""+liked+">thumb_up_alt</i>\
 						<span class=\"likeNum\">"+doc.data().usersWhoLiked.length+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
 						<span class=\"comNum\">"+doc.data().commentCount+"</span>\

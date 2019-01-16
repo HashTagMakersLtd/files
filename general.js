@@ -59,10 +59,10 @@ function likeAnything(docRef, userRef){
 	})
 }
 
-function didUserLike(doc, userRef){
+function didUserLike(doc, userID){
 	var u = doc.data().usersWhoLiked;
 	for (var i = 0; i<u.length;i++){
-		if (u[i].id===userRef.id){
+		if (u[i].id===userID){
 			return true;
 		}
 	}
