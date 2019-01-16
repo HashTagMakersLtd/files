@@ -112,7 +112,7 @@ function makeNewThread(title){
 }
 //TODO: Add functionality when user clicks the button
 function onButtonClick() {
-	var title = prompt("Enter a title:","Title");
+	var title = prompt("Enter a title:");
 	//TODO: Add Hebrew
 	if (title!=null){
 		makeNewThread(title);
