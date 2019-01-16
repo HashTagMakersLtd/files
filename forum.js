@@ -73,7 +73,7 @@ allThreadsRef
                 console.log("Removed thread: ", change.doc.data());
                 //TODO: Handle this?
             }
-            //else{console.log(change)}
+            else{console.log(change)}
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
