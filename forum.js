@@ -22,18 +22,23 @@ function getThreadAsElement(doc){
 			</li>"
 }
 
-function displayThread(thread){
-	console.log(thread);
+function displayOldThread(thread){
+	//console.log(thread);
 	$("#threadList").append(thread);
 }
 
-function get25messages(queryRef){
+function displayNewThread(thread){
+	//console.log(thread);
+	$("#threadList").prepend(thread);
+}
+
+function getNext25messages(queryRef){
 	queryRef.get()
     .then(function(querySnapshot) {
     	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
         querySnapshot.forEach(function(doc) {
-            displayThread(getThreadAsElement(doc));
+            displayOldThread(getThreadAsElement(doc));
         });
 
         nextBatch = allThreadsRef.orderBy("timestamp", "desc")
@@ -46,11 +51,65 @@ function get25messages(queryRef){
 }
 
 //Get most recent 25 messages:
-get25messages(firstBatch);
-//WRITING MESSAGES
+getNext25messages(firstBatch);
+
+//TODO: Add way to grab older threads
+
+//Realtime Handler to append new thread
+allThreadsRef
+    .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+            if (change.type === "added" && change.doc.metadata.hasPendingWrites) {
+                displayNewThread(change.doc)
+            }
+            if (change.type === "modified") {
+                console.log("Modified thread: ", change.doc.data());
+                //TODO: actually do this
+            }
+            if (change.type === "removed") {
+                console.log("Removed thread: ", change.doc.data());
+                //TODO: Handle this?
+            }
+        });
+    }, function(error) {
+        console.log("Error getting realtime chat: ", error);
+        alert("We've run into an error downloading forum data!");
+        //TODO: Add Hebrew
+        window.location.href = "Main.html";
+    });
+
+
+//MAKING NEW THREADS
 
 firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
 	}
 });
+
+function makeNewThread(title){
+	var date = new Date();
+	var ts = firebase.firestore.Timestamp.fromDate(date);
+	chatRef.add({
+	    from: userRef,
+	    name: title,
+	    timestamp: ts,
+	    commentCount: 0,
+	    likeCount: 1,
+	    usersWhoLiked: [userRef]
+	})
+	.catch(function(error) {
+	    console.error("Error creating thread: ", error);
+	    //TODO: Inform user
+	});
+	//TODO: maybe initialize thread w a comment?
+}
+//TODO: Add functionality when user clicks the button
+
+//LIKES
+
+//TODO: Blue-ify all the like buttons user has clicked
+
+//TODO: click function if btn is grey
+
+//TODO: click fn if btn is blue
