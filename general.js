@@ -59,6 +59,12 @@ function likeAnything(docRef, userRef){
 	})
 }
 
+function unlikeAnything(docRef, userRef){
+	docRef.update({
+		usersWhoLiked: firebase.firestore.FieldValue.arrayRemove(userRef),
+	})
+}
+
 function didUserLike(doc, userID){
 	var u = doc.data().usersWhoLiked;
 	for (var i = 0; i<u.length;i++){

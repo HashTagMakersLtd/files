@@ -7,21 +7,22 @@ allThreadsRef = firebase.firestore().collection("forums").doc(id).collection("th
 var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
-	var liked = didUserLike(doc,userRef.id) ? "liked" : "";
-	return "<li class=\"threadItem\" id=\""+doc.id+"\">\
+	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
+	//console.log(liked);
+	return "<li class=\"threadItem\" >\
 				<a href=\"thread.html?forumID="+id+"&threadID="+doc.id+"\">\
 					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
+				</a>\
 					<span class=\"author\">"+doc.data().from.id+"</span><br>\
 					<div class=\"infoDiv\">\
-						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
+						<button class=\"likeBtn"+liked+"\" id=\""+doc.id+"\" onclick=\"onLikeButtonClick("+doc.id+")\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
-						<i class=\"material-icons\""+liked+">thumb_up_alt</i>\
+						<i class=\"material-icons\">thumb_up_alt</i>\
 						<span class=\"likeNum\">"+doc.data().usersWhoLiked.length+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
 						<span class=\"comNum\">"+doc.data().commentCount+"</span>\
 					</div>\
 					<div class=\"border\"></div>\
-				</a>\
 			</li>"
 }
 
@@ -123,8 +124,17 @@ function onButtonClick() {
 
 //LIKES
 
-//TODO: Blue-ify all the like buttons user has clicked
-
+function onLikeButtonClick(id){
+	forumRef = allThreadsRef.doc(id);
+	if ($("#"+id).hasclass("liked")){//user already liked thread; is unliking it
+		unlikeAnything(forumRef,userRef);
+		$("#"+id).removeclass("liked");
+	}
+	else{//user is liking thread
+		likeAnything(forumRef,userRef);
+		$("#"+id).addclass("liked");
+	}
+}
 //TODO: click function if btn is grey
 
 //TODO: click fn if btn is blue
