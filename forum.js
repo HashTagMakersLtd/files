@@ -90,7 +90,7 @@ firebase.auth().onAuthStateChanged(function(user){
 function makeNewThread(title){
 	var date = new Date();
 	var ts = firebase.firestore.Timestamp.fromDate(date);
-	chatRef.add({
+	allThreadsRef.add({
 	    from: userRef,
 	    name: title,
 	    timestamp: ts,
