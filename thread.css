@@ -19,20 +19,20 @@ html{
 h1 {
 	font-family: 'Secular One', sans-serif;
 	color: #0090ff;
-	font-size: 4.5em;
+	font-size: 6em;
 	margin-top: 15%;
 	text-align: right;
 	padding: 5%;
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-.author {
+#author {
 	font-family: 'Heebo', sans-serif;
-	font-size: 2.6em;
+	font-size: 3em;
 	margin-right: 5%;
 }
 .infoDiv {
-	width: 90%;
+	width: 80%;
 	margin: 0 auto;
 	text-align: center;
 	font-size: 3em;
@@ -68,11 +68,11 @@ h1 {
 }
 .liked {
 	background-color: #0090ff;
-	transition: 0.5s;
+	transition: 0.2s;
 }
 .timeStamp {
 	float: left;
-	margin-left: 2%;
+	margin-left: 10%;
 }
 .border {
 	width: 100%;
@@ -80,7 +80,7 @@ h1 {
 	background-color: grey;
 }
 /*Code for Mother-Post*/
-#headerDiv {
+.headerDiv {
 	background-color: #f4f4f4;
 	display: block;
 	width: 100%;
@@ -91,7 +91,7 @@ h1 {
 }
 #superField {
 	overflow-y: scroll;
-	height: 90%;
+	height: 100%;
 }
 /*Code for 1st tier comments*/
 #mainField {
@@ -135,7 +135,7 @@ h1 {
 	float: right;
 	margin-right: 3%;
 	width: 80%;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 /*Style for 2nd teir comments*/
@@ -150,7 +150,7 @@ h1 {
 	font-size: 3em;
 }
 .comSpace >.yourCom >.comText {
-	font-size: 3em;
+	font-size: 2.5em;
 }
 /*Style for 2nd tier comment posting*/
 .postComDiv {
@@ -163,22 +163,23 @@ h1 {
 }
 #sendCom {
 	float: left;
-	width: 12%;
-	margin-left: 5%;
-	height: 15%;
+	width: 10%;
+	height: 10%;
 	padding: 2%;
+	margin-left: 5%;
 	background-color: #14a101;
 	border-style: none;
-	border-radius: 200px;
+	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
-	text-align: center;
+	text-align: right;
 	transition: 0.5s;
+	display: inline-block;
 }
 #sendCom:active, #sendCom:hover {
 	transition: 0.5s;
 	background-color: #0a5900;
 }
-.comInput2 {
+#comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;
@@ -199,7 +200,10 @@ h1 {
 	font-family: 'Heebo', sans-serif;
 }
 #sendCom > img {
-	width: 60%;
+	margin-left: 10%;
+	margin-bottom: -10%;
+	width: 100%;
+	height: 100%;
 }
 
 
@@ -207,24 +211,30 @@ h1 {
 #inputDiv {
 	width: 100%;
 	display: block;
-	bottom: 0%;
-	padding-bottom: 2%;
+	bottom: 2%;
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
 }
 #send {
 	float: left;
-	width: 15%;
-	margin-left: 5%;
-	height: 15%;
+	width: 14%;
+	height: 14%;
 	padding: 2%;
+	margin-left: 5%;
 	background-color: #14a101;
 	border-style: none;
-	border-radius: 200px;
+	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
-	text-align: center;
+	text-align: right;
 	transition: 0.5s;
+	display: inline-block;
+}
+button#send > img {
+	margin-left: 10%;
+	margin-bottom: -10%;
+	width: 100%;
+	height: 100%;
 }
 #send:active, #send:hover {
 	transition: 0.5s;
