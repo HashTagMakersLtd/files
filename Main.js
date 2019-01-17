@@ -1,16 +1,17 @@
 //Populate the forumList with all the forums
+var deleteToggled = false;
 
 var forumRef = firebase.firestore().collection("forums");
 
-forumRef.get()
-    .then(function(querySnapshot) {
+forumRef.onSnapshot(function(querySnapshot) {
+    $("#forumList").html("");
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            $("#forumList").append("<button class='forumBtn' id=\""+doc.id+"\"><a href='forum.html?id="+doc.id+"'>"+doc.data().name+"</a></button><br>");
+            
+            $("#forumList").append("<div  id=\""+doc.id+"\" class=\"outerDiv\"><button class='forumBtn'><a href='forum.html?id="+doc.id+"'>"+doc.data().name+"</a></button></div><br>");
         });
-    })
-    .catch(function(error) {
+    }, function(error) {
         console.log("Error getting documents: ", error);
     });
 
@@ -27,12 +28,31 @@ firebase.auth().onAuthStateChanged(function(user){
 });
 //Show delete buttons if you click the delete button
 function toggleDelete(){
-    console.log("delete");
+    //console.log("delete");
+    if (deleteToggled){
+        $(".deleteBtn").remove();
+        deleteToggled = false;
+    }
+    else{
+        var forumList = $(".outerDiv");
+        for (var i = 0; i<forumList.length; i++){
+            forumList[i].prepend("<button class=\"deleteBtn\" onclick=\"deleteForum(\""+forumList[i].id+"\")\"><i class=\"material-icons\">delete</i></button>");
+        }
+        deleteToggled = true;
+    }
+}
+
+function deleteForum(id){
+    forumRef.doc(id).delete().then(function() {
+        console.log("Forum successfully deleted!");
+    }).catch(function(error) {
+        console.error("Error removing forum: ", error);
+    });
 }
 
 //Add a new forum if you click the create button
 function newForum(){
-    console.log('create');
+    //console.log('create');
     var Name = prompt("What should be the name of the forum?");
     //TODO: Add Hebrew
     firebase.firestore().collection("forums").add({
@@ -44,7 +64,7 @@ function newForum(){
         var ts = firebase.firestore.Timestamp.fromDate(date);
         docRef.collection("threads").add({
             from: userRef,
-            name: "welcome to the "+Name+" forum!",
+            name: "Welcome to the "+Name+" forum!",
             //TODO: Add Hebrew
             timestamp: ts,
             mostRecentPost: ts,
