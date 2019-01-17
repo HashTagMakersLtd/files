@@ -233,6 +233,26 @@ function subCommentLikeButton(mainID, subID){
 	}
 }
 
+//DELETING 
+
+//Fake-delete comments
+
+function deleteComment(pathRef){
+	//TODO: check if user is admin or the msg is theirs
+	pathRef.update({
+	    text: "🚫This message has been deleted🚫"
+	    //TODO: Add Hebrew
+	})
+	.then(function() {
+	    console.log("Msg successfully deleted");
+	})
+	.catch(function(error) {
+	    // The document probably doesn't exist.
+	    console.error("Error deleting msg: ", error);
+	});
+}
+//TODO: actually delete whole threads
+
 //STRUCTURE GENERATION
 
 function getMainCommentAsElement(doc){
@@ -243,7 +263,10 @@ function getMainCommentAsElement(doc){
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
 				<div class=\""+commentClass+"\">\
-					<span class=\"userName\">"+username+"</span><br>\
+					<div class=\"midDiv\">\
+									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
+									<span class=\"userName\">"+username+"</span>\
+								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
@@ -274,7 +297,10 @@ function getSubCommentAsElement(doc){
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
-					<span class=\"userName\">"+username+"</span><br>\
+					<div class=\"midDiv\">\
+									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
+									<span class=\"userName\">"+username+"</span>\
+								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
