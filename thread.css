@@ -131,7 +131,7 @@ h1 {
 	margin-right: 3%;
 	float: right;
 }
-.theirCom > .comText, .yourCom > .comText {
+.theirCom .comText, .yourCom .comText {
 	float: right;
 	margin-right: 3%;
 	width: 80%;

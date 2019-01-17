@@ -2,6 +2,23 @@ var forumID = get("forumID");
 var threadID = get("threadID");
 
 var threadRef = firebase.firestore().collection("forums").doc(forumID).collection("threads").doc(threadID);
+var admin = false;
+
+//get userRef
+firebase.auth().onAuthStateChanged(function(user){
+	if (user) { // User is signed in!
+		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
+		uEmail = userRef.id;
+		userRef.get().then(function(doc){
+			if(doc.data().admin!=null){
+				admin = doc.data().admin;
+			}
+			else{
+				admin = false;
+			}
+		});
+	}
+});
 
 //INITIALIZE PAGE
 
@@ -10,10 +27,11 @@ threadRef.get()
 	.then(function(doc){
 		
 		var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
-
+		var deleteBtn = (doc.data().from.id===uEmail||admin) ? getDeleteButton(doc.id) : "";
+		
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
 								<div class=\"midDiv\">\
-									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
+									"+deleteBtn+"\
 									<span class=\"author\">"+doc.data().from.id+"</span>\
 								</div><br>\
 								<div class=\"infoDiv\">\
@@ -125,13 +143,7 @@ function realtimeUpdates(commentID){
 }
 //Commenting
 
-//get userRef
-firebase.auth().onAuthStateChanged(function(user){
-	if (user) { // User is signed in!
-		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
-		uEmail = userRef.id;
-	}
-});
+
 
 //Add Main Comment
 
@@ -161,8 +173,10 @@ function comment(t){
 //Main input button
 
 function mainButtonClick(){
-	comment($("#comInput").val());
-	$("#comInput").val("");
+	if ($("#comInput").val().trim()!=""){
+		comment($("#comInput").val());
+		$("#comInput").val("");
+	}
 }
 
 //Add subComment
@@ -192,8 +206,10 @@ function subComment(t, commentID){
 //Subordinate input button
 
 function secondaryButtonClick(commentID){
-	subComment($("#"+commentID+"-input").val(),commentID);
-	$("#"+commentID+"-input").val("");
+	if ($("#"+commentID+"-input").val().trim()!=""){
+		subComment($("#"+commentID+"-input").val(),commentID);
+		$("#"+commentID+"-input").val("");
+	}
 }
 
 //LIKES
@@ -235,11 +251,27 @@ function subCommentLikeButton(mainID, subID){
 
 //DELETING 
 
+//Only show trash btns for threads or comments that belong to you
+
+
 //Fake-delete comments
 
-function deleteComment(pathRef){
-	//TODO: check if user is admin or the msg is theirs
-	pathRef.update({
+function deleteComment(cID){
+	commentsRef.doc(cID).update({
+	    text: "🚫This message has been deleted🚫"
+	    //TODO: Add Hebrew
+	})
+	.then(function() {
+	    console.log("Msg successfully deleted");
+	})
+	.catch(function(error) {
+	    // The document probably doesn't exist.
+	    console.error("Error deleting msg: ", error);
+	});
+}
+
+function deleteSubComment(cID, scID){
+	commentsRef.doc(cID).collection('subComments').doc(scID).update({
 	    text: "🚫This message has been deleted🚫"
 	    //TODO: Add Hebrew
 	})
@@ -258,14 +290,15 @@ function deleteComment(pathRef){
 function getMainCommentAsElement(doc){
 	var data = doc.data();
 	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
+	var deleteBtn = (data.from.id===uEmail||admin) ? getDeleteButton(doc.id) : "";
 	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
 				<div class=\""+commentClass+"\">\
 					<div class=\"midDiv\">\
-									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
-									<span class=\"userName\">"+username+"</span>\
+									"+deleteBtn+"\
+									<span class=\"userName\">"+username+"</span><br>\
 								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
@@ -295,11 +328,12 @@ function getSubCommentAsElement(doc){
 	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
 	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
+	var deleteBtn = (data.from.id===uEmail||admin) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
-									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
-									<span class=\"userName\">"+username+"</span>\
+									"+deleteBtn+"\
+									<span class=\"userName\">"+username+"</span><br>\
 								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
@@ -312,6 +346,13 @@ function getSubCommentAsElement(doc){
 			</div>"
 }
 
+function getDeleteButton(cID){
+	return "<button class=\"deleteBtn\" onclick=\"deleteComment(\'"+cID+"\')\"><i class=\"material-icons\">delete</i></button>";
+}
+
+function getSubDeleteButton(cID, scID){
+	return "<button class=\"deleteBtn\" onclick=\"deleteSubComment(\'"+cID+"\',\'"+scID+"\')\"><i class=\"material-icons\">delete</i></button>";
+}
 //Hide the address bar in mobile safari:
 /*
 if(isSafari()) {

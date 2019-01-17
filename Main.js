@@ -7,7 +7,7 @@ forumRef.get()
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            $("#forumList").append("<li id="+doc.id+"><div class='btnOut'><div class='btnIn'><a href='forum.html?id="+doc.id+"'>"+doc.data().name+"</a></div></div></li><br>");
+            $("#forumList").append("<button class='forumBtn'><a href='forum.html?id="+doc.id+"'>"+doc.data().name+"</a></button><br>");
         });
     })
     .catch(function(error) {
