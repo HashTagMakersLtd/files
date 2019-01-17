@@ -68,7 +68,7 @@ h1 {
 	background-color: grey;
 }
 /*Code for Mother-Post*/
-.headerDiv {
+#headerDiv {
 	background-color: #f4f4f4;
 	display: block;
 	width: 100%;
