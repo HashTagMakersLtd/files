@@ -14,7 +14,7 @@ threadRef.get()
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
 								<span class=\"author\">"+doc.data().from.id+"</span>\
 								<div class=\"infoDiv\">\
-									<button class=\"likeBtn"+liked+"\"><i class=\"material-icons\">thumb_up_alt</i></button>\
+									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 									<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
 									<i class=\"material-icons\">thumb_up_alt</i>\
 									<span class=\"likeNum\" id=\'mainLikeNum\'>"+doc.data().usersWhoLiked.length+"</span>\
@@ -36,6 +36,7 @@ commentsRef.orderBy("timestamp", "desc")
         $("#mainField").append(getMainCommentAsElement(doc));
         if (doc.data().commentCount>0){
         	//console.log("SubComments:");
+        	/* OLD VERSION
         	commentsRef.doc(doc.id).collection("subComments").orderBy("timestamp").get().then(function(q) {
 			    q.forEach(function(d) {
 			        // d.data() is never undefined for query d snapshots
@@ -44,6 +45,8 @@ commentsRef.orderBy("timestamp", "desc")
 			        $("#"+doc.id+"-com").append(getSubCommentAsElement(d));
 			    });
 			});
+			*/
+			realtimeUpdates(doc.id);
         }
     });
 });
@@ -51,7 +54,8 @@ commentsRef.orderBy("timestamp", "desc")
 //Realtime Handler to update main thread comment and like counts
 threadRef
     .onSnapshot(function(doc) {
-        $("#mainLikeNum").html(doc.data().usersWhoLiked.length);
+    	var likeCount = (doc.data().usersWhoLiked===null) ? 0 : doc.data().usersWhoLiked.length;
+        $("#mainLikeNum").html(likeCount);
         $("#mainCommentNum").html(doc.data().commentCount);
     });
 
@@ -61,20 +65,23 @@ commentsRef
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
             if (change.type === "added" && !change.doc.metadata.fromCache) {
-            	console.log(change);
+            	//console.log(change);
                 $("#mainField").prepend(getMainCommentAsElement(change.doc));
+                realtimeUpdates(change.doc.id);
             }
             else if (change.type === "modified") {
-                //console.log("Modified comment: ", change);
-                $("#"+change.doc.id).remove();
-				$("#mainField").prepend(getMainCommentAsElement(change.doc));                
-				//TODO: maybe figure out a wya to not move threads around when liking them?
+                var likeCount = (change.doc.data().usersWhoLiked===null) ? 0 : change.doc.data().usersWhoLiked.length;
+                $("#"+change.doc.id+"-likeCount").html(likeCount);
+        		$("#"+change.doc.id+"-commentCount").html(change.doc.data().commentCount);    
+        		$("#"+change.doc.id+"-text").html(change.doc.data().text);            
             }
             else if (change.type === "removed") {
                 //console.log("Removed comment: ", change.doc.data());
                 $("#"+change.doc.id).remove();
             }
-            else{console.log(change)}
+            else{
+            	//console.log(change)
+            }
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
@@ -83,8 +90,36 @@ commentsRef
         window.location.href = "forum.html?id="+forumID;
     });
 
-//TODO: Realtime Handler for sub comments
-
+function realtimeUpdates(commentID){
+	commentsRef.doc(commentID).collection("subComments").orderBy("timestamp")
+    .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+        	//console.log(change);
+            if (change.type === "added") {
+            	//console.log(change);
+                $("#"+commentID+"-com").append(getSubCommentAsElement(change.doc));
+            }
+            else if (change.type === "modified") {
+                //console.log("Modified comment: ", change);
+                var likeCount = (change.doc.data().usersWhoLiked===null) ? 0 : change.doc.data().usersWhoLiked.length;
+                $("#"+change.doc.id+"-likeCount").html(likeCount);
+        		$("#"+change.doc.id+"-text").html(change.doc.data().text);            
+            }
+            else if (change.type === "removed") {
+                //console.log("Removed comment: ", change.doc.data());
+                $("#"+change.doc.id).remove();
+            }
+            else{
+            	//console.log(change)
+            }
+        });
+    }, function(error) {
+        console.log("Error getting realtime chat: ", error);
+        alert("We've run into an error downloading message data!");
+        //TODO: Add Hebrew
+        window.location.href = "forum.html?id="+forumID;
+    });
+}
 //Commenting
 
 //get userRef
@@ -114,7 +149,6 @@ function comment(t){
     		commentCount : c+1
     	});
     });
-    //TODO: Live Update
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);
@@ -146,7 +180,6 @@ function subComment(t, commentID){
     		commentCount : c+1
     	});
     });
-    	//TODO: Live Update
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);
@@ -160,6 +193,43 @@ function secondaryButtonClick(commentID){
 	$("#"+commentID+"-input").val("");
 }
 
+//LIKES
+
+function mainLikeButton(){
+	if ($("#mainLike").hasClass("liked")){//user already liked thread; is unliking it
+		unlikeAnything(threadRef,userRef);
+		$("#mainLike").removeClass("liked");
+	}
+	else{//user is liking thread
+		likeAnything(threadRef,userRef);
+		$("#mainLike").addClass("liked");
+	}
+}
+
+function commentLikeButton(id){
+	commentRef = commentsRef.doc(id);
+	if ($("#"+id+"-likebtn").hasClass("liked")){//user already liked; is unliking it
+		unlikeAnything(commentRef,userRef);
+		$("#"+id+"-likebtn").removeClass("liked");
+	}
+	else{//user is liking 
+		likeAnything(commentRef,userRef);
+		$("#"+id+"-likebtn").addClass("liked");
+	}
+}
+
+function subCommentLikeButton(mainID, subID){
+	commentRef = commentsRef.doc(mainID).collection("subComments").doc(subID);
+	if ($("#"+subID+"-likebtn").hasClass("liked")){//user already liked; is unliking it
+		unlikeAnything(commentRef,userRef);
+		$("#"+subID+"-likebtn").removeClass("liked");
+	}
+	else{//user is liking 
+		likeAnything(commentRef,userRef);
+		$("#"+subID+"-likebtn").addClass("liked");
+	}
+}
+
 //STRUCTURE GENERATION
 
 function getMainCommentAsElement(doc){
@@ -167,18 +237,19 @@ function getMainCommentAsElement(doc){
 	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
 	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
+	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
 				<div class=\""+commentClass+"\">\
 					<span class=\"userName\">"+username+"</span><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
-					<span class=\"comText\">"+data.text+"</span>\
+					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
-						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
+						<button class=\"likeBtn "+liked+"\" id=\""+doc.id+"-likebtn\" onclick=\"commentLikeButton(\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
 						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\">"+likeCount+"</span>\
+						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
-						<span class=\"comNum\">"+data.commentCount+"</span>\
+						<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+data.commentCount+"</span>\
 					</div>\
 				</div>\
 				<div class=\"comSpace\" id=\""+doc.id+"-com\"></div>\
@@ -198,15 +269,16 @@ function getSubCommentAsElement(doc){
 	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
 	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
+	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<span class=\"userName\">"+username+"</span><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
-					<span class=\"comText\">"+data.text+"</span>\
+					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
-						<button class=\"likeBtn\"><i class=\"material-icons\">thumb_up_alt</i></button>\
+						<button class=\"likeBtn "+liked+"\"  id=\""+doc.id+"-likebtn\" onclick=\"subCommentLikeButton(\'"+doc.ref.parent.parent.id+"\',\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
 						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\">"+likeCount+"</span>\
+						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
 					</div>\
 			</div>"
 }

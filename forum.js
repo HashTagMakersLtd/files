@@ -18,9 +18,9 @@ function getThreadAsElement(doc){
 						<button class=\"likeBtn"+liked+"\" id=\""+doc.id+"\" onclick=\"onLikeButtonClick(\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
 						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\">"+doc.data().usersWhoLiked.length+"</span>\
+						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+doc.data().usersWhoLiked.length+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
-						<span class=\"comNum\">"+doc.data().commentCount+"</span>\
+						<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+doc.data().commentCount+"</span>\
 					</div>\
 					<div class=\"border\"></div>\
 			</li>"
@@ -70,9 +70,10 @@ allThreadsRef
             }
             else if (change.type === "modified") {
                 //console.log("Modified thread: ", change);
-                $("#"+change.doc.id+"-main").remove();
-                displayNewThread(getThreadAsElement(change.doc));
-                //TODO: maybe figure out a wya to not move threads around when liking them?
+                //$("#"+change.doc.id+"-main").remove();
+                //displayNewThread(getThreadAsElement(change.doc));
+                $("#"+change.doc.id+"-likeCount").html(change.doc.data().usersWhoLiked.length);
+        		$("#"+change.doc.id+"-commentCount").html(change.doc.data().commentCount);
             }
             else if (change.type === "removed") {
                 console.log("Removed thread: ", change.doc.data());

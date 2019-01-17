@@ -68,6 +68,9 @@ function unlikeAnything(docRef, userRef){
 
 function didUserLike(doc, userID){
 	var u = doc.data().usersWhoLiked;
+	if (u==null){
+		return false;
+	}
 	for (var i = 0; i<u.length;i++){
 		if (u[i].id===userID){
 			return true;
