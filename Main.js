@@ -33,4 +33,30 @@ function toggleDelete(){
 //Add a new forum if you click the create button
 function newForum(){
     console.log('create');
+    var Name = prompt("What should be the name of the forum?");
+    //TODO: Add Hebrew
+    firebase.firestore().collection("forums").add({
+        name: Name
+    })
+    .then(function(docRef) {
+        console.log("Document written with ID: ", docRef.id);
+        var date = new Date();
+        var ts = firebase.firestore.Timestamp.fromDate(date);
+        docRef.collection("threads").add({
+            from: userRef,
+            name: "welcome to the "+Name+" forum!",
+            //TODO: Add Hebrew
+            timestamp: ts,
+            mostRecentPost: ts,
+            commentCount: 0,
+            usersWhoLiked: [userRef]
+        })
+        .catch(function(error) {
+            console.error("Error creating thread: ", error);
+            //TODO: Inform user
+        });
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
 }
