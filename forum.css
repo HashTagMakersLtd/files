@@ -50,6 +50,7 @@ button .material-icons {
 .likeBtn {
 	float: left;
 	background-color: grey;
+	transition: 0.2s;
 }
 .liked {
 	background-color: #0090ff;
