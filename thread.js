@@ -12,7 +12,10 @@ threadRef.get()
 		var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
-								<span class=\"author\">"+doc.data().from.id+"</span>\
+								<div class=\"midDiv\">\
+									<button class=\"deleteBtn\"><i class=\"material-icons\">delete</i></button>\
+									<span class=\"author\">"+doc.data().from.id+"</span>\
+								</div><br>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 									<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\

@@ -38,6 +38,10 @@ h1 {
 	font-size: 3em;
 	color: grey;
 }
+.midDiv {
+	width: 80%;
+	margin: 0 auto;
+}
 .infoDiv > .material-icons {
 	font-size: 1em;
 	vertical-align: middle;
@@ -50,7 +54,14 @@ h1 {
 	padding: 2%;
 	transition: 0.2s;
 }
-.likeBtn > .material-icons {
+.deleteBtn {
+	background-color: red;
+	border-style: none;
+	border-radius: 20px;
+	padding: 2%;
+	float: left;
+}
+.likeBtn > .material-icons, .deleteBtn > .material-icons {
 	font-size: 4em;
 	vertical-align: middle;
 	color: white;
