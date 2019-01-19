@@ -57,7 +57,7 @@ ul a {
 	background-image: linear-gradient(#0090ff, #14a101), linear-gradient(180deg, #0090ff, #14a101);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 1000px 1px #f4f4f4 inset;
+	box-shadow: 2px 1000px 1px #f4f4f4 inset, #749abb 1px 4px 20px 0px;
 	margin-bottom: 4%
 }
 /*Standard Button*/

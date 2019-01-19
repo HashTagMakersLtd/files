@@ -36,7 +36,7 @@ function toggleDelete(){
     else{
         var forumList = $(".outerDiv");
         for (var i = 0; i<forumList.length; i++){
-            forumList[i].prepend("<button class=\"deleteBtn\" onclick=\"deleteForum(\""+forumList[i].id+"\")\"><i class=\"material-icons\">delete</i></button>");
+            forumList[i].prepend(("<button class=\"deleteBtn\" onclick=\"deleteForum(\""+forumList[i].id+"\")\"><i class=\"material-icons\">delete</i></button>"));
         }
         deleteToggled = true;
     }
