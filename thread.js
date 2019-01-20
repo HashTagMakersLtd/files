@@ -69,6 +69,7 @@ threadRef.get()
 commentsRef = threadRef.collection("comments");
 commentsRef.orderBy("timestamp", "desc")
   .get().then(function(querySnapshot) {
+  	$(".loader").remove();
 	//console.log("comments:");
     querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots

@@ -94,6 +94,7 @@ h1 {
 }
 #superField {
 	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
 	height: 90%;
 }
 /*Code for 1st tier comments*/
@@ -344,7 +345,7 @@ button#send > img {
 	.comSpace >.yourCom >.comText {
 		font-size: 2em;
 	}
-	#comInput2 {
+	.comInput2 {
 		font-size: 2em;
 	}
 	#sendCom {

@@ -69,6 +69,21 @@
 	background-color: #005da5;
 	transition: 0.5s;
 }
+
+.loader {
+  	border: 37px solid #C0C0C0; /* Light grey */
+  	border-top: 37px solid #3498db; /* Blue */
+  	border-radius: 50%;
+  	width: 225px;
+ 	height: 225px;
+  	animation: spin 2s linear infinite;
+  	margin: 0 auto;
+  	margin-top: 30%;
+}	
+@keyframes spin {
+  	0% { transform: rotate(0deg); }
+  	100% { transform: rotate(360deg); }		
+}
 /*Mediaquery for desktop viewing*/
 @media(min-width: 1030px) {
 	.header td img {

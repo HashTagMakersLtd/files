@@ -45,6 +45,7 @@ function displayNewThread(thread){
 function getNext25messages(queryRef){
 	queryRef.get()
     .then(function(querySnapshot) {
+    	$(".loader").remove();
     	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
         querySnapshot.forEach(function(doc) {
