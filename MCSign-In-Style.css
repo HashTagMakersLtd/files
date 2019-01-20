@@ -76,6 +76,9 @@
 	#htmlLogoIMG {
 		width: 10%;
 	}
+	#googleSI {
+		width: 80%;
+	}
 /*Media Query for computer viewing*/
 @media(min-width: 1030px) {
 	body {
@@ -125,5 +128,8 @@
 		border-color: #cccccc;
 		color: #cccccc;
 		transition: 0.5s;
+	}
+	#googleSI {
+		width: 30%;
 	}
 }
