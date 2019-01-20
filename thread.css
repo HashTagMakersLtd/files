@@ -26,7 +26,7 @@ h1 {
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-#author {
+.author {
 	font-family: 'Heebo', sans-serif;
 	font-size: 2.6em;
 	margin-right: 5%;
@@ -185,7 +185,7 @@ h1 {
 	transition: 0.5s;
 	background-color: #0a5900;
 }
-#comInput2 {
+.comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;
@@ -218,7 +218,7 @@ h1 {
 	width: 100%;
 	display: block;
 	bottom: 0%;
-	padding-bottom: 2%
+	padding-bottom: 2%;
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
