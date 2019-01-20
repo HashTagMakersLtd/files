@@ -104,4 +104,20 @@ li h2 {
 		width: 60%;
 		margin: 5% auto 0 auto;
 	}
+	#threadField {
+		max-height: 65%;
+	}
+	#newPostBtn {
+		font-size: 2em;
+		margin-bottom: 2%;
+	}
+	li h2 {
+		font-size: 3em;
+	}
+	.author {
+		font-size: 2em;
+	}
+	.infoDiv {
+		font-size: 2em;
+	}
 }

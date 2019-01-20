@@ -108,35 +108,28 @@ ul a {
 		transition: 0.5s;
 		box-shadow: 5px 5px 8px grey;
 	}
-	#createPostBtn {
-		position: absolute;
-		display: block;
+	#forumField {
+		max-height: 50%;
+		width: 80%;
+	}
+	.forumBtn {
+		border-width: 10px;
+		width: 50%;
+	}
+	.forumBtn > a {
+		font-size: 4em;
+	}
+	.deleteBtn {
+		padding: 1%;
+	}
+	.deleteBtn > .material-icons {
+		font-size: 2em;
+	}
+	.btn {
+		padding: 1%;
+		width: 40%;
+		margin-top: 1%;
 		width: 30%;
-		margin: 0 auto;
-		bottom: 2%;
-		right: 0;
-		left: 0;
 	}
-	
-	ul{
-		list-style: none;
-		left: 5%;
-	}
-	#mainMenu img {
-		width: 20%;
-		margin-top: 3%;
-	}
-	#mainMenu button {
-		font-size: 0.6em;
-		padding: 2%;
-	}
-	li {
-		margin-bottom: 1%;
-	}
-	ul a {
-		font-size: 3em;
-	}
-	.btnOut {
-		padding: 2%;
-	}
+
 }
