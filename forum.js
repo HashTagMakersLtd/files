@@ -4,6 +4,12 @@ allThreadsRef = firebase.firestore().collection("forums").doc(id).collection("th
 
 // READING MESSAGES AND INITIALIZING CHAT
 
+firebase.firestore().collection("forums").doc(id).get()
+	.then(function(doc){
+		if (doc.exists){
+			$("#forumTitle").text(doc.data().name);
+		}
+	});
 var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
 
 function getThreadAsElement(doc){
