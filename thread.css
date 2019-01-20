@@ -26,7 +26,7 @@ h1 {
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-.author {
+#author {
 	font-family: 'Heebo', sans-serif;
 	font-size: 2.6em;
 	margin-right: 5%;
@@ -111,7 +111,7 @@ h1 {
 	width: 96%;
 	padding-bottom: 3%;
 	left: 0;
-	background-color: #ddd;
+	background-color: #87f8ff;
 	margin: 2%;
 	border-radius: 30px 0px 30px 30px;
 }
@@ -185,7 +185,7 @@ h1 {
 	transition: 0.5s;
 	background-color: #0a5900;
 }
-.comInput2 {
+#comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;
@@ -218,7 +218,7 @@ h1 {
 	width: 100%;
 	display: block;
 	bottom: 0%;
-	padding-bottom: 2%;
+	padding-bottom: 2%
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
@@ -274,7 +274,7 @@ button#send > img {
 		margin-top: 10%;
 		font-size: 3em;
 	}
-	author {
+	#author {
 		font-size: 2em;
 		margin-right: 0;
 	}
