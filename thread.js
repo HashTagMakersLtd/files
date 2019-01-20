@@ -2,7 +2,6 @@ var forumID = get("forumID");
 var threadID = get("threadID");
 
 var threadRef = firebase.firestore().collection("forums").doc(forumID).collection("threads").doc(threadID);
-var admin = false;
 
 //get userRef
 firebase.auth().onAuthStateChanged(function(user){
@@ -10,16 +9,30 @@ firebase.auth().onAuthStateChanged(function(user){
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
 		uEmail = userRef.id;
 		userRef.get().then(function(doc){
-			if(doc.data().admin!=null){
-				admin = doc.data().admin;
-			}
-			else{
-				admin = false;
+			if(doc.data().admin==true){
+				//SHOW ALL TRASH 
+				admin = true;
+				//$(".deleteBtn").remove();
+				$("#mainMidDiv").prepend("<button class=\"deleteBtn\" onclick=\"deleteThisThread()\"><i class=\"material-icons\">delete</i></button>");
+				//TODO: Show all the present trash
 			}
 		});
 	}
+	else{
+		alert("Please sign in!")
+		//TODO: Add Hebrew
+		window.location.href = "index.html";
+	}
 });
 
+function isAdmin(){
+	if (admin!=null){
+		return admin;
+	}
+	else{
+		return false;
+	}
+}
 //INITIALIZE PAGE
 
 //initialize Header
@@ -27,10 +40,10 @@ threadRef.get()
 	.then(function(doc){
 		
 		var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
-		var deleteBtn = (doc.data().from.id===uEmail||admin) ? getDeleteButton(doc.id) : "";
+		var deleteBtn = (doc.data().from.id===uEmail) ? getDeleteButton(doc.id) : "";
 		
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
-								<div class=\"midDiv\">\
+								<div class=\"midDiv\" id=\"mainMidDiv\">\
 									"+deleteBtn+"\
 									<span class=\"author\">"+doc.data().from.id+"</span>\
 								</div><br>\
@@ -251,9 +264,19 @@ function subCommentLikeButton(mainID, subID){
 
 //DELETING 
 
-//Only show trash btns for threads or comments that belong to you
-
-
+function deleteThisThread(){
+    if (confirm("Are you sure you would like to delete this forum?")){
+        forumRef.doc(forumID).collection('threads').doc(threadID).delete().then(function() {
+            console.log("Forum successfully deleted!");
+            window.history.back();
+        }).catch(function(error) {
+            console.error("Error removing forum: ", error);
+        });
+    }
+    else {
+        toggleDelete()
+    }
+}
 //Fake-delete comments
 
 function deleteComment(cID){
@@ -297,7 +320,7 @@ function getMainCommentAsElement(doc){
 	var data = doc.data();
 	var mine = data.from.id===uEmail;
 	var commentClass = (mine) ? "yourCom" : "theirCom";
-	var deleteBtn = (mine||admin) ? getDeleteButton(doc.id) : "";
+	var deleteBtn = (mine||isAdmin()) ? getDeleteButton(doc.id) : "";
 	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
@@ -336,7 +359,7 @@ function getSubCommentAsElement(doc){
 	var commentClass = (mine) ? "yourCom" : "theirCom";
 	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
-	var deleteBtn = (mine||admin) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
+	var deleteBtn = (mine||isAdmin()) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
