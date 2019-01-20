@@ -295,9 +295,10 @@ function deleteSubComment(cID, scID){
 
 function getMainCommentAsElement(doc){
 	var data = doc.data();
-	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
-	var deleteBtn = (data.from.id===uEmail||admin) ? getDeleteButton(doc.id) : "";
-	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
+	var mine = data.from.id===uEmail;
+	var commentClass = (mine) ? "yourCom" : "theirCom";
+	var deleteBtn = (mine||admin) ? getDeleteButton(doc.id) : "";
+	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
@@ -331,10 +332,11 @@ function getMainCommentAsElement(doc){
 
 function getSubCommentAsElement(doc){
 	var data = doc.data();
-	var commentClass = (data.from.id===uEmail) ? "yourCom" : "theirCom";
-	var username = (data.from.id===uEmail) ? "את\\ה" : data.from.id;
+	var mine = data.from.id===uEmail;
+	var commentClass = (mine) ? "yourCom" : "theirCom";
+	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
-	var deleteBtn = (data.from.id===uEmail||admin) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
+	var deleteBtn = (mine||admin) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
@@ -373,3 +375,17 @@ if(isSafari()) {
   });
 }
 */
+
+//UX & USABILITY:
+
+//hide the main input bar when a subordinate input is selected:
+
+$(document).on('focusin', '.comInput2', function () {
+    $("#inputDiv").hide();
+    $("#superField").css("height",'100%');
+});
+$(document).on('focusout', '.comInput2', function () {
+    $("#inputDiv").show();
+    $("#superField").css("height",'90%');
+});
+
