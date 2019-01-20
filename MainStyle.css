@@ -57,14 +57,13 @@ ul a {
 	background-image: linear-gradient(#0090ff, #14a101), linear-gradient(180deg, #0090ff, #14a101);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 1000px 1px #f4f4f4 inset, #749abb 1px 4px 20px 0px;
-	margin-bottom: 4%
+	box-shadow: 2px 1000px 1px #f4f4f4 inset;
 }
 /*Standard Button*/
 .btn {
 	font-family: 'Secular One', sans-serif;
 	width: 80%;
-	display: none;
+	display: block;
 	margin: 0 auto;
 	margin-top: 5%;
 	color: white;
@@ -108,35 +107,28 @@ ul a {
 		transition: 0.5s;
 		box-shadow: 5px 5px 8px grey;
 	}
-	#createPostBtn {
-		position: absolute;
-		display: block;
+	#forumField {
+		max-height: 50%;
+		width: 80%;
+	}
+	.forumBtn {
+		border-width: 10px;
+		width: 50%;
+	}
+	.forumBtn > a {
+		font-size: 4em;
+	}
+	.deleteBtn {
+		padding: 1%;
+	}
+	.deleteBtn > .material-icons {
+		font-size: 2em;
+	}
+	.btn {
+		padding: 1%;
+		width: 40%;
+		margin-top: 1%;
 		width: 30%;
-		margin: 0 auto;
-		bottom: 2%;
-		right: 0;
-		left: 0;
 	}
-	
-	ul{
-		list-style: none;
-		left: 5%;
-	}
-	#mainMenu img {
-		width: 20%;
-		margin-top: 3%;
-	}
-	#mainMenu button {
-		font-size: 0.6em;
-		padding: 2%;
-	}
-	li {
-		margin-bottom: 1%;
-	}
-	ul a {
-		font-size: 3em;
-	}
-	.btnOut {
-		padding: 2%;
-	}
+
 }

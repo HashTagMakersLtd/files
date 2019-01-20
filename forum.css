@@ -50,7 +50,6 @@ button .material-icons {
 .likeBtn {
 	float: left;
 	background-color: grey;
-	transition: 0.2s;
 }
 .liked {
 	background-color: #0090ff;
@@ -72,19 +71,16 @@ li h2 {
 }
 .author {
 	font-family: 'Heebo', sans-serif;
-	font-size: 2.6em;
-	color:black;
+	font-size: 3em;
 }
 .timeStamp {
 	float: left;
-	margin-left: 5%;
+	margin-left: 10%;
 }
 .border {
 	width: 100%;
 	height: 2px;
 	background-color: grey;
-	margin-top: 5%;
-	margin-bottom: 10%;
 }
 #newPostBtn {
 	bottom: 2%;
@@ -103,5 +99,21 @@ li h2 {
 	#threadField {
 		width: 60%;
 		margin: 5% auto 0 auto;
+	}
+	#threadField {
+		max-height: 65%;
+	}
+	#newPostBtn {
+		font-size: 2em;
+		margin-bottom: 2%;
+	}
+	li h2 {
+		font-size: 3em;
+	}
+	.author {
+		font-size: 2em;
+	}
+	.infoDiv {
+		font-size: 2em;
 	}
 }
