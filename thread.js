@@ -257,31 +257,37 @@ function subCommentLikeButton(mainID, subID){
 //Fake-delete comments
 
 function deleteComment(cID){
-	commentsRef.doc(cID).update({
-	    text: "🚫This message has been deleted🚫"
-	    //TODO: Add Hebrew
-	})
-	.then(function() {
-	    console.log("Msg successfully deleted");
-	})
-	.catch(function(error) {
-	    // The document probably doesn't exist.
-	    console.error("Error deleting msg: ", error);
-	});
+	if (confirm("Are you sure you would like to delete this comment?")){
+		//TODO: Add Hebrew
+		commentsRef.doc(cID).update({
+		    text: "🚫This message has been deleted🚫"
+		    //TODO: Add Hebrew
+		})
+		.then(function() {
+		    console.log("Msg successfully deleted");
+		})
+		.catch(function(error) {
+		    // The document probably doesn't exist.
+		    console.error("Error deleting msg: ", error);
+		});
+	}
 }
 
 function deleteSubComment(cID, scID){
-	commentsRef.doc(cID).collection('subComments').doc(scID).update({
-	    text: "🚫This message has been deleted🚫"
-	    //TODO: Add Hebrew
-	})
-	.then(function() {
-	    console.log("Msg successfully deleted");
-	})
-	.catch(function(error) {
-	    // The document probably doesn't exist.
-	    console.error("Error deleting msg: ", error);
-	});
+	if (confirm("Are you sure you would like to delete this comment?")){
+		//TODO: Add Hebrew
+		commentsRef.doc(cID).collection('subComments').doc(scID).update({
+		    text: "🚫This message has been deleted🚫"
+		    //TODO: Add Hebrew
+		})
+		.then(function() {
+		    console.log("Msg successfully deleted");
+		})
+		.catch(function(error) {
+		    // The document probably doesn't exist.
+		    console.error("Error deleting msg: ", error);
+		});	
+	}
 }
 //TODO: actually delete whole threads
 
