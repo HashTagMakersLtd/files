@@ -131,5 +131,6 @@
 	}
 	#googleSI {
 		width: 30%;
+		cursor: pointer;
 	}
 }
