@@ -36,18 +36,23 @@ function toggleDelete(){
     else{
         var forumList = $(".outerDiv");
         for (var i = 0; i<forumList.length; i++){
-            forumList[i].prepend(("<button class=\"deleteBtn\" onclick=\"deleteForum(\""+forumList[i].id+"\")\"><i class=\"material-icons\">delete</i></button>"));
+            forumList.eq(i).prepend(("<button class=\"deleteBtn\" onclick=\"deleteForum(\'"+forumList[i].id+"\')\"><i class=\"material-icons\">delete</i></button>"));
         }
         deleteToggled = true;
     }
 }
 
 function deleteForum(id){
-    forumRef.doc(id).delete().then(function() {
-        console.log("Forum successfully deleted!");
-    }).catch(function(error) {
-        console.error("Error removing forum: ", error);
-    });
+    if (confirm("Are you sure you would like to delete this forum?")){
+        forumRef.doc(id).delete().then(function() {
+            console.log("Forum successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing forum: ", error);
+        });
+    }
+    else {
+        toggleDelete()
+    }
 }
 
 //Add a new forum if you click the create button
