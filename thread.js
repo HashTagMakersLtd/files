@@ -14,7 +14,14 @@ firebase.auth().onAuthStateChanged(function(user){
 				admin = true;
 				//$(".deleteBtn").remove();
 				$("#mainMidDiv").prepend("<button class=\"deleteBtn\" onclick=\"deleteThisThread()\"><i class=\"material-icons\">delete</i></button>");
-				//TODO: Show all the present trash
+				//Show trash buttons for top-level comments
+				$(".mainCommentMidDiv .deleteBtn").remove();
+				var mainCommentMidDivs = $(".mainCommentMidDiv");
+				//console.log(mainCommentMidDivs);
+				for (var i = 0; i < mainCommentMidDivs.length; i++){
+					//console.log(mainCommentMidDivs.eq(i));
+					mainCommentMidDivs.eq(i).prepend(getDeleteButton(mainCommentMidDivs[i].id.slice(4)));
+				}
 			}
 		});
 	}
@@ -26,7 +33,7 @@ firebase.auth().onAuthStateChanged(function(user){
 });
 
 function isAdmin(){
-	if (admin!=null){
+	if (typeof admin!=='undefined'){
 		return admin;
 	}
 	else{
@@ -326,7 +333,7 @@ function getMainCommentAsElement(doc){
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
 				<div class=\""+commentClass+"\">\
-					<div class=\"midDiv\">\
+					<div class=\"midDiv mainCommentMidDiv\" id=\"mid-"+doc.id+"\">\
 									"+deleteBtn+"\
 									<span class=\"userName\">"+username+"</span><br>\
 								</div><br>\
