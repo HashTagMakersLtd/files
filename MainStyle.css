@@ -86,6 +86,7 @@ ul a {
 	border-radius: 20px;
 	padding: 2%;
 	color: white;
+	margin-right: 2%;
 }
 .deleteBtn > .material-icons {
 	font-size: 4em;
