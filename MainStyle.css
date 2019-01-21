@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
 @import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
 body{
-	background-color: #f4f4f4;
+	background-color: #fff;
 	font-family: 'Heebo', sans-serif;
 	padding: 0;
 	margin: 0;
@@ -15,12 +15,20 @@ html{
 	overflow-x: hidden;
 	height: 100%;
 }
-
+#exp {
+	margin: 23% 10% 2% 10%;
+	font-family: 'Heebo', sans-serif;
+	font-size: 3em;
+	color: black;
+	width: 80%;
+	border: 1px solid #444;
+	border-radius: 30px;
+	background-color: #eee;
+}
 /*forum field code*/
 #forumField {
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 30%;
 	text-align: center;
 	max-height: 70%;
 	overflow-y: scroll;
@@ -39,13 +47,16 @@ li {
 	margin: 0 auto;
 	margin-bottom: 5%;
 }
+.outerDiv {
+	padding: 1%;
+}
 ul a {
 	font-family: 'Secular One', sans-serif;
 	color: white;
 	font-size: 8em;
 	font-weight: bold;
 	text-decoration: none;
-	background: -webkit-linear-gradient(#0090ff, #14a101);
+	background: -webkit-linear-gradient(#4db1ff, #3885c1);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
@@ -54,12 +65,13 @@ ul a {
 	border-radius: 400px;
 	padding: 0% 5% 0% 5%;
 	width: 80%;
-	border: 30px solid transparent;
-	background-image: linear-gradient(#0090ff, #14a101), linear-gradient(180deg, #0090ff, #14a101);
+	border: 20px solid transparent;
+	background-image: linear-gradient(#4db1ff, #3885c1), linear-gradient(180deg, #4db1ff, #3885c1);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 1000px 1px #f4f4f4 inset, #749abb 1px 4px 20px 0px;
-	margin-bottom: 4%
+	box-shadow: 2px 1000px 1px #f4f4f4 inset, #749abb 0px 0px 50px 0px;
+	margin-bottom: 2%;
+	margin-top: 2%;
 }
 /*Standard Button*/
 .btn {
@@ -70,7 +82,7 @@ ul a {
 	margin-top: 5%;
 	color: white;
 	font-size: 3em;
-	background-color: #14a101;
+	background-color: #00487f;
 	border-radius: 40px;
 	border-style: none;
 	transition: 0.5s;
@@ -79,7 +91,7 @@ ul a {
 }
 .btn:hover, .btn:active {
 	transition: 0.5s;
-	background-color: #0d5e02;
+	background-color: #002b4c;
 }
 .deleteBtn {
 	background-color: red;
@@ -87,7 +99,6 @@ ul a {
 	border-radius: 20px;
 	padding: 2%;
 	color: white;
-	margin-right: 2%;
 }
 .deleteBtn > .material-icons {
 	font-size: 4em;
@@ -104,7 +115,7 @@ ul a {
 		font-family: 'Secular One', sans-serif;
 		color: white;
 		font-size: 2em;
-		background-color: #14a101;
+		background-color: #00487f;
 		border-radius: 40px;
 		border-style: none;
 		transition: 0.5s;
@@ -132,7 +143,6 @@ ul a {
 		width: 40%;
 		margin-top: 1%;
 		width: 30%;
-		cursor: pointer;
 	}
 
 }
