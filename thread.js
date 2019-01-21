@@ -56,11 +56,13 @@ threadRef.get()
 								</div><br>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-									<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
-									<i class=\"material-icons\">thumb_up_alt</i>\
-									<span class=\"likeNum\" id=\'mainLikeNum\'>"+doc.data().usersWhoLiked.length+"</span>\
-									<i class=\"material-icons\">chat_bubble</i>\
-									<span class=\"comNum\" id=\'mainCommentNum\'>"+doc.data().commentCount+"</span>\
+									<div class=\'infoText\'>\
+										<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
+										<i class=\"material-icons\">thumb_up_alt</i>\
+										<span class=\"likeNum\" id=\'mainLikeNum\'>"+doc.data().usersWhoLiked.length+"</span>\
+										<i class=\"material-icons\">chat_bubble</i>\
+										<span class=\"comNum\" id=\'mainCommentNum\'>"+doc.data().commentCount+"</span>\
+									</div>\
 								</div>")
 
 	})
@@ -342,11 +344,13 @@ function getMainCommentAsElement(doc){
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn "+liked+"\" id=\""+doc.id+"-likebtn\" onclick=\"commentLikeButton(\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
-						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
-						<i class=\"material-icons\">chat_bubble</i>\
-						<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+data.commentCount+"</span>\
+						<div class=\'infoText\'>\
+							<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
+							<i class=\"material-icons\">thumb_up_alt</i>\
+							<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
+							<i class=\"material-icons\">chat_bubble</i>\
+							<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+data.commentCount+"</span>\
+						</div>\
 					</div>\
 				</div>\
 				<div class=\"comSpace\" id=\""+doc.id+"-com\"></div>\
@@ -378,9 +382,11 @@ function getSubCommentAsElement(doc){
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn "+liked+"\"  id=\""+doc.id+"-likebtn\" onclick=\"subCommentLikeButton(\'"+doc.ref.parent.parent.id+"\',\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
-						<i class=\"material-icons\">thumb_up_alt</i>\
-						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
+						<div class=\'infoText\'>\
+							<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
+							<i class=\"material-icons\">thumb_up_alt</i>\
+							<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
+						</div>\
 					</div>\
 			</div>"
 }

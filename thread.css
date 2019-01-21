@@ -19,7 +19,7 @@ html{
 h1 {
 	direction: rtl;
 	font-family: 'Secular One', sans-serif;
-	color: #0090ff;
+	color: #4db1ff;
 	font-size: 4.5em;
 	margin-top: 15%;
 	text-align: right;
@@ -37,7 +37,7 @@ h1 {
 	width: 90%;
 	margin: 0 auto;
 	text-align: center;
-	font-size: 2em;
+	font-size: 2.5em;
 	color: grey;
 	vertical-align: bottom;
 	overflow: auto;
@@ -72,6 +72,7 @@ h1 {
 	border-radius: 20px;
 	padding: 2%;
 	float: left;
+	display: none;
 }
 .likeBtn > .material-icons, .deleteBtn > .material-icons {
 	font-size: 4em;
@@ -79,7 +80,7 @@ h1 {
 	color: white;
 }
 .liked {
-	background-color: #0090ff;
+	background-color: #4db1ff;
 	transition: 0.2s;
 }
 .timeStamp {
@@ -119,11 +120,10 @@ h1 {
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
-	width: 96%;
 	padding-bottom: 3%;
 	left: 0;
-	background-color: #87f8ff;
-	margin: 2%;
+	margin: 6% 4%;
+	border: 1px solid #333;
 	border-radius: 30px 0px 30px 30px;
 }
 .yourCom {
@@ -131,11 +131,10 @@ h1 {
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
-	width: 96%;
 	padding-bottom: 3%;
 	left: 0;
-	background-color: #21ed65;
-	margin: 2%;
+	margin: 6% 4%;
+	border: 1px solid #333;
 	border-radius: 30px 0px 30px 30px;
 }
 .theirCom .userName, .yourCom .userName {
@@ -143,6 +142,9 @@ h1 {
 	font-family: 'Secular One', sans-serif;
 	font-size: 2.5em;
 	margin-right: 2%;
+}
+.yourCom .userName {
+	color: #4db1ff;
 }
 .theirCom > #profilePhoto, .yourCom > #profilePhoto {
 	width: 10%;
@@ -185,7 +187,7 @@ h1 {
 	height: 10%;
 	padding: 2%;
 	margin-left: 5%;
-	background-color: #14a101;
+	background-color: #00487f;
 	border-style: none;
 	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
@@ -195,11 +197,10 @@ h1 {
 }
 #sendCom:active, #sendCom:hover {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #0065b3;
 }
 .comInput2 {
 	width: 65%;
-	float: right;
 	padding: 1%;
 	padding-right: 3%;
 	border-radius: 50px;
@@ -209,7 +210,7 @@ h1 {
 	border-style: none;
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
-	box-shadow: 10px 10px 30px #cccccc;
+	border: 1px solid #444;
 	overflow: auto;
 	height: 1.5em;
 	direction: rtl;
@@ -235,14 +236,16 @@ h1 {
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
+	background-color: #f7f7f7;
+	padding-top: 4%;
+	height: 9%;
 }
 #send {
 	float: left;
 	width: 14%;
-	height: 14%;
 	padding: 2%;
 	margin-left: 5%;
-	background-color: #14a101;
+	background-color: #4db1ff;
 	border-style: none;
 	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
@@ -258,7 +261,7 @@ button#send > img {
 }
 #send:active, #send:hover {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #0065b3;
 }
 #comInput {
 	width: 65%;
@@ -273,7 +276,7 @@ button#send > img {
 	border-style: none;
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
-	box-shadow: 10px 10px 30px #cccccc;
+	border: 1px solid #666;
 	direction: rtl;
 }
 #comInput::placeholder {
@@ -298,6 +301,7 @@ button#send > img {
 	}
 	.deleteBtn {
 		padding: 1%;
+		display: none;
 	}
 	.deleteBtn > .material-icons {
 		font-size: 2em;
@@ -331,7 +335,7 @@ button#send > img {
 	}
 	#send:active, #send:hover {
 		transition: 0.5s;
-		background-color: #0a5900;
+		background-color: #0065b3;
 	}
 	#comInput {
 		width: 65%;
