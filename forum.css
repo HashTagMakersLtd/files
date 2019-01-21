@@ -25,7 +25,7 @@ html{
 	height: 70%;
 }
 button {
-	background-color: #14a101;
+	background-color: #4db1ff;
 	padding: 1%;
 	border-radius: 0.1em;
 	border-style: none;
@@ -53,7 +53,7 @@ button .material-icons {
 	transition: 0.2s;
 }
 .liked {
-	background-color: #0090ff;
+	background-color: #4db1ff;
 	transition: 0.5s;
 }
 ul {
@@ -68,7 +68,7 @@ li h2 {
 	font-family: 'Secular One', sans-serif;
 	font-size: 5em;
 	margin: 0;
-	color: #0090ff;
+	color: #4db1ff;
 	direction: rtl;
 }
 .author {
@@ -99,7 +99,7 @@ li h2 {
 }
 #newPostBtn:hover, #newPostBtn:active {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #002b4c;
 }
 @media(min-width: 1030px) {
 	#threadField {
