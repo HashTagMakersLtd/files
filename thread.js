@@ -186,6 +186,10 @@ function comment(t){
     	threadRef.update({
     		commentCount : c+1
     	});
+    //Scroll to top:
+    $('#superField').animate({
+        scrollTop: 0
+      }, 400);
     });
 	})
 	.catch(function(error) {
@@ -197,8 +201,16 @@ function comment(t){
 
 function mainButtonClick(){
 	if ($("#comInput").val().trim()!=""){
-		comment($("#comInput").val());
-		$("#comInput").val("");
+		if (focusedId==""){
+			comment($("#comInput").val());
+			$("#comInput").val("");
+		}
+		else {
+			subComment($("#comInput").val(), focusedId.slice(0, focusedId.length-6));
+			$("#comInput").val("");
+			$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
+    		focusedId = "";
+		}
 	}
 }
 
@@ -417,14 +429,67 @@ if(isSafari()) {
 
 //UX & USABILITY:
 
-//hide the main input bar when a subordinate input is selected:
+//Facebook style subcomments
+$(document).on('click',"div",function(event){
+	//console.log(this);
+	if (this.id=="inputDiv"){
+		event.stopPropagation();
+	}
+	else{
+	    if ($(this).hasClass("postComDiv")){
+	  		event.stopPropagation();
+	    	var x = $(this).children()[0];
+	    	//console.log(x);
+	    	$('#superField').animate({
+	        	scrollTop: $('#superField').scrollTop() + $(x).offset().top-$("#inputDiv").offset().top+200
+	      	}, 400);
 
+	    	setTimeout(function() { $('#comInput').focus() }, 100);
+	    	newFocus(x.id);
+	    }
+	    else if (focusedId!==""){
+	    	//console.log('hey');
+	    	$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
+	    	focusedId = "";
+	    }
+	}
+	
+});
+/*
 $(document).on('focusin', '.comInput2', function () {
-    $("#inputDiv").hide();
-    $("#superField").css("height",'100%');
-});
-$(document).on('focusout', '.comInput2', function () {
-    $("#inputDiv").show();
-    $("#superField").css("height",'90%');
-});
+    //$("#inputDiv").hide();
+    //$("#superField").css("height",'100%');
 
+    //Scroll to clicked comInput2
+    $('#superField').animate({
+        scrollTop: $('#superField').scrollTop() + $(this).offset().top-$("#inputDiv").offset().top+200
+      }, 400);
+
+    setTimeout(function() { $('#comInput').focus() }, 100);
+    newFocus(this.id);
+});
+*/
+/*
+var tempFocus = "";
+$(document).on('focusout', "#comInput",function () {
+    //$("#inputDiv").show();
+    //$("#superField").css("height",'90%');
+    tempFocus = focusedId;
+    if (focusedId!==""){
+    	$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
+    	focusedId = "";
+    }
+});
+*/
+
+
+var focusedId = "";
+
+function newFocus(inputId){
+	//tempFocus = "";
+	if (focusedId!==""){
+		$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
+	}
+	focusedId = inputId;
+	$("#"+inputId.slice(0, inputId.length-6)).css("background-color","#def");
+}
