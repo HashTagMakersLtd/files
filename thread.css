@@ -205,6 +205,7 @@ h1 {
 	box-shadow: 10px 10px 30px #cccccc;
 	overflow: auto;
 	height: 1.5em;
+	direction: rtl;
 }
 #comInput::placeholder {
 	color: grey;
@@ -266,6 +267,7 @@ button#send > img {
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
 	box-shadow: 10px 10px 30px #cccccc;
+	direction: rtl;
 }
 #comInput::placeholder {
 	color: grey;
