@@ -25,7 +25,7 @@ html{
 	height: 70%;
 }
 button {
-	background-color: #14a101;
+	background-color: #00487f;
 	padding: 1%;
 	border-radius: 0.1em;
 	border-style: none;
@@ -99,7 +99,7 @@ li h2 {
 }
 #newPostBtn:hover, #newPostBtn:active {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #002b4c;
 }
 @media(min-width: 1030px) {
 	#threadField {
