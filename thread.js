@@ -53,7 +53,7 @@ threadRef.get()
 								<div class=\"midDiv\" id=\"mainMidDiv\">\
 									"+deleteBtn+"\
 									<span class=\"author username\">"+doc.data().from.id+"</span>\
-								</div><br>\
+								</div>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
 									<div class=\'infoText\'>\
@@ -339,7 +339,7 @@ function getMainCommentAsElement(doc){
 					<div class=\"midDiv mainCommentMidDiv\" id=\"mid-"+doc.id+"\">\
 									"+deleteBtn+"\
 									<span class=\"userName\">"+username+"</span><br>\
-								</div><br>\
+								</div>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
@@ -379,7 +379,7 @@ function getSubCommentAsElement(doc){
 					<div class=\"midDiv\">\
 									"+deleteBtn+"\
 									<span class=\"userName\">"+username+"</span><br>\
-								</div><br>\
+								</div>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
