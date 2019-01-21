@@ -18,6 +18,7 @@ html{
 
 h1 {
 	font-family: 'Secular One', sans-serif;
+	direction: rtl;
 	color: #0090ff;
 	font-size: 4.5em;
 	margin-top: 15%;
@@ -26,8 +27,9 @@ h1 {
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-.author {
+#author {
 	font-family: 'Heebo', sans-serif;
+	direction: rtl;
 	font-size: 2.6em;
 	margin-right: 5%;
 }
@@ -94,7 +96,6 @@ h1 {
 }
 #superField {
 	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
 	height: 90%;
 }
 /*Code for 1st tier comments*/
@@ -106,6 +107,7 @@ h1 {
 	z-index: 2;
 }
 .theirCom {
+	direction: rtl;
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
@@ -118,6 +120,7 @@ h1 {
 }
 .yourCom {
 	text-align: right;
+	direction: rtl;
 	z-index: 9;
 	overflow: auto;
 	width: 96%;
@@ -186,7 +189,7 @@ h1 {
 	transition: 0.5s;
 	background-color: #0a5900;
 }
-.comInput2 {
+#comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;
@@ -219,7 +222,7 @@ h1 {
 	width: 100%;
 	display: block;
 	bottom: 0%;
-	padding-bottom: 2%;
+	padding-bottom: 2%
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
@@ -275,7 +278,7 @@ button#send > img {
 		margin-top: 10%;
 		font-size: 3em;
 	}
-	author {
+	#author {
 		font-size: 2em;
 		margin-right: 0;
 	}
@@ -345,7 +348,7 @@ button#send > img {
 	.comSpace >.yourCom >.comText {
 		font-size: 2em;
 	}
-	.comInput2 {
+	#comInput2 {
 		font-size: 2em;
 	}
 	#sendCom {

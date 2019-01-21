@@ -24,6 +24,7 @@ html{
 	text-align: center;
 	max-height: 70%;
 	overflow-y: scroll;
+	direction: rtl;
 }
 ul {
 	list-style: none;
@@ -86,7 +87,6 @@ ul a {
 	border-radius: 20px;
 	padding: 2%;
 	color: white;
-	margin-right: 2%;
 }
 .deleteBtn > .material-icons {
 	font-size: 4em;
@@ -131,7 +131,6 @@ ul a {
 		width: 40%;
 		margin-top: 1%;
 		width: 30%;
-		cursor: pointer;
 	}
 
 }

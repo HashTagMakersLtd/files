@@ -69,11 +69,13 @@ li h2 {
 	font-size: 5em;
 	margin: 0;
 	color: #0090ff;
+	direction: rtl;
 }
 .author {
 	font-family: 'Heebo', sans-serif;
 	font-size: 2.6em;
 	color:black;
+	direction: rtl;
 }
 .timeStamp {
 	float: left;
