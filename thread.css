@@ -17,8 +17,8 @@ html{
 }
 
 h1 {
-	direction: rtl;
 	font-family: 'Secular One', sans-serif;
+	direction: rtl;
 	color: #0090ff;
 	font-size: 4.5em;
 	margin-top: 15%;
@@ -27,9 +27,9 @@ h1 {
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-.author {
-	direction: rtl;
+#author {
 	font-family: 'Heebo', sans-serif;
+	direction: rtl;
 	font-size: 2.6em;
 	margin-right: 5%;
 }
@@ -41,6 +41,13 @@ h1 {
 	color: grey;
 	vertical-align: bottom;
 	overflow: auto;
+	position: relative;
+}
+.infoText{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 70%;
 }
 .midDiv {
 	width: 90%;
@@ -65,6 +72,7 @@ h1 {
 	border-radius: 20px;
 	padding: 2%;
 	float: left;
+	display: none;
 }
 .likeBtn > .material-icons, .deleteBtn > .material-icons {
 	font-size: 4em;
@@ -96,7 +104,6 @@ h1 {
 }
 #superField {
 	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
 	height: 90%;
 }
 /*Code for 1st tier comments*/
@@ -115,19 +122,19 @@ h1 {
 	width: 96%;
 	padding-bottom: 3%;
 	left: 0;
-	background-color: #87f8ff;
+	background-color: #eee;
 	margin: 2%;
 	border-radius: 30px 0px 30px 30px;
 }
 .yourCom {
-	direction: rtl;
 	text-align: right;
+	direction: rtl;
 	z-index: 9;
 	overflow: auto;
 	width: 96%;
 	padding-bottom: 3%;
 	left: 0;
-	background-color: #21ed65;
+	background-color: #87f8ff;
 	margin: 2%;
 	border-radius: 30px 0px 30px 30px;
 }
@@ -178,7 +185,7 @@ h1 {
 	height: 10%;
 	padding: 2%;
 	margin-left: 5%;
-	background-color: #14a101;
+	background-color: #00487f;
 	border-style: none;
 	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
@@ -188,9 +195,9 @@ h1 {
 }
 #sendCom:active, #sendCom:hover {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #002b4c;
 }
-.comInput2 {
+#comInput2 {
 	width: 65%;
 	float: right;
 	padding: 1%;
@@ -224,7 +231,7 @@ h1 {
 	width: 100%;
 	display: block;
 	bottom: 0%;
-	padding-bottom: 2%;
+	padding-bottom: 2%
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
@@ -235,7 +242,7 @@ h1 {
 	height: 14%;
 	padding: 2%;
 	margin-left: 5%;
-	background-color: #14a101;
+	background-color: #00487f;
 	border-style: none;
 	border-radius: 300px;
 	box-shadow: 10px 10px 30px #cccccc;
@@ -251,7 +258,7 @@ button#send > img {
 }
 #send:active, #send:hover {
 	transition: 0.5s;
-	background-color: #0a5900;
+	background-color: #002b4c;
 }
 #comInput {
 	width: 65%;
@@ -281,7 +288,7 @@ button#send > img {
 		margin-top: 10%;
 		font-size: 3em;
 	}
-	author {
+	#author {
 		font-size: 2em;
 		margin-right: 0;
 	}
@@ -291,6 +298,7 @@ button#send > img {
 	}
 	.deleteBtn {
 		padding: 1%;
+		display: none;
 	}
 	.deleteBtn > .material-icons {
 		font-size: 2em;
@@ -324,7 +332,7 @@ button#send > img {
 	}
 	#send:active, #send:hover {
 		transition: 0.5s;
-		background-color: #0a5900;
+		background-color: #002b4c;
 	}
 	#comInput {
 		width: 65%;
@@ -351,7 +359,7 @@ button#send > img {
 	.comSpace >.yourCom >.comText {
 		font-size: 2em;
 	}
-	.comInput2 {
+	#comInput2 {
 		font-size: 2em;
 	}
 	#sendCom {
