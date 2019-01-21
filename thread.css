@@ -41,6 +41,13 @@ h1 {
 	color: grey;
 	vertical-align: bottom;
 	overflow: auto;
+	position: relative;
+}
+.infoText{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 70%;
 }
 .midDiv {
 	width: 90%;
