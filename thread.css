@@ -17,8 +17,8 @@ html{
 }
 
 h1 {
-	direction: rtl;
 	font-family: 'Secular One', sans-serif;
+	direction: rtl;
 	color: #4db1ff;
 	font-size: 4.5em;
 	margin-top: 15%;
@@ -27,8 +27,10 @@ h1 {
 	margin-bottom: 0%;
 	padding-bottom: 0%;
 }
-.author {
+#author {
+	font-family: 'Heebo', sans-serif;
 	direction: rtl;
+	font-size: 2.6em;
 	margin-right: 5%;
 }
 .infoDiv {
@@ -48,6 +50,7 @@ h1 {
 	width: 70%;
 }
 .midDiv {
+	width: 90%;
 	margin: 0 auto;
 }
 .infoDiv > .material-icons {
@@ -101,7 +104,6 @@ h1 {
 }
 #superField {
 	overflow-y: scroll;
-	-webkit-overflow-scrolling: touch;
 	height: 90%;
 }
 /*Code for 1st tier comments*/
@@ -124,8 +126,8 @@ h1 {
 	border-radius: 30px 0px 30px 30px;
 }
 .yourCom {
-	direction: rtl;
 	text-align: right;
+	direction: rtl;
 	z-index: 9;
 	overflow: auto;
 	padding-bottom: 3%;
@@ -137,8 +139,13 @@ h1 {
 .theirCom .userName, .yourCom .userName {
 	font-weight: bold;
 	font-family: 'Secular One', sans-serif;
+	font-size: 0.8em;
 	margin-right: 2%;
 }
+.comSpace > .theirCom > .userName, .comSpace > .yourCom > .userName {
+	font-size: 2em;
+}
+
 .yourCom .userName {
 	color: #4db1ff;
 }
@@ -195,19 +202,20 @@ h1 {
 	transition: 0.5s;
 	background-color: #0065b3;
 }
-.comInput2 {
-	width: 75%;
+#comInput2 {
+	width: 65%;
 	padding: 1%;
 	padding-right: 3%;
 	border-radius: 50px;
 	font-size: 4em;
+	margin-right: 5%;
 	text-align: right;
 	border-style: none;
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
 	border: 1px solid #444;
 	overflow: auto;
-	height: 1.8em;
+	height: 1.5em;
 	direction: rtl;
 }
 #comInput::placeholder {
@@ -227,13 +235,14 @@ h1 {
 	width: 100%;
 	display: block;
 	bottom: 0%;
-	padding-bottom: 2%;
+	padding-bottom: 2%
 	vertical-align: middle;
 	position: absolute;
 	z-index: 990;
 	background-color: #f7f7f7;
 	padding-top: 4%;
 	height: 9%;
+
 }
 #send {
 	float: left;
@@ -271,8 +280,8 @@ button#send > img {
 	border-style: none;
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
-	border: 1px solid #666;
 	direction: rtl;
+	border: 1px solid #666;
 }
 #comInput::placeholder {
 	color: grey;
@@ -286,7 +295,7 @@ button#send > img {
 		margin-top: 10%;
 		font-size: 3em;
 	}
-	author {
+	#author {
 		font-size: 2em;
 		margin-right: 0;
 	}
@@ -357,7 +366,7 @@ button#send > img {
 	.comSpace >.yourCom >.comText {
 		font-size: 2em;
 	}
-	.comInput2 {
+	#comInput2 {
 		font-size: 2em;
 	}
 	#sendCom {
