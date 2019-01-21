@@ -282,7 +282,7 @@ function deleteThisThread(){
         });
     }
     else {
-        toggleDelete()
+        toggleDelete();
     }
 }
 //Fake-delete comments
