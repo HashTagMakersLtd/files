@@ -357,9 +357,11 @@ function getMainCommentAsElement(doc){
 				<div class=\"comSpace\" >\
 					<div class=\"postComDiv\">\
 						<textarea name=\"text\" class=\"comInput2\" id=\""+doc.id+"-input\" placeholder=\"הגיבו כאן\"></textarea>\
+						<!--\
 						<button id=\"sendCom\" onclick=\"secondaryButtonClick(\'"+doc.id+"\')\">\
 							<img src=\"sendImg.png\">\
 						</button>\
+						-->\
 					</div>\
 				</div>\
 			</div>"

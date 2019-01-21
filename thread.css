@@ -50,7 +50,6 @@ h1 {
 	width: 70%;
 }
 .midDiv {
-	width: 90%;
 	margin: 0 auto;
 }
 .infoDiv > .material-icons {
@@ -140,7 +139,6 @@ h1 {
 .theirCom .userName, .yourCom .userName {
 	font-weight: bold;
 	font-family: 'Secular One', sans-serif;
-	font-size: 2.5em;
 	margin-right: 2%;
 }
 .yourCom .userName {
@@ -200,19 +198,18 @@ h1 {
 	background-color: #0065b3;
 }
 .comInput2 {
-	width: 65%;
+	width: 85%;
 	padding: 1%;
 	padding-right: 3%;
 	border-radius: 50px;
 	font-size: 4em;
-	margin-right: 5%;
 	text-align: right;
 	border-style: none;
 	bottom: 0;
 	font-family: 'Heebo', sans-serif;
 	border: 1px solid #444;
 	overflow: auto;
-	height: 1.5em;
+	height: 1.8em;
 	direction: rtl;
 }
 #comInput::placeholder {
