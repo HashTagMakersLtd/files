@@ -52,7 +52,7 @@ threadRef.get()
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
 								<div class=\"midDiv\" id=\"mainMidDiv\">\
 									"+deleteBtn+"\
-									<span class=\"author\">"+doc.data().from.id+"</span>\
+									<span class=\"author username\">"+doc.data().from.id+"</span>\
 								</div><br>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
