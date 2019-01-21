@@ -28,8 +28,10 @@ h1 {
 	padding-bottom: 0%;
 }
 .author {
+	font-family: 'Heebo', sans-serif;
 	direction: rtl;
 	margin-right: 5%;
+	font-size: 2.6em;
 }
 .infoDiv {
 	width: 90%;
@@ -142,6 +144,10 @@ h1 {
 .yourCom .userName {
 	color: #4db1ff;
 }
+.comSpace > .theirCom > .userName, .comSpace > .yourCom > .userName {
+	font-size: 2em;
+}
+
 .theirCom > #profilePhoto, .yourCom > #profilePhoto {
 	width: 10%;
 	margin-right: 3%;

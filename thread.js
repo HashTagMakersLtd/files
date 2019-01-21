@@ -209,7 +209,7 @@ function mainButtonClick(){
 			subComment($("#comInput").val(), focusedId.slice(0, focusedId.length-6));
 			$("#comInput").val("");
 			$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
-    		focusedId = "";
+    		
 		}
 	}
 }
@@ -232,6 +232,10 @@ function subComment(t, commentID){
     		commentCount : c+1
     	});
     });
+    	$('#superField').animate({
+	        scrollTop: $('#superField').scrollTop() + $("#"+focusedId).offset().top-$("#inputDiv").offset().top+200
+	     }, 400);
+    	focusedId = "";
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);

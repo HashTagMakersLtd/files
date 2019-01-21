@@ -15,7 +15,7 @@ html{
 	height: 100%;
 }
 #threadField {
-	margin-top: 20%;
+	margin-top: 23%;
 	width: 100%;
 	overflow-y: scroll;
 	text-align: center;
@@ -98,7 +98,19 @@ li h2 {
 }
 #newPostBtn:hover, #newPostBtn:active {
 	transition: 0.5s;
-	background-color: #002b4c;
+	background-color: #0065b3;
+}
+#olderPosts {
+	text-align: center;
+	font-size: 4em;
+	margin: 0 auto;
+	margin: 4%;
+	width: 60%;
+	font-family: 'Secular One', sans-serif;
+}
+#olderPosts:hover, #olderPosts:active {
+	transition: 0.5s;
+	background-color: #0065b3;
 }
 @media(min-width: 1030px) {
 	#threadField {
