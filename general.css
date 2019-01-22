@@ -28,6 +28,9 @@
 	background-color: #0065b3;
 	transition: 0.5s;
 }
+#profilePhoto{
+	border-radius: 300px;
+}
 /*sidemenu code*/
 #mainMenu {
 	box-shadow: -3px 0px 40px #0080dd;

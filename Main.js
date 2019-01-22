@@ -19,10 +19,31 @@ forumRef.onSnapshot(function(querySnapshot) {
 firebase.auth().onAuthStateChanged(function(user){
     if (user) { // User is signed in!
         userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
-        userRef.get().then(function(doc){
-            if(doc.data().admin==true){
-                $(".btn").css("display","block");
+        userRef.get().then(function(doc) {
+            //console.log(doc);
+            if (!doc.exists) {
+                userRef.set({
+                    starred: [],
+                    displayName : user.displayName,
+                    photoUrl : user.photoURL
+                })
+                .then(function() {
+                    console.log("User successfully created!");
+                    $("#profilePhoto")[0].src=user.photoURL;
+                })
+                .catch(function(error) {
+                    console.error("Error creating user: ", error);
+                });
+            } 
+            else{
+                console.log("Returning user");
+                $("#profilePhoto")[0].src=user.photoURL;
+                if(doc.data().admin==true){
+                    $(".btn").css("display","block");
+                }
             }
+        }).catch(function(error) {
+            console.log("Error finding user:", error);
         });
     }
 });
@@ -60,6 +81,7 @@ function newForum(){
     //console.log('create');
     var Name = prompt("What should be the name of the forum?");
     //TODO: Add Hebrew
+    if (Name==null){return;}
     firebase.firestore().collection("forums").add({
         name: Name
     })

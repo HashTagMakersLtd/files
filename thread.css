@@ -149,12 +149,13 @@ h1 {
 	font-family: 'Secular One', sans-serif;
 	margin-right: 2%;
 	font-weight: lighter;
+	font-size: 2.3em;
 }
 .yourCom .userName {
 	color: #4db1ff;
 }
-.comSpace > .theirCom > .userName, .comSpace > .yourCom > .userName {
-	font-size: 2em;
+.comSpace .theirCom .userName, .comSpace .yourCom .userName {
+	
 }
 
 .theirCom > #profilePhoto, .yourCom > #profilePhoto {

@@ -25,15 +25,17 @@ function signInWithGoogle(){//Signs in with Google
 	  // The signed-in user info.
 	  var user = result.user;
 
-	  /*
-	  //Add the user to database (deprecated)
+	  
+	  //Add the user to database 
 	  var userRef = db.collection("users").doc(user.email);
 
 		userRef.get().then(function(doc) {
 		    if (!doc.exists) {
 		        userRef.set({
 				    admin: false,
-				    starred: []
+				    starred: [],
+				    displayName : user.displayName,
+				    photoUrl : user.photoURL
 				})
 				.then(function() {
 				    console.log("User successfully created!");
@@ -48,7 +50,7 @@ function signInWithGoogle(){//Signs in with Google
 		}).catch(function(error) {
 		    console.log("Error finding user:", error);
 		});
-		*/
+		
 
 	}).catch(function(error) {
 	  // Handle Errors here.

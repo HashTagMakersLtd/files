@@ -6,6 +6,7 @@ var threadRef = firebase.firestore().collection("forums").doc(forumID).collectio
 //get userRef
 firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
+		//$("#profilePhoto")[0].src=user.photoURL;
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
 		uEmail = userRef.id;
 		userRef.get().then(function(doc){
@@ -140,6 +141,7 @@ function realtimeUpdates(commentID){
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
             if (change.type === "added") {
+            	//console.log(change.doc);
             	//console.log(change);
                 $("#"+commentID+"-com").append(getSubCommentAsElement(change.doc));
             }
@@ -172,9 +174,10 @@ function realtimeUpdates(commentID){
 
 function comment(t){
 	var date = new Date();
+	var ts = firebase.firestore.Timestamp.fromDate(date);
 	commentsRef.add({
 		text: t,
-		timestamp: firebase.firestore.Timestamp.fromDate(date),
+		timestamp: ts,
 		from: userRef,
 		commentCount: 0,
 		usersWhoLiked: null
@@ -184,7 +187,8 @@ function comment(t){
     threadRef.get().then(function(doc){
     	var c = doc.data().commentCount;
     	threadRef.update({
-    		commentCount : c+1
+    		commentCount : c+1,
+    		mostRecentPost : ts
     	});
     //Scroll to top:
     $('#superField').animate({
@@ -219,20 +223,28 @@ function mainButtonClick(){
 
 function subComment(t, commentID){
 	var date = new Date();
+	var ts = firebase.firestore.Timestamp.fromDate(date);
 	commentsRef.doc(commentID).collection("subComments").add({
 		text: t,
-		timestamp: firebase.firestore.Timestamp.fromDate(date),
+		timestamp: ts,
 		from: userRef,
 		usersWhoLiked: null
 	})
 	.then(function(docRef) {
     	console.log("Document written with ID: ", docRef.id);
     	commentsRef.doc(commentID).get().then(function(doc){
-    	var c = doc.data().commentCount;
-    	commentsRef.doc(commentID).update({
-    		commentCount : c+1
-    	});
-    });
+	    	var c = doc.data().commentCount;
+	    	commentsRef.doc(commentID).update({
+	    		commentCount : c+1,
+	    		mostRecentPost : ts
+	    	});
+	    });
+	    threadRef.get().then(function(doc){
+	    	var cc = doc.data().commentCount;
+	    	threadRef.update({
+	    		commentCount : cc+1
+	    	});
+	    });
     	$('#superField').animate({
 	        scrollTop: $('#superField').scrollTop() + $("#"+focusedId).offset().top-$("#inputDiv").offset().top+200
 	     }, 400);
@@ -445,11 +457,10 @@ $(document).on('click',"div",function(event){
 	  		event.stopPropagation();
 	    	var x = $(this).children()[0];
 	    	//console.log(x);
+	    	setTimeout(function() { $('#comInput').focus() }, 10);
 	    	$('#superField').animate({
 	        	scrollTop: $('#superField').scrollTop() + $(x).offset().top-$("#inputDiv").offset().top+200
 	      	}, 400);
-
-	    	setTimeout(function() { $('#comInput').focus() }, 100);
 	    	newFocus(x.id);
 	    }
 	    else if (focusedId!==""){
@@ -501,12 +512,15 @@ function newFocus(inputId){
 
 //Exapand the textarea to fit innerText:
 $( document ).ready(function() {
-    var inputDivHeight = 1.5;
+    minimizeInputDiv();
 	$("#comInput").keyup(function(event){
 		//console.log(event);
 		if (($('#comInput')[0].scrollHeight-20)>($('#comInput').height())){
 			inputDivHeight+=1.5;
 			$('#comInput')[0].style.height=inputDivHeight+"em";
+		}
+		if ($('#comInput').val()===""){
+			minimizeInputDiv();
 		}
 	});
 });

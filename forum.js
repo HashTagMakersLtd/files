@@ -2,6 +2,8 @@ var id = get("id");
 
 allThreadsRef = firebase.firestore().collection("forums").doc(id).collection("threads");
 
+//Build dictionary of emails to usernames:
+var displayNameDict = {};
 // READING MESSAGES AND INITIALIZING CHAT
 
 firebase.firestore().collection("forums").doc(id).get()
@@ -10,19 +12,34 @@ firebase.firestore().collection("forums").doc(id).get()
 			$("#forumTitle").text(doc.data().name);
 		}
 	});
-var firstBatch = allThreadsRef.orderBy("timestamp", "desc").limit(25);
+var firstBatch = allThreadsRef.orderBy("mostRecentPost", "desc").limit(25);
 
 function getThreadAsElement(doc){
+	if (displayNameDict[doc.data().from.id]==null){
+		var authName = doc.data().from.id;
+		firebase.firestore().collection("users").doc(doc.data().from.id).get()
+			.then(function(uDoc){
+				//console.log(uDoc.data());
+				if (uDoc.exists){
+					var e = doc.data().from.id;
+					var n = uDoc.data().displayName;
+					displayNameDict[e] = n;
+					$("."+e.replace(/@|\./g, "")).text(n);
+				}
+			})
+	} else {
+		var authName = displayNameDict[doc.data().from.id];
+	}
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	//console.log(liked);
 	return "<li class=\"threadItem\" id=\""+doc.id+"-main\">\
 				<a href=\"thread.html?forumID="+id+"&threadID="+doc.id+"\">\
 					<h2 class=\"threadTitle\">"+doc.data().name+"</h2>\
 				</a>\
-					<span class=\"author\">"+doc.data().from.id+"</span><br>\
+					<span class=\"author "+authName.replace(/@|\./g, '')+"\">"+authName+"</span><br>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn"+liked+"\" id=\""+doc.id+"\" onclick=\"onLikeButtonClick(\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-						<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
+						<span class=\"timeStamp\">"+timeConverter(doc.data().mostRecentPost.toDate())+"</span>\
 						<i class=\"material-icons\">thumb_up_alt</i>\
 						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+doc.data().usersWhoLiked.length+"</span>\
 						<i class=\"material-icons\">chat_bubble</i>\
@@ -55,7 +72,7 @@ function getNext25messages(queryRef){
         });
         if (queryNum==25){
         	$("#olderPosts").show()
-        	nextBatch = allThreadsRef.orderBy("timestamp", "desc")
+        	nextBatch = allThreadsRef.orderBy("mostRecentPost", "desc")
           						.startAfter(lastVisible)
           						.limit(25);
         } else{
@@ -98,7 +115,9 @@ allThreadsRef
                 console.log("Removed thread: ", change.doc.data());
                 $("#"+change.doc.id+"-main").remove();
             }
-            else{console.log(change)}
+            else{
+            	//console.log(change)
+            }
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
@@ -113,6 +132,8 @@ allThreadsRef
 firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
+		//$("#profilePhoto")[0].src=user.photoURL;
+		displayNameDict[(firebase.auth().currentUser.email)] = firebase.auth().currentUser.displayName;
 	}
 });
 
