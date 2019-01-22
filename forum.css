@@ -29,9 +29,9 @@ html{
 	width: 100%;
 	overflow-y: scroll;
 	text-align: center;
-	max-height: 80%;
+	max-height: 65%;
 	display: block;
-	height: 70%;
+	height: 60%;
 }
 button {
 	background-color: #4db1ff;
@@ -106,10 +106,6 @@ li h2 {
 	width: 60%;
 	font-family: 'Secular One', sans-serif;
 }
-#newPostBtn:hover, #newPostBtn:active {
-	transition: 0.5s;
-	background-color: #0065b3;
-}
 #olderPosts {
 	text-align: center;
 	font-size: 4em;
@@ -117,6 +113,10 @@ li h2 {
 	margin: 4%;
 	width: 60%;
 	font-family: 'Secular One', sans-serif;
+}
+#newPostBtn:hover, #newPostBtn:active {
+	transition: 0.5s;
+	background-color: #0065b3;
 }
 #olderPosts:hover, #olderPosts:active {
 	transition: 0.5s;
