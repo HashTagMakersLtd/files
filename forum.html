@@ -19,8 +19,9 @@
 	<div id="mainMenu">
 		<button id="backBtn" style=" right: 0; ">חזור<i class="material-icons">arrow_forward_ios</i></button>
 		<img src="museumLogoImg.png">
+		<button onclick="window.location.href='Main.html'">דף הראשי</button>
 		<button id="settings">הגדרות</button>
-		<button id="faq">מידע</button>
+		<button onclick="window.location.href='info.html'">מידע</button>
 		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא</button>
 	</div>
 	<div class="header">
@@ -39,16 +40,14 @@
 		</table>
 	</div>
 	<!--END HEADER CODE-->
-	
 	<div id="threadField">
 		<div id="exp">
 			פה תוכל להצטרף בשיחה קיימת או להתחיל שיחה חדשה משלך
 		</div>
 		<ul id="threadList">
-			<div class="loader"></div>
 			<!-- <li> to be appended from firebase -->
 		</ul>
-		<button id="olderPosts" style="display: none">הצג עוד שיחות</button>
+		<button id="olderPosts">הצג עוד שיחות</button>
 	</div>
 	<button id="newPostBtn" onclick="onButtonClick()">התחל שיחה</button>
 	<script type="text/javascript">

@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Heebo|Secular+One');
+@import url('https://fonts.googleapis.com/css?family=Barlow+Condensed');
+body{
+	background-color: #fff;
+	font-family: 'Heebo', sans-serif;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	overflow-x: hidden;
+	text-align: right;
+	height: 100%;
+	text-align: center;
+}
+html{
+	overflow: hidden;
+	overflow-x: hidden;
+	height: 100%;
+}
+#textBody {
+	max-height: 77%;
+	position: static;
+	width: 90%;
+	direction: rtl;
+	overflow-y: scroll;
+	text-align: right;
+	margin: 0 auto;
+	padding-top: 23%;
+	z-index: 2;
+}
+h1 {
+	font-family: 'Secular One', sans-serif;
+	font-size: 6em;
+	padding: 0%;
+	color: #4db1ff;
+	margin: 0;
+}
+h2 {
+	font-family: 'Secular One', sans-serif;
+	font-size: 3.5em;
+	padding: 0%;
+	color: #4db1ff;
+	margin: 0;
+}
+.text {
+	font-size: 1.5em;
+	font-family: 'Heebo', sans-serif;
+}
+ul {
+	direction: rtl;
+	font-size: 1.5em;
+	font-family: 'Heebo', sans-serif;
+	padding-right: 8%;
+}
+#feedbackBtn {
+	color: white;
+	font-family: 'Secular One', sans-serif;
+	padding: 3%;
+	font-size: 4em;
+	background-color: #4db1ff;
+	z-index: 999;
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	width: 60%;
+	border-radius: 40px;
+	box-shadow: 5px 5px 40px grey;
+	transition: 0.5s;
+}
+#feedbackBtn:active {
+	transition: 0.5s;
+	background-color: #0065b3; 
+}
