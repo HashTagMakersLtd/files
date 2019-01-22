@@ -18,7 +18,7 @@ html{
 
 h1 {
 	direction: rtl;
-	font-family: 'Secular One', sans-serif;
+	font-family: 'Heebo', sans-serif;
 	color: #4db1ff;
 	font-size: 4.5em;
 	margin-top: 15%;
@@ -26,12 +26,13 @@ h1 {
 	padding: 5%;
 	margin-bottom: 0%;
 	padding-bottom: 0%;
+	font-weight: bolder;
 }
 .author {
-	font-family: 'Heebo', sans-serif;
+	font-family: 'Secular One', sans-serif;
 	direction: rtl;
 	margin-right: 5%;
-	font-size: 2.6em;
+	font-size: 2em;
 }
 .infoDiv {
 	width: 90%;
@@ -139,7 +140,7 @@ h1 {
 .theirCom .userName, .yourCom .userName {
 	font-family: 'Secular One', sans-serif;
 	margin-right: 2%;
-	font-size: 2.5em;
+	font-weight: lighter;
 }
 .yourCom .userName {
 	color: #4db1ff;
