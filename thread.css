@@ -18,7 +18,7 @@ html{
 
 h1 {
 	direction: rtl;
-	font-family: 'Heebo', sans-serif;
+	font-family: 'Secular One', sans-serif;
 	color: #4db1ff;
 	font-size: 4.5em;
 	margin-top: 15%;
@@ -26,13 +26,12 @@ h1 {
 	padding: 5%;
 	margin-bottom: 0%;
 	padding-bottom: 0%;
-	font-weight: bolder;
 }
 .author {
-	font-family: 'Secular One', sans-serif;
+	font-family: 'Heebo', sans-serif;
 	direction: rtl;
 	margin-right: 5%;
-	font-size: 2em;
+	font-size: 2.6em;
 }
 .infoDiv {
 	width: 90%;
@@ -66,12 +65,17 @@ h1 {
 	transition: 0.2s;
 	vertical-align: top;
 }
+#headerDiv  .deleteBtn {
+	top: 45%;
+}
 .deleteBtn {
 	background-color: red;
+	position: absolute;
 	border-style: none;
 	border-radius: 20px;
 	padding: 2%;
-	float: left;
+	top: 15%;
+	left: 5%;
 	display: none;
 }
 .likeBtn > .material-icons, .deleteBtn > .material-icons {
@@ -101,6 +105,7 @@ h1 {
 	padding-bottom: 5%;
 	box-shadow: 0px 10px 50px grey;
 	z-index: 50;
+	position: relative;
 }
 #superField {
 	overflow-y: scroll;
@@ -120,6 +125,7 @@ h1 {
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
+	position: relative;
 	padding-bottom: 3%;
 	left: 0;
 	margin: 6% 4%;
@@ -128,6 +134,7 @@ h1 {
 }
 .yourCom {
 	direction: rtl;
+	position: relative;
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
@@ -140,7 +147,7 @@ h1 {
 .theirCom .userName, .yourCom .userName {
 	font-family: 'Secular One', sans-serif;
 	margin-right: 2%;
-	font-weight: lighter;
+	font-size: 2.5em;
 }
 .yourCom .userName {
 	color: #4db1ff;
@@ -165,15 +172,12 @@ h1 {
 .comSpace {
 	width: 90%;
 	margin-bottom: 5%;
-}
-.comSpace {
 	font-size: 0.8em;
 }
 .comSpace .comText {
 	font-size: 3em;
-}
-.comSpace >.yourCom >.comText {
-	font-size: 3em;
+	float: right;
+	width: 70%;
 }
 /*Style for 2nd tier comment posting*/
 .postComDiv {
@@ -240,11 +244,13 @@ h1 {
 	z-index: 990;
 	background-color: #f7f7f7;
 	padding-top: 4%;
+	height: 9%;
 }
 #send {
-	position: absolute;
+	float: left;
 	width: 14%;
 	padding: 2%;
+	margin-left: 5%;
 	background-color: #4db1ff;
 	border-style: none;
 	border-radius: 300px;
@@ -252,10 +258,8 @@ h1 {
 	text-align: right;
 	transition: 0.5s;
 	display: inline-block;
-	left: 5%;
-    bottom: 8%;
 }
-#sendImg {
+button#send > img {
 	margin-left: 10%;
 	margin-bottom: -10%;
 	width: 100%;
@@ -285,7 +289,9 @@ h1 {
 	color: grey;
 	font-family: 'Heebo', sans-serif;
 }
-
+#send > img {
+	width: 70%;
+}
 @media(min-width: 1030px) {
 	h1 {
 		margin-top: 10%;
