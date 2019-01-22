@@ -17,7 +17,6 @@ html{
 }
 #forumTitle{
 	font-family: 'Secular One', sans-serif;
-	font-size: 3em;
 }
 #exp {
 	font-family: 'Heebo', sans-serif;
@@ -27,14 +26,16 @@ html{
 	border: 1px solid #444;
 	border-radius: 30px;
 	background-color: #eee;
+	margin: 0 auto;
 }
 #threadField {
+	margin-top: 25%;
 	width: 100%;
 	overflow-y: scroll;
 	text-align: center;
-	max-height: 65%;
+	max-height: 75%;
 	display: block;
-	height: 60%;
+	height: 70%;
 }
 button {
 	background-color: #4db1ff;

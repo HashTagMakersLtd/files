@@ -43,18 +43,25 @@ function displayNewThread(thread){
 }
 
 function getNext25messages(queryRef){
+	var queryNum = 0;
 	queryRef.get()
     .then(function(querySnapshot) {
     	$(".loader").remove();
     	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
         querySnapshot.forEach(function(doc) {
+        	queryNum++;
             displayOldThread(getThreadAsElement(doc));
         });
-
-        nextBatch = allThreadsRef.orderBy("timestamp", "desc")
+        if (queryNum==25){
+        	$("#olderPosts").show()
+        	nextBatch = allThreadsRef.orderBy("timestamp", "desc")
           						.startAfter(lastVisible)
           						.limit(25);
+        } else{
+        	$("#olderPosts").hide();
+        }
+        
     })
     .catch(function(error) {
         console.log("Error getting threads: ", error);
@@ -64,7 +71,12 @@ function getNext25messages(queryRef){
 //Get most recent 25 messages:
 getNext25messages(firstBatch);
 
-//TODO: Add way to grab older threads
+//Way to grab older threads
+$(document).ready(function(){
+	$("#olderPosts").click(function(){
+		getNext25messages(nextBatch);
+	});
+});
 
 //Realtime Handler to append new thread
 allThreadsRef
