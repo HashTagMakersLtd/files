@@ -23,6 +23,7 @@ firebase.auth().onAuthStateChanged(function(user){
             //console.log(doc);
             if (!doc.exists) {
                 userRef.set({
+                    admin : false,
                     starred: [],
                     displayName : user.displayName,
                     photoUrl : user.photoURL
