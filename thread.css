@@ -66,12 +66,17 @@ h1 {
 	transition: 0.2s;
 	vertical-align: top;
 }
+#headerDiv  .deleteBtn {
+	top: 45%;
+}
 .deleteBtn {
 	background-color: red;
+	position: absolute;
 	border-style: none;
 	border-radius: 20px;
 	padding: 2%;
-	float: left;
+	top: 15%;
+	left: 5%;
 	display: none;
 }
 .likeBtn > .material-icons, .deleteBtn > .material-icons {
@@ -101,6 +106,7 @@ h1 {
 	padding-bottom: 5%;
 	box-shadow: 0px 10px 50px grey;
 	z-index: 50;
+	position: relative;
 }
 #superField {
 	overflow-y: scroll;
@@ -120,6 +126,7 @@ h1 {
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
+	position: relative;
 	padding-bottom: 3%;
 	left: 0;
 	margin: 6% 4%;
@@ -128,6 +135,7 @@ h1 {
 }
 .yourCom {
 	direction: rtl;
+	position: relative;
 	text-align: right;
 	z-index: 9;
 	overflow: auto;
@@ -166,14 +174,10 @@ h1 {
 	width: 90%;
 	margin-bottom: 5%;
 }
-.comSpace {
-	font-size: 0.8em;
-}
 .comSpace .comText {
 	font-size: 3em;
-}
-.comSpace >.yourCom >.comText {
-	font-size: 3em;
+	float: right;
+	width: 70%;
 }
 /*Style for 2nd tier comment posting*/
 .postComDiv {
@@ -268,7 +272,7 @@ h1 {
 #comInput {
 	width: 65%;
 	float: right;
-	height: 100px;
+	height: 1.5em;
 	padding: 1%;
 	padding-right: 3%;
 	border-radius: 50px;
@@ -280,6 +284,8 @@ h1 {
 	font-family: 'Heebo', sans-serif;
 	border: 1px solid #666;
 	direction: rtl;
+	overflow-y: scroll;
+	max-height: 6em;
 }
 #comInput::placeholder {
 	color: grey;

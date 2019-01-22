@@ -204,12 +204,13 @@ function mainButtonClick(){
 		if (focusedId==""){
 			comment($("#comInput").val());
 			$("#comInput").val("");
+			minimizeInputDiv();
 		}
 		else {
 			subComment($("#comInput").val(), focusedId.slice(0, focusedId.length-6));
 			$("#comInput").val("");
 			$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
-    		
+    		minimizeInputDiv();
 		}
 	}
 }
@@ -496,4 +497,21 @@ function newFocus(inputId){
 	}
 	focusedId = inputId;
 	$("#"+inputId.slice(0, inputId.length-6)).css("background-color","#def");
+}
+
+//Exapand the textarea to fit innerText:
+$( document ).ready(function() {
+    var inputDivHeight = 1.5;
+	$("#comInput").keyup(function(event){
+		//console.log(event);
+		if (($('#comInput')[0].scrollHeight-20)>($('#comInput').height())){
+			inputDivHeight+=1.5;
+			$('#comInput')[0].style.height=inputDivHeight+"em";
+		}
+	});
+});
+	
+function minimizeInputDiv(){
+	inputDivHeight = 1.5;
+	$('#comInput')[0].style.height=inputDivHeight+"em";
 }
