@@ -64,6 +64,7 @@ function getNext25messages(queryRef){
 	queryRef.get()
     .then(function(querySnapshot) {
     	$(".loader").remove();
+    	$("#newPostBtn").show();
     	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
         querySnapshot.forEach(function(doc) {

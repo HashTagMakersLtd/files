@@ -17,7 +17,7 @@ html{
 	height: 100%;
 }
 #textBody {
-	max-height: 77%;
+	max-height: 75%;
 	position: static;
 	width: 90%;
 	direction: rtl;
