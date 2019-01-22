@@ -29,7 +29,6 @@ html{
 #forumField {
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 3%;
 	text-align: center;
 	max-height: 70%;
 	overflow-y: scroll;
@@ -70,7 +69,7 @@ ul a {
 	background-image: linear-gradient(#4db1ff, #3885c1), linear-gradient(180deg, #4db1ff, #3885c1);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 1000px 1px #f4f4f4 inset, #749abb 1px 4px 20px 0px;
+	box-shadow: 2px 1000px 1px #fff inset, #aaa 0px 0px 50px 0px;
 	margin-bottom: 2%;
 	margin-top: 2%;
 }
@@ -144,7 +143,6 @@ ul a {
 		width: 40%;
 		margin-top: 1%;
 		width: 30%;
-		cursor: pointer;
 	}
 
 }
