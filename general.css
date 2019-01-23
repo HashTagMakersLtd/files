@@ -28,9 +28,6 @@
 	background-color: #0065b3;
 	transition: 0.5s;
 }
-#profilePhoto{
-	border-radius: 300px;
-}
 /*sidemenu code*/
 #mainMenu {
 	box-shadow: -3px 0px 40px #0080dd;
@@ -61,31 +58,21 @@
 	font-size: 1.5em;
 	color: white;
 	text-align: right;
-	padding-right: 10%;
-	padding: 5%;
+	padding: 2% 10% 2% 2%;
 	transition: 0.5s;
 }
 #mainMenu button i {
 	font-size: 1em;
+	vertical-align: middle;
+	margin-left: 3%;
+}
+#signOutBtn {
+	position: absolute;
+	bottom: 0;
 }
 #mainMenu > button:hover, #mainMenu > button:active{
 	background-color: #0065b3;
 	transition: 0.5s;
-}
-
-.loader {
-  	border: 37px solid #C0C0C0; /* Light grey */
-  	border-top: 37px solid #3498db; /* Blue */
-  	border-radius: 50%;
-  	width: 225px;
- 	height: 225px;
-  	animation: spin 2s linear infinite;
-  	margin: 0 auto;
-  	margin-top: 30%;
-}	
-@keyframes spin {
-  	0% { transform: rotate(0deg); }
-  	100% { transform: rotate(360deg); }		
 }
 /*Mediaquery for desktop viewing*/
 @media(min-width: 1030px) {
