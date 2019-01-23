@@ -3,6 +3,9 @@ var threadID = get("threadID");
 
 var threadRef = firebase.firestore().collection("forums").doc(forumID).collection("threads").doc(threadID);
 
+//Build dictionary of emails to usernames:
+var displayNameDict = JSON.parse(sessionStorage.getItem("displayNameDict"))||{};
+
 //get userRef
 firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
@@ -46,14 +49,30 @@ function isAdmin(){
 //initialize Header
 threadRef.get()
 	.then(function(doc){
-		
+		if (displayNameDict[doc.data().from.id]==null){
+			var authName = doc.data().from.id;
+			firebase.firestore().collection("users").doc(doc.data().from.id).get()
+				.then(function(uDoc){
+					//console.log(uDoc.data());
+					if (uDoc.exists){
+						var e = doc.data().from.id;
+						var n = uDoc.data().displayName;
+						displayNameDict[e] = n;
+						$("."+e.replace(/@|\./g, "")).text(n);
+						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
+					}
+				});
+		} else {
+			var authName = displayNameDict[doc.data().from.id];
+		}
+		var username = (doc.data().from.id===uEmail) ? "את\\ה" : authName;
 		var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 		var deleteBtn = (doc.data().from.id===uEmail) ? getDeleteButton(doc.id) : "";
 		
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
 								<div class=\"midDiv\" id=\"mainMidDiv\">\
 									"+deleteBtn+"\
-									<span class=\"author username\">"+doc.data().from.id+"</span>\
+									<span class=\"author userName "+username.replace(/@|\./g, '')+"\">"+username+"</span>\
 								</div>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
@@ -64,9 +83,9 @@ threadRef.get()
 										<i class=\"material-icons\">chat_bubble</i>\
 										<span class=\"comNum\" id=\'mainCommentNum\'>"+doc.data().commentCount+"</span>\
 									</div>\
-								</div>")
+								</div>");
 
-	})
+	});
 
 //Initialize comments
 commentsRef = threadRef.collection("comments");
@@ -358,16 +377,34 @@ function deleteSubComment(cID, scID){
 function getMainCommentAsElement(doc){
 	var data = doc.data();
 	var mine = data.from.id===uEmail;
+	var authName = data.from.id;
+	if (!mine){
+		if (displayNameDict[data.from.id]==null){
+			firebase.firestore().collection("users").doc(data.from.id).get()
+				.then(function(uDoc){
+					//console.log(uDoc.data());
+					if (uDoc.exists){
+						var e = data.from.id;
+						var n = uDoc.data().displayName;
+						displayNameDict[e] = n;
+						$("."+e.replace(/@|\./g, "")).text(n);
+						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
+					}
+				});
+		} else {
+			var authName = displayNameDict[data.from.id];
+		}
+	}
 	var commentClass = (mine) ? "yourCom" : "theirCom";
 	var deleteBtn = (mine||isAdmin()) ? getDeleteButton(doc.id) : "";
-	var username = (mine) ? "את\\ה" : data.from.id;
+	var username = (mine) ? "את\\ה" : authName;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
 				<div class=\""+commentClass+"\">\
 					<div class=\"midDiv mainCommentMidDiv\" id=\"mid-"+doc.id+"\">\
 									"+deleteBtn+"\
-									<span class=\"userName\">"+username+"</span><br>\
+									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
 								</div>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
@@ -399,15 +436,33 @@ function getMainCommentAsElement(doc){
 function getSubCommentAsElement(doc){
 	var data = doc.data();
 	var mine = data.from.id===uEmail;
+	var authName = data.from.id;
+	if (!mine){
+		if (displayNameDict[data.from.id]==null){
+			firebase.firestore().collection("users").doc(data.from.id).get()
+				.then(function(uDoc){
+					//console.log(uDoc.data());
+					if (uDoc.exists){
+						var e = data.from.id;
+						var n = uDoc.data().displayName;
+						displayNameDict[e] = n;
+						$("."+e.replace(/@|\./g, "")).text(n);
+						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
+					}
+				});
+		} else {
+			var authName = displayNameDict[data.from.id];
+		}
+	}
 	var commentClass = (mine) ? "yourCom" : "theirCom";
-	var username = (mine) ? "את\\ה" : data.from.id;
+	var username = (mine) ? "את\\ה" : authName;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var deleteBtn = (mine||isAdmin()) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
 									"+deleteBtn+"\
-									<span class=\"userName\">"+username+"</span><br>\
+									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
 								</div>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
@@ -451,6 +506,35 @@ $(document).on('click',"div",function(event){
 	//console.log(this);
 	if (this.id=="inputDiv"){
 		event.stopPropagation();
+	}
+	else if (($(this).is(".theirCom:first-child") && !$(this).parent().hasClass("comSpace") )||($(this).is(".yourCom:first-child")) && !$(this).parent().hasClass("comSpace") ){
+		//collapse subcomments when main comment is clicked
+		event.stopPropagation();
+		//console.log("first child of com field "+$(this).parent()[0].id+" clicked");
+		//console.log($(".comSpace#"+$(this).parent()[0].id+"-com"));
+		var ccid = $(this).parent()[0].id;
+		$(".comSpace#"+ccid+"-com .yourCom").toggle(100, function(){
+			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
+			//Add shadow to collapsed comment threads
+			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
+				console.log($(this).parent().parent().children(0));
+				$(this).parent().parent().children(0).css("box-shadow","aliceblue 0px 0px 20px 20px");
+			} else {
+				$(this).parent().parent().children(0).css("box-shadow","");
+			}
+		});
+		$(".comSpace#"+ccid+"-com .theirCom").toggle(100, function(){
+			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
+			//Add shadow to collapsed comment threads
+			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
+				console.log($(this).parent().parent().eq(0));
+				$(this).parent().parent().children(0).css("box-shadow","aliceblue 0px 1px 20px 20px");
+			} else {
+				$(this).parent().parent().children(0).css("box-shadow","");
+			}
+		});
+		
+		
 	}
 	else{
 	    if ($(this).hasClass("postComDiv")){

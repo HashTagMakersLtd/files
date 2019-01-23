@@ -247,7 +247,7 @@ h1 {
 	position: absolute;
 	z-index: 990;
 	background-color: #f7f7f7;
-	padding-top: 4%;
+	padding: 2% 0%;
 }
 #send {
 	position: absolute;

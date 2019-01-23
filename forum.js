@@ -3,7 +3,7 @@ var id = get("id");
 allThreadsRef = firebase.firestore().collection("forums").doc(id).collection("threads");
 
 //Build dictionary of emails to usernames:
-var displayNameDict = {};
+var displayNameDict = JSON.parse(sessionStorage.getItem("displayNameDict"))||{};
 // READING MESSAGES AND INITIALIZING CHAT
 
 firebase.firestore().collection("forums").doc(id).get()
@@ -25,8 +25,9 @@ function getThreadAsElement(doc){
 					var n = uDoc.data().displayName;
 					displayNameDict[e] = n;
 					$("."+e.replace(/@|\./g, "")).text(n);
+					sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
 				}
-			})
+			});
 	} else {
 		var authName = displayNameDict[doc.data().from.id];
 	}
@@ -134,7 +135,7 @@ firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
 		//$("#profilePhoto")[0].src=user.photoURL;
-		displayNameDict[(firebase.auth().currentUser.email)] = firebase.auth().currentUser.displayName;
+		displayNameDict[(user.email)] = user.displayName;
 	}
 });
 
