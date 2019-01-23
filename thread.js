@@ -517,20 +517,20 @@ $(document).on('click',"div",function(event){
 			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
-				console.log($(this).parent().parent().children(0));
-				$(this).parent().parent().children(0).css("box-shadow","aliceblue 0px 0px 20px 20px");
+				//console.log($(this).parent().parent().children(0).eq(0));
+				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
 			} else {
-				$(this).parent().parent().children(0).css("box-shadow","");
+				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
 			}
 		});
 		$(".comSpace#"+ccid+"-com .theirCom").toggle(100, function(){
 			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
-				console.log($(this).parent().parent().eq(0));
-				$(this).parent().parent().children(0).css("box-shadow","aliceblue 0px 1px 20px 20px");
+				//console.log($(this).parent().parent().children(0).eq(0));
+				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
 			} else {
-				$(this).parent().parent().children(0).css("box-shadow","");
+				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
 			}
 		});
 		
