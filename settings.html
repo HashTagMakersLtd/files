@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MakerChat Settings</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="general.css">
+	<script type="text/javascript" src="general.js"></script>
+	<link rel="stylesheet" type="text/css" href="settings.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+	<!--START HEADER CODE-->
+	<div id="mainMenu">
+		<button id="backBtn" style=" right: 0;" >חזור<i class="material-icons">arrow_forward_ios</i></button>
+		<img src="museumLogoImg.png">
+		<button onclick="window.location.href='Main.html'">דף הראשי</button>
+		<button id="settings" onclick="window.location.href='settings.html'">הגדרות</button>
+		<button onclick="window.location.href='info.html'">מידע</button>
+		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא</button>
+	</div>
+	<div class="header">
+		<table>
+			<tr>
+				<td id="return" style="text-align: left;">
+					<img src="backBtnImg.png" onclick="window.history.back()">
+				</td>
+				<td style="text-align: center;">
+					<span id="settingsTitle">הגדרות</span>
+				</td>
+				<td id="toggleMenu" style="text-align: right;">
+					<img src="MenuImg.png">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--END HEADER CODE-->
+	<div id="settingsField">
+		<h1>שנה שפה</h1>
+		<select id="langSelect">
+			<option id="HE">עברית</option>
+			<option id="EN">English</option>
+		</select>
+		<br><br>
+		<h1>מצב חשוך</h1>
+			<label class="switch">
+ 	 			<input type="checkbox">
+  				<span class="slider round"></span>
+			</label>
+		<br><br>
+	</div>
+	<button id="saveSettings">שמור הגדרות</button>
+	<script type="text/javascript">
+		$("#toggleMenu").click(function(){
+			if($("#mainMenu").css('width') < '80%') {
+				$("#mainMenu").animate({width: '80%'});
+			}
+		});
+		$("#backBtn").click(function(){
+			if($("#mainMenu").css('width') > '0') {
+				$("#mainMenu").animate({width: '0'});
+			}
+		});
+	</script>
+</body>
+</html> 
