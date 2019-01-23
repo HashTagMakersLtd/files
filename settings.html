@@ -1,23 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>MakerChat</title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>MakerChat Settings</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-	<script type="text/javascript" src="firebaseConfig.js"></script>
-	<script type="text/javascript" src="general.js"></script>
-	<script type="text/javascript" src="forum.js"></script>
-	<link rel="stylesheet" type="text/css" href="forum.css">
-	<!-- HEADER STYLE -->
 	<link rel="stylesheet" type="text/css" href="general.css">
+	<script type="text/javascript" src="general.js"></script>
+	<link rel="stylesheet" type="text/css" href="settings.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 	<!--START HEADER CODE-->
 	<div id="mainMenu">
-		<button id="backBtn" style=" right: 0; ">חזור<i class="material-icons">arrow_forward_ios</i></button>
+		<button id="backBtn" style=" right: 0;" >חזור<i class="material-icons">arrow_forward_ios</i></button>
 		<img src="museumLogoImg.png">
 		<button onclick="window.location.href='Main.html'">דף הראשי</button>
 		<button id="settings" onclick="window.location.href='settings.html'">הגדרות</button>
@@ -31,7 +25,7 @@
 					<img src="backBtnImg.png" onclick="window.history.back()">
 				</td>
 				<td style="text-align: center;">
-					<span id="forumTitle">MakerChat</span>
+					<span id="settingsTitle">הגדרות</span>
 				</td>
 				<td id="toggleMenu" style="text-align: right;">
 					<img src="MenuImg.png">
@@ -40,16 +34,21 @@
 		</table>
 	</div>
 	<!--END HEADER CODE-->
-	<div id="threadField">
-		<div id="exp">
-			פה תוכל להצטרף בשיחה קיימת או להתחיל שיחה חדשה משלך
-		</div>
-		<ul id="threadList">
-			<!-- <li> to be appended from firebase -->
-		</ul>
-		<button id="olderPosts">הצג עוד שיחות</button>
+	<div id="settingsField">
+		<h1>שנה שפה</h1>
+		<select id="langSelect">
+			<option id="HE">עברית</option>
+			<option id="EN">English</option>
+		</select>
+		<br><br>
+		<h1>מצב חשוך</h1>
+			<label class="switch">
+ 	 			<input type="checkbox">
+  				<span class="slider round"></span>
+			</label>
+		<br><br>
 	</div>
-	<button id="newPostBtn" onclick="onButtonClick()">התחל שיחה</button>
+	<button id="saveSettings">שמור הגדרות</button>
 	<script type="text/javascript">
 		$("#toggleMenu").click(function(){
 			if($("#mainMenu").css('width') < '80%') {

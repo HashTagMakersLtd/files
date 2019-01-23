@@ -3,13 +3,8 @@
 <head>
 	<title>MakerChat</title>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="mobile-web-app-capable" content="yes" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-	<script type="text/javascript" src="firebaseConfig.js"></script>
 	<link rel="stylesheet" type="text/css" href="info.css">
 	<!-- HEADER STYLE -->
 	<link rel="stylesheet" type="text/css" href="general.css">
@@ -20,7 +15,7 @@
 		<button id="backBtn" style=" right: 0;" >חזור<i class="material-icons">arrow_forward_ios</i></button>
 		<img src="museumLogoImg.png">
 		<button onclick="window.location.href='Main.html'">דף הראשי</button>
-		<button id="settings">הגדרות</button>
+		<button id="settings" onclick="window.location.href='settings.html'">הגדרות</button>
 		<button onclick="window.location.href='info.html'">מידע</button>
 		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא</button>
 	</div>
@@ -63,7 +58,7 @@
 			בלה בלה בלה בלה שטויות בלה בלה בלה אפליקציה מדהימה בלה בלה מהפחה תמידית בלה בלה בלה טרוצקי צדק בלה בלה בלה
 		</span>
 	</div>
-	<a href="mailto:hashtagmakersltd@gmail.com?Subject=MakerChat" id="feedbackBtn">שלח משובות</a>
+	<a href="hashtagmakersltd@gmail.com" id="feedbackBtn">שלח משובות</a>
 	<script type="text/javascript">
 		$("#toggleMenu").click(function(){
 			if($("#mainMenu").css('width') < '80%') {
@@ -77,4 +72,4 @@
 		});
 	</script>
 </body>
-</html> 
+</html>

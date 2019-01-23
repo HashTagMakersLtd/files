@@ -2,13 +2,12 @@
 <html>
 <head>
 	<title>MakerChat</title>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="mobile-web-app-capable" content="yes" />
 	<link rel="stylesheet" type="text/css" href="MainStyle.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	
 	<script type="text/javascript" src="firebaseConfig.js"></script>
 	<script type="text/javascript" src="Main.js"></script>
 	<script type="text/javascript" src="general.js"></script>
@@ -24,7 +23,7 @@
 		<button id="backBtn" style=" right: 0;">חזור<i class="material-icons">arrow_forward_ios</i></button>
 		<img src="museumLogoImg.png">
 		<button onclick="window.location.href='Main.html'">דף הראשי</button>
-		<button id="settings">הגדרות</button>
+		<button id="settings" onclick="window.location.href='settings.html'">הגדרות</button>
 		<button onclick="window.location.href='info.html'">מידע</button>
 		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא</button>
 	</div>
@@ -49,7 +48,7 @@
 	</div>
 	<div id="forumField">
 		<ul id="forumList">
-			<div class="loader"></div>
+
 			<!--
 			<button class="deleteBtn"><i class="material-icons">delete</i></button>
 			<button class="forumBtn"><a href="">דוגמא</a></button>
