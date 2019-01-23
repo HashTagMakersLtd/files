@@ -627,5 +627,3 @@ function minimizeInputDiv(){
 	inputDivHeight = 1.5;
 	$('#comInput')[0].style.height=inputDivHeight+"em";
 }
-
-
