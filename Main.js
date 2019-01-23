@@ -41,6 +41,7 @@ firebase.auth().onAuthStateChanged(function(user){
                 $("#profilePhoto")[0].src=user.photoURL;
                 if(doc.data().admin==true){
                     $(".btn").css("display","block");
+                    $("#forumField").css("height","50%");
                 }
             }
         }).catch(function(error) {

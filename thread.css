@@ -121,6 +121,10 @@ h1 {
 	display: block;
 	z-index: 2;
 }
+
+.yourComField, .theirComField {
+	padding-top: 1%;
+}
 .theirCom {
 	direction: rtl;
 	text-align: right;
@@ -173,7 +177,6 @@ h1 {
 /*Style for 2nd teir comments*/
 .comSpace {
 	width: 90%;
-	margin-bottom: 5%;
 }
 .comSpace .comText {
 	font-size: 3em;
