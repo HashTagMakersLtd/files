@@ -114,7 +114,7 @@ allThreadsRef
         		$("#"+change.doc.id+"-commentCount").html(change.doc.data().commentCount);
             }
             else if (change.type === "removed") {
-                console.log("Removed thread: ", change.doc.data());
+                //console.log("Removed thread: ", change.doc.data());
                 $("#"+change.doc.id+"-main").remove();
             }
             else{
@@ -123,7 +123,7 @@ allThreadsRef
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading forum data!");
+        alert("We've run into an error downloading hub data!");
         //TODO: Add Hebrew
         window.location.href = "Main.html";
     });
@@ -151,12 +151,13 @@ function makeNewThread(title){
 	    commentCount: 0,
 	    usersWhoLiked: [userRef]
 	})
+	.then(function() {
+	    window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
+	})
 	.catch(function(error) {
 	    console.error("Error creating thread: ", error);
 	    //TODO: Inform user
 	});
-	//TODO: maybe initialize thread w a comment?
-	window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id
 }
 
 function onButtonClick() {

@@ -202,7 +202,7 @@ function comment(t){
 		usersWhoLiked: null
 	})
 	.then(function(docRef) {
-    console.log("Document written with ID: ", docRef.id);
+    //console.log("Document written with ID: ", docRef.id);
     threadRef.get().then(function(doc){
     	var c = doc.data().commentCount;
     	threadRef.update({
@@ -250,7 +250,7 @@ function subComment(t, commentID){
 		usersWhoLiked: null
 	})
 	.then(function(docRef) {
-    	console.log("Document written with ID: ", docRef.id);
+    	//console.log("Document written with ID: ", docRef.id);
     	commentsRef.doc(commentID).get().then(function(doc){
 	    	var c = doc.data().commentCount;
 	    	commentsRef.doc(commentID).update({
@@ -323,12 +323,12 @@ function subCommentLikeButton(mainID, subID){
 //DELETING 
 
 function deleteThisThread(){
-    if (confirm("Are you sure you would like to delete this forum?")){
-        forumRef.doc(forumID).collection('threads').doc(threadID).delete().then(function() {
-            console.log("Forum successfully deleted!");
+    if (confirm("Are you sure you would like to delete this conversation?")){
+        threadRef.delete().then(function() {
+            //console.log("Conversation successfully deleted!");
             window.history.back();
         }).catch(function(error) {
-            console.error("Error removing forum: ", error);
+            console.error("Error removing conversation: ", error);
         });
     }
     else {
@@ -345,7 +345,7 @@ function deleteComment(cID){
 		    //TODO: Add Hebrew
 		})
 		.then(function() {
-		    console.log("Msg successfully deleted");
+		    //console.log("Msg successfully deleted");
 		})
 		.catch(function(error) {
 		    // The document probably doesn't exist.
@@ -362,7 +362,7 @@ function deleteSubComment(cID, scID){
 		    //TODO: Add Hebrew
 		})
 		.then(function() {
-		    console.log("Msg successfully deleted");
+		    //console.log("Msg successfully deleted");
 		})
 		.catch(function(error) {
 		    // The document probably doesn't exist.
@@ -401,7 +401,7 @@ function getMainCommentAsElement(doc){
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
-				<div class=\""+commentClass+"\">\
+				<div class=\""+commentClass+" deletable\">\
 					<div class=\"midDiv mainCommentMidDiv\" id=\"mid-"+doc.id+"\">\
 									"+deleteBtn+"\
 									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
@@ -459,7 +459,7 @@ function getSubCommentAsElement(doc){
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var deleteBtn = (mine||isAdmin()) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
-	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
+	return "<div class=\""+commentClass+" deletable\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
 									"+deleteBtn+"\
 									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
@@ -478,11 +478,11 @@ function getSubCommentAsElement(doc){
 }
 
 function getDeleteButton(cID){
-	return "<button class=\"deleteBtn\" onclick=\"deleteComment(\'"+cID+"\')\"><i class=\"material-icons\">delete</i></button>";
+	return "<button class=\"deleteBtn\" onclick=\"deleteComment(\'"+cID+"\'); $(this).toggle()\"><i class=\"material-icons\">delete</i></button>";
 }
 
 function getSubDeleteButton(cID, scID){
-	return "<button class=\"deleteBtn\" onclick=\"deleteSubComment(\'"+cID+"\',\'"+scID+"\')\"><i class=\"material-icons\">delete</i></button>";
+	return "<button class=\"deleteBtn\" onclick=\"deleteSubComment(\'"+cID+"\',\'"+scID+"\'); $(this).toggle()\"><i class=\"material-icons\">delete</i></button>";
 }
 //Hide the address bar in mobile safari:
 /*
@@ -504,7 +504,7 @@ if(isSafari()) {
 //Facebook style subcomments
 $(document).on('click',"div",function(event){
 	//console.log(this);
-	if (this.id=="inputDiv"){
+	if (this.id=="inputDiv"||$(this).hasClass(".likeBtn")){
 		event.stopPropagation();
 	}
 	else if (($(this).is(".theirCom:first-child") && !$(this).parent().hasClass("comSpace") )||($(this).is(".yourCom:first-child")) && !$(this).parent().hasClass("comSpace") ){
@@ -607,9 +607,27 @@ $( document ).ready(function() {
 			minimizeInputDiv();
 		}
 	});
+	//Add listener for long/right click to get delete things
+	$("#superField").on('contextmenu',".deletable",function(event){
+		event.stopPropagation();
+		event.preventDefault();
+		//console.log(this);
+		if (this.id=="headerDiv"){//top level delete
+			$("#headerDiv > .midDiv > .deleteBtn").toggle();
+		} else if (!$(this).parent().hasClass("comSpace")){//main comment
+			$(this).children(0).children(0).eq(0).toggle();
+		}
+		else{//subcomment
+			$("#"+(this.id)+" > .midDiv > .deleteBtn").toggle();
+		}
+		
+	});
+
 });
 	
 function minimizeInputDiv(){
 	inputDivHeight = 1.5;
 	$('#comInput')[0].style.height=inputDivHeight+"em";
 }
+
+
