@@ -63,7 +63,7 @@ h1 {
 	border-style: none;
 	border-radius: 20px;
 	padding: 2%;
-	transition: 0.2s;
+	transition: 0.5s;
 	vertical-align: top;
 }
 #headerDiv  .deleteBtn {
@@ -86,7 +86,7 @@ h1 {
 }
 .liked {
 	background-color: #4db1ff;
-	transition: 0.2s;
+	transition: 0.3s;
 }
 .timeStamp {
 	float: left;

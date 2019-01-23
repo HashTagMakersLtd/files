@@ -98,8 +98,7 @@ commentsRef.orderBy("timestamp", "desc")
         //console.log(getMainCommentAsElement(doc));
 
         $("#mainField").append(getMainCommentAsElement(doc));
-        if (doc.data().commentCount>0){
-        	//console.log("SubComments:");
+                	//console.log("SubComments:");
         	/* OLD VERSION
         	commentsRef.doc(doc.id).collection("subComments").orderBy("timestamp").get().then(function(q) {
 			    q.forEach(function(d) {
@@ -110,8 +109,8 @@ commentsRef.orderBy("timestamp", "desc")
 			    });
 			});
 			*/
-			realtimeUpdates(doc.id);
-        }
+		realtimeUpdates(doc.id);
+        
     });
 });
 
@@ -159,9 +158,8 @@ function realtimeUpdates(commentID){
     .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
+        	//console.log(change.doc);
             if (change.type === "added") {
-            	//console.log(change.doc);
-            	//console.log(change);
                 $("#"+commentID+"-com").append(getSubCommentAsElement(change.doc));
             }
             else if (change.type === "modified") {
@@ -504,7 +502,7 @@ if(isSafari()) {
 //Facebook style subcomments
 $(document).on('click',"div",function(event){
 	//console.log(this);
-	if (this.id=="inputDiv"||$(this).hasClass(".likeBtn")){
+	if (this.id=="inputDiv"||$(this).hasClass("infoDiv")){
 		event.stopPropagation();
 	}
 	else if (($(this).is(".theirCom:first-child") && !$(this).parent().hasClass("comSpace") )||($(this).is(".yourCom:first-child")) && !$(this).parent().hasClass("comSpace") ){

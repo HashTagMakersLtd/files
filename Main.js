@@ -66,11 +66,11 @@ function toggleDelete(){
 }
 
 function deleteForum(id){
-    if (confirm("Are you sure you would like to delete this forum?")){
+    if (confirm("Are you sure you would like to delete this hub ?")){
         forumRef.doc(id).delete().then(function() {
             //console.log("Forum successfully deleted!");
         }).catch(function(error) {
-            console.error("Error removing forum: ", error);
+            console.error("Error removing hub : ", error);
         });
     }
     else {
@@ -81,7 +81,7 @@ function deleteForum(id){
 //Add a new forum if you click the create button
 function newForum(){
     //console.log('create');
-    var Name = prompt("What should be the name of the forum?");
+    var Name = prompt("What should be the name of the hub?");
     //TODO: Add Hebrew
     if (Name==null){return;}
     firebase.firestore().collection("forums").add({
@@ -93,7 +93,7 @@ function newForum(){
         var ts = firebase.firestore.Timestamp.fromDate(date);
         docRef.collection("threads").add({
             from: userRef,
-            name: "Welcome to the "+Name+" forum!",
+            name: "Welcome to the "+Name+" hub!",
             //TODO: Add Hebrew
             timestamp: ts,
             mostRecentPost: ts,
