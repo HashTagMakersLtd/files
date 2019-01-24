@@ -510,7 +510,7 @@ $(document).on('click',"div",function(event){
 		//collapse subcomments when main comment is clicked
 		event.stopPropagation();
 		var ccid = $(this).parent()[0].id;
-		$(".comSpace#"+ccid+"-com .yourCom").toggle(100, function(){
+		$(".comSpace#"+ccid+"-com .yourCom").toggle(200, function(){
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
@@ -518,7 +518,7 @@ $(document).on('click',"div",function(event){
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
 			}
 		});
-		$(".comSpace#"+ccid+"-com .theirCom").toggle(100, function(){
+		$(".comSpace#"+ccid+"-com .theirCom").toggle(200, function(){
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
@@ -610,8 +610,12 @@ $(document).ready(function(){
 	var moved = false;
 
 	$("#superField")
-	  .on("touchstart", "div", function(event){
-	  	event.stopPropagation();
+	  .on("touchstart", ".likeBtn, .theirCom, .yourCom, #headerDiv", function(event){
+	  	if ($(this).hasClass("likeBtn")){
+	  		event.stopPropagation();
+	  		return;
+	  	}
+	  	//event.stopPropagation();
 	      // Prevent default behavior
 	      //event.preventDefault();
 	      // Test that the touch is correctly detected
@@ -624,7 +628,7 @@ $(document).ready(function(){
 	          //alert("long mousedown");
 	      }, 2000);
 	  })
-	  .on("touchmove", "div", function(event){
+	  .on("touchmove", ".theirCom, .yourCom, #headerDiv", function(event){
 	  	event.stopPropagation();
 	      // Prevent default behavior
 	      //event.preventDefault();
@@ -633,8 +637,8 @@ $(document).ready(function(){
 	      clearTimeout(timerLongTouch);
 	      moved = true;
 	  })
-	  .on("touchend", "div", function(){
-	  	event.stopPropagation();
+	  .on("touchend", ".theirCom, .yourCom, #headerDiv", function(){
+	  	//event.stopPropagation();
 	      // Prevent default behavior
 	      //event.preventDefault();
 	      // If timerLongTouch is still running, then this is not a long touch
