@@ -65,6 +65,11 @@ button .material-icons {
 	float: left;
 	background-color: grey;
 	transition: 0.2s;
+	padding: 15px 20px 15px 20px;
+	border-radius: 20px;
+}
+.likeBtn .material-icons {
+	vertical-align: text-top;
 }
 .liked {
 	background-color: #4db1ff;
