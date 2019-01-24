@@ -197,7 +197,8 @@ function comment(t){
 		timestamp: ts,
 		from: userRef,
 		commentCount: 0,
-		usersWhoLiked: null
+		usersWhoLiked: null,
+		likeCount: 0
 	})
 	.then(function(docRef) {
     //console.log("Document written with ID: ", docRef.id);
@@ -606,6 +607,7 @@ $(document).ready(function(){
 	var timerLongTouch;
 	// Long touch flag for preventing "normal touch event" trigger when long touch ends
 	var longTouch = false;
+	var moved = false;
 
 	$("#superField")
 	  .on("touchstart", "div", function(event){
@@ -629,6 +631,7 @@ $(document).ready(function(){
 	      // If timerLongTouch is still running, then this is not a long touch 
 	      // (there is a move) so stop the timer
 	      clearTimeout(timerLongTouch);
+	      moved = true;
 	  })
 	  .on("touchend", "div", function(){
 	  	event.stopPropagation();
@@ -643,9 +646,15 @@ $(document).ready(function(){
 	          // Do here stuff linked to long touch end 
 	          // (if different from stuff done on long touch detection)
 	          $(this).contextmenu();
+	          moved = false;
 	      } else {
 	          // Do here stuff linked to "normal" touch end
-	          $(this).click();
+	         
+	          if (!moved){
+	          	$(this).click();
+	          } else {
+	          	moved = false;
+	          }
 	      }
 	  });
 	}
