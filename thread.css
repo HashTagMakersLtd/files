@@ -295,7 +295,9 @@ h1 {
 	color: grey;
 	font-family: 'Heebo', sans-serif;
 }
-
+#comInput:focus{
+	box-shadow: 0 0 3pt 2pt #4bc1ff;
+}
 @media(min-width: 1030px) {
 	h1 {
 		margin-top: 10%;

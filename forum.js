@@ -102,7 +102,7 @@ allThreadsRef
     .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
-            if (change.type === "added" && !change.doc.metadata.fromCache) {
+            if (change.type === "added" && !change.doc.metadata.fromCache && $("#"+change.doc.id).length==0) {
             	//console.log("added");
                 displayNewThread(getThreadAsElement(change.doc))
             }
