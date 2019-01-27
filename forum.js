@@ -149,8 +149,7 @@ function makeNewThread(title){
 	    timestamp: ts,
 	    mostRecentPost: ts,
 	    commentCount: 0,
-	    usersWhoLiked: [userRef],
-	    likeCount: 1
+	    usersWhoLiked: [userRef]
 	})
 	.then(function() {
 	    window.location.href = "thread.html?forumID="+id+"&threadID="+newThread.id

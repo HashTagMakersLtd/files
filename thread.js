@@ -30,7 +30,7 @@ firebase.auth().onAuthStateChanged(function(user){
 		});
 	}
 	else{
-		//alert("Please sign in!")
+		alert("Please sign in!")
 		//TODO: Add Hebrew
 		window.location.href = "index.html";
 	}
@@ -197,8 +197,7 @@ function comment(t){
 		timestamp: ts,
 		from: userRef,
 		commentCount: 0,
-		usersWhoLiked: null,
-		likeCount: 0
+		usersWhoLiked: null
 	})
 	.then(function(docRef) {
     //console.log("Document written with ID: ", docRef.id);
@@ -509,18 +508,24 @@ $(document).on('click',"div",function(event){
 	else if (($(this).is(".theirCom:first-child") && !$(this).parent().hasClass("comSpace") )||($(this).is(".yourCom:first-child")) && !$(this).parent().hasClass("comSpace") ){
 		//collapse subcomments when main comment is clicked
 		event.stopPropagation();
+		//console.log("first child of com field "+$(this).parent()[0].id+" clicked");
+		//console.log($(".comSpace#"+$(this).parent()[0].id+"-com"));
 		var ccid = $(this).parent()[0].id;
-		$(".comSpace#"+ccid+"-com .yourCom").toggle(200, function(){
+		$(".comSpace#"+ccid+"-com .yourCom").toggle(100, function(){
+			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
+				//console.log($(this).parent().parent().children(0).eq(0));
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
 			} else {
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
 			}
 		});
-		$(".comSpace#"+ccid+"-com .theirCom").toggle(200, function(){
+		$(".comSpace#"+ccid+"-com .theirCom").toggle(100, function(){
+			//console.log($(".comSpace#"+ccid+"-com div").css("display"));
 			//Add shadow to collapsed comment threads
 			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
+				//console.log($(this).parent().parent().children(0).eq(0));
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
 			} else {
 				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
@@ -534,7 +539,7 @@ $(document).on('click',"div",function(event){
 	  		event.stopPropagation();
 	    	var x = $(this).children()[0];
 	    	//console.log(x);
-	    	setTimeout(function() { $('#comInput').focus() }, 1);
+	    	setTimeout(function() { $('#comInput').focus() }, 10);
 	    	$('#superField').animate({
 	        	scrollTop: $('#superField').scrollTop() + $(x).offset().top-$("#inputDiv").offset().top+200
 	      	}, 400);
@@ -548,7 +553,32 @@ $(document).on('click',"div",function(event){
 	}
 	
 });
+/*
+$(document).on('focusin', '.comInput2', function () {
+    //$("#inputDiv").hide();
+    //$("#superField").css("height",'100%');
 
+    //Scroll to clicked comInput2
+    $('#superField').animate({
+        scrollTop: $('#superField').scrollTop() + $(this).offset().top-$("#inputDiv").offset().top+200
+      }, 400);
+
+    setTimeout(function() { $('#comInput').focus() }, 100);
+    newFocus(this.id);
+});
+*/
+/*
+var tempFocus = "";
+$(document).on('focusout', "#comInput",function () {
+    //$("#inputDiv").show();
+    //$("#superField").css("height",'90%');
+    tempFocus = focusedId;
+    if (focusedId!==""){
+    	$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
+    	focusedId = "";
+    }
+});
+*/
 
 
 var focusedId = "";
@@ -597,69 +627,3 @@ function minimizeInputDiv(){
 	inputDivHeight = 1.5;
 	$('#comInput')[0].style.height=inputDivHeight+"em";
 }
-
-//make touch events work properly for apple devices:
-
-$(document).ready(function(){
-	if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)){//this is an apple device
-
-	// Timer for long touch detection
-	var timerLongTouch;
-	// Long touch flag for preventing "normal touch event" trigger when long touch ends
-	var longTouch = false;
-	var moved = false;
-
-	$("#superField")
-	  .on("touchstart", ".likeBtn, .theirCom, .yourCom, #headerDiv", function(event){
-	  	if ($(this).hasClass("likeBtn")){
-	  		event.stopPropagation();
-	  		return;
-	  	}
-	  	//event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // Test that the touch is correctly detected
-	      //alert("touchstart event");
-	      // Timer for long touch detection
-	      timerLongTouch = setTimeout(function() {
-	          // Flag for preventing "normal touch event" trigger when touch ends. 
-	          longTouch = true;
-	          // Test long touch detection (remove previous alert to test it correctly)
-	          //alert("long mousedown");
-	      }, 2000);
-	  })
-	  .on("touchmove", ".theirCom, .yourCom, #headerDiv", function(event){
-	  	event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // If timerLongTouch is still running, then this is not a long touch 
-	      // (there is a move) so stop the timer
-	      clearTimeout(timerLongTouch);
-	      moved = true;
-	  })
-	  .on("touchend", ".theirCom, .yourCom, #headerDiv", function(){
-	  	//event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // If timerLongTouch is still running, then this is not a long touch
-	      // so stop the timer
-	      clearTimeout(timerLongTouch);
-
-	      if(longTouch){
-	          longTouch = false;
-	          // Do here stuff linked to long touch end 
-	          // (if different from stuff done on long touch detection)
-	          $(this).contextmenu();
-	          moved = false;
-	      } else {
-	          // Do here stuff linked to "normal" touch end
-	         
-	          if (!moved){
-	          	$(this).click();
-	          } else {
-	          	moved = false;
-	          }
-	      }
-	  });
-	}
-});
