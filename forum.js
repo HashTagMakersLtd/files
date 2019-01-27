@@ -123,8 +123,8 @@ allThreadsRef
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading hub data!");
-        //TODO: Add Hebrew
+        //alert("We've run into an error downloading hub data!");
+        alert("שגיאה בטעינת המידע!");
         window.location.href = "Main.html";
     });
 
@@ -162,8 +162,8 @@ function makeNewThread(title){
 }
 
 function onButtonClick() {
-	var title = prompt("Enter a title:");
-	//TODO: Add Hebrew
+	//var title = prompt("Enter a title:");
+	var title = prompt("הכניסו כותרת:");
 	if (title!=null){
 		makeNewThread(title);
 	}

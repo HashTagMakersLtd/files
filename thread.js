@@ -148,8 +148,8 @@ commentsRef
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading message data!");
-        //TODO: Add Hebrew
+        //alert("We've run into an error downloading message data!");
+        alert("שגיאה בטעינת המידע של ההודעה!");
         window.location.href = "forum.html?id="+forumID;
     });
 
@@ -178,8 +178,8 @@ function realtimeUpdates(commentID){
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading message data!");
-        //TODO: Add Hebrew
+        //alert("We've run into an error downloading message data!");
+        alert("שגיאה בטעינת המידע של ההודעה!");
         window.location.href = "forum.html?id="+forumID;
     });
 }
@@ -337,11 +337,11 @@ function deleteThisThread(){
 //Fake-delete comments
 
 function deleteComment(cID){
-	if (confirm("Are you sure you would like to delete this comment?")){
-		//TODO: Add Hebrew
+	//if (confirm("Are you sure you would like to delete this comment?")){
+	if (confirm("האם את/ה בטוח/ה שברצונך למחוק את ההודעה?")){
 		commentsRef.doc(cID).update({
-		    text: "🚫This message has been deleted🚫"
-		    //TODO: Add Hebrew
+		    //text: "🚫This message has been deleted🚫"
+		    text: "🚫ההודעה זו נמחקה🚫"
 		})
 		.then(function() {
 		    //console.log("Msg successfully deleted");
@@ -354,11 +354,11 @@ function deleteComment(cID){
 }
 
 function deleteSubComment(cID, scID){
-	if (confirm("Are you sure you would like to delete this comment?")){
-		//TODO: Add Hebrew
+	//if (confirm("Are you sure you would like to delete this comment?")){
+	if (confirm("האם את/ה בטוח/ה שברצונך למחוק את ההודעה?")){
 		commentsRef.doc(cID).collection('subComments').doc(scID).update({
-		    text: "🚫This message has been deleted🚫"
-		    //TODO: Add Hebrew
+		    //text: "🚫This message has been deleted🚫"
+		    text: "🚫ההודעה זו נמחקה🚫"
 		})
 		.then(function() {
 		    //console.log("Msg successfully deleted");
