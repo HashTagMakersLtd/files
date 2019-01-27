@@ -2,103 +2,61 @@ var forumID = get("forumID");
 var threadID = get("threadID");
 
 var threadRef = firebase.firestore().collection("forums").doc(forumID).collection("threads").doc(threadID);
-
-//Build dictionary of emails to usernames:
-var displayNameDict = JSON.parse(sessionStorage.getItem("displayNameDict"))||{};
+var admin = false;
 
 //get userRef
 firebase.auth().onAuthStateChanged(function(user){
 	if (user) { // User is signed in!
-		//$("#profilePhoto")[0].src=user.photoURL;
 		userRef = firebase.firestore().collection("users").doc(firebase.auth().currentUser.email);
 		uEmail = userRef.id;
 		userRef.get().then(function(doc){
-			if(doc.data().admin==true){
-				//SHOW ALL TRASH 
-				admin = true;
-				//$(".deleteBtn").remove();
-				$("#mainMidDiv").prepend("<button class=\"deleteBtn\" onclick=\"deleteThisThread()\"><i class=\"material-icons\">delete</i></button>");
-				//Show trash buttons for top-level comments
-				$(".mainCommentMidDiv .deleteBtn").remove();
-				var mainCommentMidDivs = $(".mainCommentMidDiv");
-				//console.log(mainCommentMidDivs);
-				for (var i = 0; i < mainCommentMidDivs.length; i++){
-					//console.log(mainCommentMidDivs.eq(i));
-					mainCommentMidDivs.eq(i).prepend(getDeleteButton(mainCommentMidDivs[i].id.slice(4)));
-				}
+			if(doc.data().admin!=null){
+				admin = doc.data().admin;
+			}
+			else{
+				admin = false;
 			}
 		});
 	}
-	else{
-		//alert("Please sign in!")
-		//TODO: Add Hebrew
-		window.location.href = "index.html";
-	}
 });
 
-function isAdmin(){
-	if (typeof admin!=='undefined'){
-		return admin;
-	}
-	else{
-		return false;
-	}
-}
 //INITIALIZE PAGE
 
 //initialize Header
 threadRef.get()
 	.then(function(doc){
-		if (displayNameDict[doc.data().from.id]==null){
-			var authName = doc.data().from.id;
-			firebase.firestore().collection("users").doc(doc.data().from.id).get()
-				.then(function(uDoc){
-					//console.log(uDoc.data());
-					if (uDoc.exists){
-						var e = doc.data().from.id;
-						var n = uDoc.data().displayName;
-						displayNameDict[e] = n;
-						$("."+e.replace(/@|\./g, "")).text(n);
-						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
-					}
-				});
-		} else {
-			var authName = displayNameDict[doc.data().from.id];
-		}
-		var username = (doc.data().from.id===uEmail) ? "את\\ה" : authName;
+		
 		var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
-		var deleteBtn = (doc.data().from.id===uEmail) ? getDeleteButton(doc.id) : "";
+		var deleteBtn = (doc.data().from.id===uEmail||admin) ? getDeleteButton(doc.id) : "";
 		
 		$("#headerDiv").html("<h1 id=\"threadTitle\">"+doc.data().name+"</h1>\
-								<div class=\"midDiv\" id=\"mainMidDiv\">\
+								<div class=\"midDiv\">\
 									"+deleteBtn+"\
-									<span class=\"author userName "+username.replace(/@|\./g, '')+"\">"+username+"</span>\
-								</div>\
+									<span class=\"author\">"+doc.data().from.id+"</span>\
+								</div><br>\
 								<div class=\"infoDiv\">\
 									<button id=\"mainLike\" class=\"likeBtn"+liked+"\" onclick=\"mainLikeButton()\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-									<div class=\'infoText\'>\
-										<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
-										<i class=\"material-icons\">thumb_up_alt</i>\
-										<span class=\"likeNum\" id=\'mainLikeNum\'>"+doc.data().usersWhoLiked.length+"</span>\
-										<i class=\"material-icons\">chat_bubble</i>\
-										<span class=\"comNum\" id=\'mainCommentNum\'>"+doc.data().commentCount+"</span>\
-									</div>\
-								</div>");
+									<span class=\"timeStamp\">"+timeConverter(doc.data().timestamp.toDate())+"</span>\
+									<i class=\"material-icons\">thumb_up_alt</i>\
+									<span class=\"likeNum\" id=\'mainLikeNum\'>"+doc.data().usersWhoLiked.length+"</span>\
+									<i class=\"material-icons\">chat_bubble</i>\
+									<span class=\"comNum\" id=\'mainCommentNum\'>"+doc.data().commentCount+"</span>\
+								</div>")
 
-	});
+	})
 
 //Initialize comments
 commentsRef = threadRef.collection("comments");
 commentsRef.orderBy("timestamp", "desc")
   .get().then(function(querySnapshot) {
-  	$(".loader").remove();
 	//console.log("comments:");
     querySnapshot.forEach(function(doc) {
         // doc.data() is never undefined for query doc snapshots
         //console.log(getMainCommentAsElement(doc));
 
         $("#mainField").append(getMainCommentAsElement(doc));
-                	//console.log("SubComments:");
+        if (doc.data().commentCount>0){
+        	//console.log("SubComments:");
         	/* OLD VERSION
         	commentsRef.doc(doc.id).collection("subComments").orderBy("timestamp").get().then(function(q) {
 			    q.forEach(function(d) {
@@ -109,8 +67,8 @@ commentsRef.orderBy("timestamp", "desc")
 			    });
 			});
 			*/
-		realtimeUpdates(doc.id);
-        
+			realtimeUpdates(doc.id);
+        }
     });
 });
 
@@ -148,7 +106,7 @@ commentsRef
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading message data!");
+        alert("שגיאה בטעינת המידע של ההודעה!");
         //TODO: Add Hebrew
         window.location.href = "forum.html?id="+forumID;
     });
@@ -158,8 +116,8 @@ function realtimeUpdates(commentID){
     .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
         	//console.log(change);
-        	//console.log(change.doc);
             if (change.type === "added") {
+            	//console.log(change);
                 $("#"+commentID+"-com").append(getSubCommentAsElement(change.doc));
             }
             else if (change.type === "modified") {
@@ -178,7 +136,7 @@ function realtimeUpdates(commentID){
         });
     }, function(error) {
         console.log("Error getting realtime chat: ", error);
-        alert("We've run into an error downloading message data!");
+        alert("שגיאה בטעינת המידע של ההודעה!");
         //TODO: Add Hebrew
         window.location.href = "forum.html?id="+forumID;
     });
@@ -191,27 +149,20 @@ function realtimeUpdates(commentID){
 
 function comment(t){
 	var date = new Date();
-	var ts = firebase.firestore.Timestamp.fromDate(date);
 	commentsRef.add({
 		text: t,
-		timestamp: ts,
+		timestamp: firebase.firestore.Timestamp.fromDate(date),
 		from: userRef,
 		commentCount: 0,
-		usersWhoLiked: null,
-		likeCount: 0
+		usersWhoLiked: null
 	})
 	.then(function(docRef) {
-    //console.log("Document written with ID: ", docRef.id);
+    console.log("Document written with ID: ", docRef.id);
     threadRef.get().then(function(doc){
     	var c = doc.data().commentCount;
     	threadRef.update({
-    		commentCount : c+1,
-    		mostRecentPost : ts
+    		commentCount : c+1
     	});
-    //Scroll to top:
-    $('#superField').animate({
-        scrollTop: 0
-      }, 400);
     });
 	})
 	.catch(function(error) {
@@ -223,17 +174,8 @@ function comment(t){
 
 function mainButtonClick(){
 	if ($("#comInput").val().trim()!=""){
-		if (focusedId==""){
-			comment($("#comInput").val());
-			$("#comInput").val("");
-			minimizeInputDiv();
-		}
-		else {
-			subComment($("#comInput").val(), focusedId.slice(0, focusedId.length-6));
-			$("#comInput").val("");
-			$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
-    		minimizeInputDiv();
-		}
+		comment($("#comInput").val());
+		$("#comInput").val("");
 	}
 }
 
@@ -241,32 +183,20 @@ function mainButtonClick(){
 
 function subComment(t, commentID){
 	var date = new Date();
-	var ts = firebase.firestore.Timestamp.fromDate(date);
 	commentsRef.doc(commentID).collection("subComments").add({
 		text: t,
-		timestamp: ts,
+		timestamp: firebase.firestore.Timestamp.fromDate(date),
 		from: userRef,
 		usersWhoLiked: null
 	})
 	.then(function(docRef) {
-    	//console.log("Document written with ID: ", docRef.id);
+    	console.log("Document written with ID: ", docRef.id);
     	commentsRef.doc(commentID).get().then(function(doc){
-	    	var c = doc.data().commentCount;
-	    	commentsRef.doc(commentID).update({
-	    		commentCount : c+1,
-	    		mostRecentPost : ts
-	    	});
-	    });
-	    threadRef.get().then(function(doc){
-	    	var cc = doc.data().commentCount;
-	    	threadRef.update({
-	    		commentCount : cc+1
-	    	});
-	    });
-    	$('#superField').animate({
-	        scrollTop: $('#superField').scrollTop() + $("#"+focusedId).offset().top-$("#inputDiv").offset().top+200
-	     }, 400);
-    	focusedId = "";
+    	var c = doc.data().commentCount;
+    	commentsRef.doc(commentID).update({
+    		commentCount : c+1
+    	});
+    });
 	})
 	.catch(function(error) {
 	    console.error("Error adding document: ", error);
@@ -321,30 +251,20 @@ function subCommentLikeButton(mainID, subID){
 
 //DELETING 
 
-function deleteThisThread(){
-    if (confirm("Are you sure you would like to delete this conversation?")){
-        threadRef.delete().then(function() {
-            //console.log("Conversation successfully deleted!");
-            window.history.back();
-        }).catch(function(error) {
-            console.error("Error removing conversation: ", error);
-        });
-    }
-    else {
-        toggleDelete();
-    }
-}
+//Only show trash btns for threads or comments that belong to you
+
+
 //Fake-delete comments
 
 function deleteComment(cID){
-	if (confirm("Are you sure you would like to delete this comment?")){
+	if (confirm("האם  את/ה בטוח/ה שברצונך למחוק את ההודעה?")){
 		//TODO: Add Hebrew
 		commentsRef.doc(cID).update({
-		    text: "🚫This message has been deleted🚫"
+		    text: "🚫ההודעה זו נמחקה🚫"
 		    //TODO: Add Hebrew
 		})
 		.then(function() {
-		    //console.log("Msg successfully deleted");
+		    console.log("Msg successfully deleted");
 		})
 		.catch(function(error) {
 		    // The document probably doesn't exist.
@@ -354,14 +274,14 @@ function deleteComment(cID){
 }
 
 function deleteSubComment(cID, scID){
-	if (confirm("Are you sure you would like to delete this comment?")){
+	if (confirm("האם  את/ה בטוח/ה שברצונך למחוק את ההודעה?")){
 		//TODO: Add Hebrew
 		commentsRef.doc(cID).collection('subComments').doc(scID).update({
-		    text: "🚫This message has been deleted🚫"
+		    text: "🚫ההודעה זו נמחקה🚫"
 		    //TODO: Add Hebrew
 		})
 		.then(function() {
-		    //console.log("Msg successfully deleted");
+		    console.log("Msg successfully deleted");
 		})
 		.catch(function(error) {
 		    // The document probably doesn't exist.
@@ -376,57 +296,35 @@ function deleteSubComment(cID, scID){
 function getMainCommentAsElement(doc){
 	var data = doc.data();
 	var mine = data.from.id===uEmail;
-	var authName = data.from.id;
-	if (!mine){
-		if (displayNameDict[data.from.id]==null){
-			firebase.firestore().collection("users").doc(data.from.id).get()
-				.then(function(uDoc){
-					//console.log(uDoc.data());
-					if (uDoc.exists){
-						var e = data.from.id;
-						var n = uDoc.data().displayName;
-						displayNameDict[e] = n;
-						$("."+e.replace(/@|\./g, "")).text(n);
-						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
-					}
-				});
-		} else {
-			var authName = displayNameDict[data.from.id];
-		}
-	}
 	var commentClass = (mine) ? "yourCom" : "theirCom";
-	var deleteBtn = (mine||isAdmin()) ? getDeleteButton(doc.id) : "";
-	var username = (mine) ? "את\\ה" : authName;
+	var deleteBtn = (mine||admin) ? getDeleteButton(doc.id) : "";
+	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
 	return "<div class=\""+commentClass+"Field\"  id=\""+doc.id+"\">\
-				<div class=\""+commentClass+" deletable\">\
-					<div class=\"midDiv mainCommentMidDiv\" id=\"mid-"+doc.id+"\">\
+				<div class=\""+commentClass+"\">\
+					<div class=\"midDiv\">\
 									"+deleteBtn+"\
-									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
-								</div>\
+									<span class=\"userName\">"+username+"</span><br>\
+								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn "+liked+"\" id=\""+doc.id+"-likebtn\" onclick=\"commentLikeButton(\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-						<div class=\'infoText\'>\
-							<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
-							<i class=\"material-icons\">thumb_up_alt</i>\
-							<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
-							<i class=\"material-icons\">chat_bubble</i>\
-							<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+data.commentCount+"</span>\
-						</div>\
+						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
+						<i class=\"material-icons\">thumb_up_alt</i>\
+						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
+						<i class=\"material-icons\">chat_bubble</i>\
+						<span class=\"comNum\" id=\""+doc.id+"-commentCount\">"+data.commentCount+"</span>\
 					</div>\
 				</div>\
 				<div class=\"comSpace\" id=\""+doc.id+"-com\"></div>\
 				<div class=\"comSpace\" >\
 					<div class=\"postComDiv\">\
 						<textarea name=\"text\" class=\"comInput2\" id=\""+doc.id+"-input\" placeholder=\"הגיבו כאן\"></textarea>\
-						<!--\
 						<button id=\"sendCom\" onclick=\"secondaryButtonClick(\'"+doc.id+"\')\">\
 							<img src=\"sendImg.png\">\
 						</button>\
-						-->\
 					</div>\
 				</div>\
 			</div>"
@@ -435,53 +333,33 @@ function getMainCommentAsElement(doc){
 function getSubCommentAsElement(doc){
 	var data = doc.data();
 	var mine = data.from.id===uEmail;
-	var authName = data.from.id;
-	if (!mine){
-		if (displayNameDict[data.from.id]==null){
-			firebase.firestore().collection("users").doc(data.from.id).get()
-				.then(function(uDoc){
-					//console.log(uDoc.data());
-					if (uDoc.exists){
-						var e = data.from.id;
-						var n = uDoc.data().displayName;
-						displayNameDict[e] = n;
-						$("."+e.replace(/@|\./g, "")).text(n);
-						sessionStorage.setItem("displayNameDict", JSON.stringify(displayNameDict));
-					}
-				});
-		} else {
-			var authName = displayNameDict[data.from.id];
-		}
-	}
 	var commentClass = (mine) ? "yourCom" : "theirCom";
-	var username = (mine) ? "את\\ה" : authName;
+	var username = (mine) ? "את\\ה" : data.from.id;
 	var likeCount = (data.usersWhoLiked===null) ? 0 : data.usersWhoLiked.length;
-	var deleteBtn = (mine||isAdmin()) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
+	var deleteBtn = (mine||admin) ? getSubDeleteButton(doc.ref.parent.parent.id,doc.id) : "";
 	var liked = didUserLike(doc,userRef.id) ? " liked" : " ";
-	return "<div class=\""+commentClass+" deletable\" id=\""+doc.id+"\">\
+	return "<div class=\""+commentClass+"\" id=\""+doc.id+"\">\
 					<div class=\"midDiv\">\
 									"+deleteBtn+"\
-									<span class=\"userName "+username.replace(/@|\./g, '')+"\">"+username+"</span><br>\
-								</div>\
+									<span class=\"userName\">"+username+"</span><br>\
+								</div><br>\
 					<img id=\"profilePhoto\" src=\"genericProfileImg.png\">\
 					<span class=\"comText\" id=\""+doc.id+"-text\">"+data.text+"</span>\
 					<div class=\"infoDiv\">\
 						<button class=\"likeBtn "+liked+"\"  id=\""+doc.id+"-likebtn\" onclick=\"subCommentLikeButton(\'"+doc.ref.parent.parent.id+"\',\'"+doc.id+"\')\"><i class=\"material-icons\">thumb_up_alt</i></button>\
-						<div class=\'infoText\'>\
-							<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
-							<i class=\"material-icons\">thumb_up_alt</i>\
-							<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
-						</div>\
+						<span class=\"timeStamp\">"+timeConverter(data.timestamp.toDate())+"</span>\
+						<i class=\"material-icons\">thumb_up_alt</i>\
+						<span class=\"likeNum\" id=\""+doc.id+"-likeCount\">"+likeCount+"</span>\
 					</div>\
 			</div>"
 }
 
 function getDeleteButton(cID){
-	return "<button class=\"deleteBtn\" onclick=\"deleteComment(\'"+cID+"\'); $(this).toggle()\"><i class=\"material-icons\">delete</i></button>";
+	return "<button class=\"deleteBtn\" onclick=\"deleteComment(\'"+cID+"\')\"><i class=\"material-icons\">delete</i></button>";
 }
 
 function getSubDeleteButton(cID, scID){
-	return "<button class=\"deleteBtn\" onclick=\"deleteSubComment(\'"+cID+"\',\'"+scID+"\'); $(this).toggle()\"><i class=\"material-icons\">delete</i></button>";
+	return "<button class=\"deleteBtn\" onclick=\"deleteSubComment(\'"+cID+"\',\'"+scID+"\')\"><i class=\"material-icons\">delete</i></button>";
 }
 //Hide the address bar in mobile safari:
 /*
@@ -500,166 +378,14 @@ if(isSafari()) {
 
 //UX & USABILITY:
 
-//Facebook style subcomments
-$(document).on('click',"div",function(event){
-	//console.log(this);
-	if (this.id=="inputDiv"||$(this).hasClass("infoDiv")){
-		event.stopPropagation();
-	}
-	else if (($(this).is(".theirCom:first-child") && !$(this).parent().hasClass("comSpace") )||($(this).is(".yourCom:first-child")) && !$(this).parent().hasClass("comSpace") ){
-		//collapse subcomments when main comment is clicked
-		event.stopPropagation();
-		var ccid = $(this).parent()[0].id;
-		$(".comSpace#"+ccid+"-com .yourCom").toggle(200, function(){
-			//Add shadow to collapsed comment threads
-			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
-				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
-			} else {
-				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
-			}
-		});
-		$(".comSpace#"+ccid+"-com .theirCom").toggle(200, function(){
-			//Add shadow to collapsed comment threads
-			if ($(".comSpace#"+ccid+"-com div").css("display")==="none"){
-				$(this).parent().parent().children(0).eq(0).css("box-shadow","2px 4px 30px #cccccc");
-			} else {
-				$(this).parent().parent().children(0).eq(0).css("box-shadow","");
-			}
-		});
-		
-		
-	}
-	else{
-	    if ($(this).hasClass("postComDiv")){
-	  		event.stopPropagation();
-	    	var x = $(this).children()[0];
-	    	//console.log(x);
-	    	setTimeout(function() { $('#comInput').focus() }, 1);
-	    	$('#superField').animate({
-	        	scrollTop: $('#superField').scrollTop() + $(x).offset().top-$("#inputDiv").offset().top+200
-	      	}, 400);
-	    	newFocus(x.id);
-	    }
-	    else if (focusedId!==""){
-	    	//console.log('hey');
-	    	$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
-	    	focusedId = "";
-	    }
-	}
-	
+//hide the main input bar when a subordinate input is selected:
+
+$(document).on('focusin', '.comInput2', function () {
+    $("#inputDiv").hide();
+    $("#superField").css("height",'100%');
+});
+$(document).on('focusout', '.comInput2', function () {
+    $("#inputDiv").show();
+    $("#superField").css("height",'90%');
 });
 
-
-
-var focusedId = "";
-
-function newFocus(inputId){
-	//tempFocus = "";
-	if (focusedId!==""){
-		$("#"+focusedId.slice(0, focusedId.length-6)).css("background-color","#fff");
-	}
-	focusedId = inputId;
-	$("#"+inputId.slice(0, inputId.length-6)).css("background-color","#def");
-}
-
-//Exapand the textarea to fit innerText:
-$( document ).ready(function() {
-    minimizeInputDiv();
-	$("#comInput").keyup(function(event){
-		//console.log(event);
-		if (($('#comInput')[0].scrollHeight-20)>($('#comInput').height())){
-			inputDivHeight+=1.5;
-			$('#comInput')[0].style.height=inputDivHeight+"em";
-		}
-		if ($('#comInput').val()===""){
-			minimizeInputDiv();
-		}
-	});
-	//Add listener for long/right click to get delete things
-	$("#superField").on('contextmenu',".deletable",function(event){
-		event.stopPropagation();
-		event.preventDefault();
-		//console.log(this);
-		if (this.id=="headerDiv"){//top level delete
-			$("#headerDiv > .midDiv > .deleteBtn").toggle();
-		} else if (!$(this).parent().hasClass("comSpace")){//main comment
-			$(this).children(0).children(0).eq(0).toggle();
-		}
-		else{//subcomment
-			$("#"+(this.id)+" > .midDiv > .deleteBtn").toggle();
-		}
-		
-	});
-
-});
-	
-function minimizeInputDiv(){
-	inputDivHeight = 1.5;
-	$('#comInput')[0].style.height=inputDivHeight+"em";
-}
-
-//make touch events work properly for apple devices:
-
-$(document).ready(function(){
-	if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)){//this is an apple device
-
-	// Timer for long touch detection
-	var timerLongTouch;
-	// Long touch flag for preventing "normal touch event" trigger when long touch ends
-	var longTouch = false;
-	var moved = false;
-
-	$("#superField")
-	  .on("touchstart", ".likeBtn, .theirCom, .yourCom, #headerDiv", function(event){
-	  	if ($(this).hasClass("likeBtn")){
-	  		event.stopPropagation();
-	  		return;
-	  	}
-	  	//event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // Test that the touch is correctly detected
-	      //alert("touchstart event");
-	      // Timer for long touch detection
-	      timerLongTouch = setTimeout(function() {
-	          // Flag for preventing "normal touch event" trigger when touch ends. 
-	          longTouch = true;
-	          // Test long touch detection (remove previous alert to test it correctly)
-	          //alert("long mousedown");
-	      }, 2000);
-	  })
-	  .on("touchmove", ".theirCom, .yourCom, #headerDiv", function(event){
-	  	event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // If timerLongTouch is still running, then this is not a long touch 
-	      // (there is a move) so stop the timer
-	      clearTimeout(timerLongTouch);
-	      moved = true;
-	  })
-	  .on("touchend", ".theirCom, .yourCom, #headerDiv", function(){
-	  	//event.stopPropagation();
-	      // Prevent default behavior
-	      //event.preventDefault();
-	      // If timerLongTouch is still running, then this is not a long touch
-	      // so stop the timer
-	      clearTimeout(timerLongTouch);
-
-	      if(longTouch){
-	          longTouch = false;
-	          // Do here stuff linked to long touch end 
-	          // (if different from stuff done on long touch detection)
-	          $(this).contextmenu();
-	          moved = false;
-	      } else {
-	          // Do here stuff linked to "normal" touch end
-	         
-	          if (!moved){
-	          	$(this).click();
-	          } else {
-	          	moved = false;
-	          }
-	      }
-	  });
-	}
-});

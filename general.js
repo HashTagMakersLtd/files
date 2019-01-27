@@ -78,9 +78,3 @@ function didUserLike(doc, userID){
 	}
 	return false;
 }
-
-function signOutAndGoToAuth(){
-	firebase.auth().signOut();
-	window.location.href = "index.html";
-}
-
