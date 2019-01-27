@@ -3,13 +3,8 @@
 <head>
 	<title>MakerChat</title>
 	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="mobile-web-app-capable" content="yes" />
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-firestore.js"></script>
-	<script type="text/javascript" src="firebaseConfig.js"></script>
 	<link rel="stylesheet" type="text/css" href="info.css">
 	<!-- HEADER STYLE -->
 	<link rel="stylesheet" type="text/css" href="general.css">
@@ -19,9 +14,10 @@
 	<div id="mainMenu">
 		<button id="backBtn" style=" right: 0;" >חזור<i class="material-icons">arrow_forward_ios</i></button>
 		<img src="museumLogoImg.png">
-		<button onclick="window.location.href='Main.html'">דף הראשי</button>
+		<button onclick="window.location.href='Main.html'">דף ראשי</button>
+		<button id="settings" onclick="window.location.href='settings.html'">הגדרות</button>
 		<button onclick="window.location.href='info.html'">מידע</button>
-		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא<i class="material-icons">exit_to_app</i></button>
+		<button id="signOutBtn" onclick="signOutAndGoToAuth()">צא</button>
 	</div>
 	<div class="header">
 		<table>
@@ -41,28 +37,29 @@
 	<div id="textBody">
 		<h1>מידע על האפליקציה</h1>
 		<span class="text">
-			ברוכים הבאים לאפליקצית MakerChat, האפליקציה הרשמית של פרק קרסו למדע בשביל יצור חברת מעצבים מסביב ה-Maker's Space של הפארק.
+			ברוכים הבאים לאפליקצית MakerChat, האפליקציה הרשמית של פארק קרסו שמטרתה לייצר קהילת מעצבים בMakerSpace.
 		</span>
 		<br><br>
 		<h2>בשביל מה קיימת האפליקציה?</h2>
 		<span class="text">
-			פארק קרסו למדע הקים את האפליקציה הזאת כדי להגדיל את הקהילה שבאה ל-MakerSpace. האפליקציה הזאת קיימת גם כדי לגרום לאנשים שמעוניינים בעצוב לבוא לפארק, להכיר אנשים חדשים שגם אוהבים בעיצוב, ולשתף רעיונות חדשות.
+			האפליקציה הוקמה על מנת להגדיל את קהילת המייקרים, להביא אנשים שמתעניינים ואוהבים עיצוב לפארק, להכיר אנשים נוספים שמתעניינים בתחום, לשתף רעיונות וליצור ביחד.
+		</span>
+		<br><br>
+		<h2>איך משתמשים?</h2>
+		<span class="text">
+			האפליקציה הזו בנויה בשביל דיונים שונים בנושאי עיצוב. כדי להצטרף לדיון, בחרו בנושא המעניין אתכם והיכנסו לחדר הדיונים. השיחה בחדר יכול להיות שאלות שלכם, רעיונות שתרצו להציג, או תוכן כללי הקשור לנושא. תוכלו גם להגיב לשיחות המתקיימות בחדר. הגיבו או תנו לייק להודעה שאהבתם!
 		</span>
 		<br><br>
 		<h2>כללי שימוש</h2>
 		<span class="text">
 			<ul>
-				<li>מומלץ רק  לפרסם הודעות שמתאימות לנושא </li>
+				<li>מומלץ לפרסם רק הוגעות שמתאימות לנושא</li>
 				<li>אסור לפרסם הודעות גסות ופגעניות</li>
 			</ul>
 		</span>
 		<br>
-		<h2>עוד משהו להוסיף?</h2>
-		<span class="text">
-			בלה בלה בלה בלה שטויות בלה בלה בלה אפליקציה מדהימה בלה בלה מהפחה תמידית בלה בלה בלה טרוצקי צדק בלה בלה בלה
-		</span>
 	</div>
-	<a href="hashtagmakersltd@gmail.com" id="feedbackBtn">שלח משובות</a>
+	<a href="hashtagmakersltd@gmail.com" id="feedbackBtn">שלח משוב</a>
 	<script type="text/javascript">
 		$("#toggleMenu").click(function(){
 			if($("#mainMenu").css('width') < '80%') {
@@ -76,4 +73,4 @@
 		});
 	</script>
 </body>
-</html> 
+</html>
