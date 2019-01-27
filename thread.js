@@ -31,7 +31,6 @@ firebase.auth().onAuthStateChanged(function(user){
 	}
 	else{
 		//alert("Please sign in!")
-		//TODO: Add Hebrew
 		window.location.href = "index.html";
 	}
 });
@@ -322,7 +321,8 @@ function subCommentLikeButton(mainID, subID){
 //DELETING 
 
 function deleteThisThread(){
-    if (confirm("Are you sure you would like to delete this conversation?")){
+    //if (confirm("Are you sure you would like to delete this conversation?")){
+    if (confirm("האם את/ה בטוח/ה שברצונך למחוק את השיחה?")){
         threadRef.delete().then(function() {
             //console.log("Conversation successfully deleted!");
             window.history.back();

@@ -1,7 +1,7 @@
 //Populate the forumList with all the forums
 var deleteToggled = false;
 
-var forumRef = firebase.firestore().collection("forums");
+var forumRef = firebase.firestore().collection("forums").orderBy("name");
 
 forumRef.onSnapshot(function(querySnapshot) {
     $("#forumList").html("");
@@ -96,7 +96,6 @@ function newForum(){
             from: userRef,
             //name: "Welcome to the "+Name+" hub!",
             name: "ברוכים הבאים לקטגוריה:"+Name+"!",
-            //TODO: Add Hebrew
             timestamp: ts,
             mostRecentPost: ts,
             commentCount: 0,
