@@ -64,8 +64,9 @@ ul {
 	right: 0;
 	width: 60%;
 	border-radius: 40px;
-	box-shadow: 5px 5px 40px grey;
+	box-shadow: 4px 4px 20px grey;
 	transition: 0.5s;
+	bottom: 1.5%;
 }
 #feedbackBtn:active {
 	transition: 0.5s;

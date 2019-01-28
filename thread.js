@@ -91,23 +91,12 @@ commentsRef = threadRef.collection("comments");
 commentsRef.orderBy("timestamp", "desc")
   .get().then(function(querySnapshot) {
   	$(".loader").remove();
+  	$("#switchApendBox").show();
 	//console.log("comments:");
     querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
         //console.log(getMainCommentAsElement(doc));
-
         $("#mainField").append(getMainCommentAsElement(doc));
                 	//console.log("SubComments:");
-        	/* OLD VERSION
-        	commentsRef.doc(doc.id).collection("subComments").orderBy("timestamp").get().then(function(q) {
-			    q.forEach(function(d) {
-			        // d.data() is never undefined for query d snapshots
-			        //console.log(d.id, " => ", d.data());
-
-			        $("#"+doc.id+"-com").append(getSubCommentAsElement(d));
-			    });
-			});
-			*/
 		realtimeUpdates(doc.id);
         
     });
@@ -662,4 +651,35 @@ $(document).ready(function(){
 	      }
 	  });
 	}
+	//Button to switch between sorting by likes and sorting by date
+
+	$('#switchAppend').change(function(){
+		$(".theirComField, .yourComField").remove();
+	    if($(this).is(':checked')) {
+	        // Checkbox is checked... sort by likeCount
+	        commentsRef.orderBy("likeCount", "desc")
+			  .get().then(function(querySnapshot) {
+			    querySnapshot.forEach(function(doc) {
+			        //console.log(getMainCommentAsElement(doc));
+			        $("#mainField").append(getMainCommentAsElement(doc));
+			                	//console.log("SubComments:");
+					realtimeUpdates(doc.id);
+			        
+			    });
+			});
+	    } else {
+	        // Checkbox is not checked... sort by date
+	        commentsRef.orderBy("timestamp", "desc")
+			  .get().then(function(querySnapshot) {
+			    querySnapshot.forEach(function(doc) {
+			        //console.log(getMainCommentAsElement(doc));
+			        $("#mainField").append(getMainCommentAsElement(doc));
+			                	//console.log("SubComments:");
+					realtimeUpdates(doc.id);
+			        
+			    });
+			});
+	    }
+	});
 });
+

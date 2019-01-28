@@ -55,18 +55,18 @@ li {
 ul a {
 	font-family: 'Secular One', sans-serif;
 	color: white;
-	font-size: 8em;
+	font-size: 7em;
 	font-weight: bold;
 	text-decoration: none;
 	background: -webkit-linear-gradient(#4db1ff, #3885c1);
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-text-fill-color: #4db1ff;
 }
 .forumBtn {
 	background-color: none;
 	border-radius: 400px;
 	padding: 0% 5% 0% 5%;
-	width: 80%;
+	width: 85%;
 	border: 20px solid transparent;
 	background-image: linear-gradient(#4db1ff, #3885c1), linear-gradient(180deg, #4db1ff, #3885c1);
 	background-origin: border-box;
@@ -74,6 +74,7 @@ ul a {
 	box-shadow: 2px 1000px 1px #fff inset, #aaa 1px 4px 20px 0px;
 	margin-bottom: 2%;
 	margin-top: 2%;
+	overflow: auto;
 }
 /*Standard Button*/
 .btn {

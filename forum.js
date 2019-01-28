@@ -10,6 +10,8 @@ firebase.firestore().collection("forums").doc(id).get()
 	.then(function(doc){
 		if (doc.exists){
 			$("#forumTitle").text(doc.data().name);
+			$("#threadField").css("margin-top",$(".header").height()*1.1);
+			$("#threadField").css("height",$("body").height()-$(".header").height()-$("#newPostBtn").height()-150);
 		}
 	});
 var firstBatch = allThreadsRef.orderBy("mostRecentPost", "desc").limit(25);
@@ -60,12 +62,13 @@ function displayNewThread(thread){
 	$("#threadList").prepend(thread);
 }
 
-function getNext25messages(queryRef){
+function getNext25messages(queryRef, field){
 	var queryNum = 0;
 	queryRef.get()
     .then(function(querySnapshot) {
     	$(".loader").remove();
     	$("#newPostBtn").show();
+    	$("#switchApendBox").show();
     	var lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
         querySnapshot.forEach(function(doc) {
@@ -74,7 +77,7 @@ function getNext25messages(queryRef){
         });
         if (queryNum==25){
         	$("#olderPosts").show()
-        	nextBatch = allThreadsRef.orderBy("mostRecentPost", "desc")
+        	nextBatch = allThreadsRef.orderBy(sortByField, "desc")
           						.startAfter(lastVisible)
           						.limit(25);
         } else{
@@ -88,6 +91,7 @@ function getNext25messages(queryRef){
 }
 
 //Get most recent 25 messages:
+sortByField = "mostRecentPost";
 getNext25messages(firstBatch);
 
 //Way to grab older threads
@@ -182,3 +186,22 @@ function onLikeButtonClick(id){
 		$("#"+id).addClass("liked");
 	}
 }
+
+//Button to switch between sorting by likes and sorting by date
+
+$(document).ready(function(){
+	$('#switchAppend').change(function(){
+		$("#threadList").html("");
+	    if($(this).is(':checked')) {
+	        // Checkbox is checked... sort by likeCount
+	        sortByField = "likeCount";
+	        firstBatch = allThreadsRef.orderBy("likeCount", "desc").limit(25);
+	        getNext25messages(firstBatch);
+	    } else {
+	        // Checkbox is not checked... sort by date
+	        sortByField = "mostRecentPost";
+	        firstBatch = allThreadsRef.orderBy("mostRecentPost", "desc").limit(25);
+	        getNext25messages(firstBatch);
+	    }
+	});
+});

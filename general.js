@@ -48,7 +48,7 @@ function timeConverter(UNIX_timestamp){
   if (sec<10){
   	sec = "0"+sec;
   }
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  var time = date + '/' + month + '/' + year + ' ' + hour + ':' + min ;
   return time;
 }
 

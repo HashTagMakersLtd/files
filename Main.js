@@ -1,9 +1,9 @@
 //Populate the forumList with all the forums
 var deleteToggled = false;
 
-var forumRef = firebase.firestore().collection("forums").orderBy("name");
+var forumRef = firebase.firestore().collection("forums");
 
-forumRef.onSnapshot(function(querySnapshot) {
+forumRef.orderBy("name").onSnapshot(function(querySnapshot) {
     $("#forumList").html("");
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots
