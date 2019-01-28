@@ -33,7 +33,7 @@
 		margin: 0 auto;
 		display: block;
 		vertical-align: center;
-		margin-top: 20%;
+		margin-top: 12%;
 
 	}
 	#exp {
@@ -84,8 +84,9 @@
 	#htmlLogoIMG {
 		width: 10%;
 	}
-	#googleSI {
+	#googleSI, #facebookSI {
 		width: 80%;
+		margin-bottom: 3%;
 	}
 /*Media Query for computer viewing*/
 @media(min-width: 1030px) {
