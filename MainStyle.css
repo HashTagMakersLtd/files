@@ -54,24 +54,18 @@ li {
 }
 ul a {
 	font-family: 'Secular One', sans-serif;
-	color: white;
+	color: #4db1ff;
 	font-size: 8em;
 	font-weight: bold;
 	text-decoration: none;
-	background: -webkit-linear-gradient(#4db1ff, #3885c1);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 .forumBtn {
-	background-color: none;
 	border-radius: 400px;
+	background-color: white;
 	padding: 0% 5% 0% 5%;
 	width: 80%;
-	border: 20px solid transparent;
-	background-image: linear-gradient(#4db1ff, #3885c1), linear-gradient(180deg, #4db1ff, #3885c1);
-	background-origin: border-box;
-	background-clip: content-box, border-box;
-	box-shadow: 2px 1000px 1px #fff inset, #aaa 1px 4px 20px 0px;
+	border: 20px solid #4db1ff;
+	box-shadow: 0px 0px 15px grey;
 	margin-bottom: 2%;
 	margin-top: 2%;
 }
@@ -85,10 +79,9 @@ ul a {
 	color: white;
 	font-size: 3em;
 	background-color: #4db1ff;
-	border-radius: 40px;
+	border-radius: 20px;
 	border-style: none;
 	transition: 0.5s;
-	box-shadow: 5px 5px 8px grey;
 	padding: 2%;
 	cursor: pointer;
 }
