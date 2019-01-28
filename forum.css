@@ -134,14 +134,14 @@ li h2 {
 }
 /*Code for switchApend*/
 #switchApendBox {
-	position: fixed;
-	left: 0;
+	margin: 0 auto;
 	background-color: #f4f4f4;
 	padding: 3%;
 	overflow: auto;
 	color: grey;
-	width: 20%;
+	width: 40%;
 	border-radius: 30px;
+	z-index: 999;
 }
 #switchApendBox > .material-icons {
 	font-size: 3em;
