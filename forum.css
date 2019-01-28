@@ -144,7 +144,7 @@ li h2 {
 	z-index: 999;
 }
 #switchApendBox > .material-icons {
-	font-size: 3em;
+	font-size: 5em;
 	vertical-align: middle;
 	display: inline-block;
 }
@@ -152,8 +152,8 @@ li h2 {
 .switch {
   position: relative;
   display: inline-block;
-  width: 90px;
-  height: 40px;
+  width: 170px;
+  height: 60px;
   vertical-align: middle;
 }
 
@@ -180,8 +180,8 @@ li h2 {
 .slider:before {
   position: absolute;
   content: "";
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
   left: 5px;
   bottom: 5px;
   background-color: white;
@@ -198,9 +198,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(50px);
-  -ms-transform: translateX(50px);
-  transform: translateX(50px);
+  -webkit-transform: translateX(110px);
+  -ms-transform: translateX(110px);
+  transform: translateX(110px);
 }
 @media(min-width: 1030px) {
 	#threadField {
