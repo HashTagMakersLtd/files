@@ -191,7 +191,7 @@ function onLikeButtonClick(id){
 
 $(document).ready(function(){
 	$('#switchAppend').change(function(){
-		$("#threadList").html("");
+		$("#threadList").html("<div class=\"loader\"></div>");
 	    if($(this).is(':checked')) {
 	        // Checkbox is checked... sort by likeCount
 	        sortByField = "likeCount";

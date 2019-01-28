@@ -3,7 +3,7 @@ var deleteToggled = false;
 
 var forumRef = firebase.firestore().collection("forums");
 
-forumRef.orderBy("name").onSnapshot(function(querySnapshot) {
+forumRef.orderBy("name","desc").onSnapshot(function(querySnapshot) {
     $("#forumList").html("");
         querySnapshot.forEach(function(doc) {
             // doc.data() is never undefined for query doc snapshots

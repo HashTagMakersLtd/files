@@ -655,10 +655,12 @@ $(document).ready(function(){
 
 	$('#switchAppend').change(function(){
 		$(".theirComField, .yourComField").remove();
+		$("#mainField").append("<div class=\"loader\"></div>");
 	    if($(this).is(':checked')) {
 	        // Checkbox is checked... sort by likeCount
 	        commentsRef.orderBy("likeCount", "desc")
 			  .get().then(function(querySnapshot) {
+			  	$(".loader").remove();
 			    querySnapshot.forEach(function(doc) {
 			        //console.log(getMainCommentAsElement(doc));
 			        $("#mainField").append(getMainCommentAsElement(doc));
@@ -671,6 +673,7 @@ $(document).ready(function(){
 	        // Checkbox is not checked... sort by date
 	        commentsRef.orderBy("timestamp", "desc")
 			  .get().then(function(querySnapshot) {
+			  	$(".loader").remove();
 			    querySnapshot.forEach(function(doc) {
 			        //console.log(getMainCommentAsElement(doc));
 			        $("#mainField").append(getMainCommentAsElement(doc));
