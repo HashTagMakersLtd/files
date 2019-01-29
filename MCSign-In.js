@@ -60,7 +60,7 @@ function signInWithGoogle(){//Signs in with Google
 	});
 }
 
-function signInWithFacebook(){//Signs in with Google
+function signInWithFacebook(){//Signs in with Facebook
 	//console.log("clicked");
 	var provider = new firebase.auth.FacebookAuthProvider();
 	firebase.auth().signInWithRedirect(provider);
